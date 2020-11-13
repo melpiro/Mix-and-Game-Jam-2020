@@ -160,16 +160,11 @@ void MinitTetris::update()
                         }
                     }
                 }
-
                 if (!checkDefeat())
                     generateRdm();
-
             }
             
         }
-
-        
-        
 
         for (int i = 0; i < m_allcase.size(); i++)
         {
@@ -285,16 +280,12 @@ void MinitTetris::rotateLeft()
     m_piece = allPiece[(int)pieceId][pieceRotation];
 }
 
-std::pair<int, int> MinitTetris::getPieceSize(PIECE p)
+std::pair<int, int> MinitTetris::getPieceSize(PIECE p, int rotation)
 {
-    switch (p)
-    {
-    case T:
-        return std::make_pair(3,2);
-    
-    default:
-        return std::make_pair(0,0);
-    }
+    return std::make_pair(
+        allPiece[(int)p][rotation].size(),
+        allPiece[(int)p][rotation].back().size()
+    );
 }
 
 
@@ -315,11 +306,15 @@ bool MinitTetris::checkCollision(sf::Vector2i futurePos)
 
 void MinitTetris::generateRdm()
 {
-    PIECE p = (PIECE)O::math::rdm::randInt(0, NB_PIECE);
-    auto size = getPieceSize(p);
-    addPiece(O::math::rdm::randInt(0, m_nbCol - size.first - 1), 0, p, 
+    PIECE p = (PIECE)O::math::rdm::randInt(0, allPiece.size());
+    int rotation = O::math::rdm::randInt(0, 4);
+
+    auto size = getPieceSize(p, rotation);
+
+    auto v = O::math::rdm::randInt(0, m_nbCol - 1 - size.first );
+    addPiece(v, 0, p, 
         COLORS[O::math::rdm::randInt(0, COLORS.size())],
-        O::math::rdm::randInt(0,3));
+        rotation);
 }
 
 bool MinitTetris::checkDefeat()

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef MINITETRIS_HPP
+#define MINITETRIS_HPP
+
 #include <SFML/Graphics.hpp>
 #include "Omega/Graphics/Rectangle.h"
 #include "Omega/Math/RandomFunctions.h"
@@ -20,7 +24,7 @@ public:
 
     void setPosition(float x, float y);
     void setWindowSize(float x, float y);
-    
+
     void setTileSize(int nbCol, int nbLine);
 
     void event(sf::Event e);
@@ -43,7 +47,7 @@ private:
     bool checkDefeat();
 
 
-    static std::pair<int, int> getPieceSize(PIECE p);
+    std::pair<int, int> getPieceSize(PIECE p, int rotation);
 
     sf::RenderWindow* m_fen;
 
@@ -63,8 +67,6 @@ private:
     int m_nbLine = 10;
     double padding = 5;
 
-
-    const int NB_PIECE = 2;
 
     const std::vector<sf::Color> COLORS = {
         sf::Color::Red,
@@ -128,9 +130,30 @@ private:
                 {0,1,0}
             }
             
+        },
+        {
+            {
+                {1,0},
+                {1,1},
+                {0,1}
+            },
+            {
+                {1,1,0},
+                {0,1,1}
+            },
+            {
+                {0,1},
+                {1,1},
+                {1,0}
+            },
+            {
+                {0,1,1},
+                {1,1,0}
+            }
         }
     };
 };
 
+#endif
 
 

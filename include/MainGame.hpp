@@ -1,3 +1,7 @@
+#pragma once
+#ifndef MAINHAME_HPP
+#define MAINHAME_HPP
+
 #include <SFML/Graphics.hpp>
 #include "Omega/Operators/PrintFunctions.h"
 #include "MinitTetris.hpp"
@@ -44,3 +48,4 @@ private:
 
 
 
+#endif
