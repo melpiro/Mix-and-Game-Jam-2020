@@ -26,7 +26,7 @@ namespace STATIC {
 		const double WIDTH = 1920.0;
 		const double HIGHT = 1080.0;
 		const double HALF_WIDTH = WIDTH / 2.0;
-		const double HALF_HIGHT = HIGHT / 2.0;
+		const double HALF_HEIGHT = HIGHT / 2.0;
 
 	}
 }
