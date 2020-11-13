@@ -71,6 +71,7 @@ namespace graphics {
 	{
 		m_x = x;
 		m_y = y;
+		Rectangle::update();
 	}
 	void Rectangle::setPosition(float x, float y, bool update)
 	{

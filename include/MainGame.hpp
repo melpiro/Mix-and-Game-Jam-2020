@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Omega/Operators/PrintFunctions.h"
+#include "MinitTetris.hpp"
 
 
 class MainGame
@@ -15,14 +16,16 @@ public:
     void update();
     void render();
 
-private:
 
-    void updateOnResize(sf::Event& e);
+    void updateOnResize();
+
+
+private:
 
     sf::RenderWindow* m_fen;
 
     sf::View m_view;
-    double m_viewZoom = 1.f;
+    float m_viewZoom = 1.f;
 
     bool m_left = false;
     bool m_right = false;
@@ -34,6 +37,8 @@ private:
 
     const float speed= 5.f;
     const float zoom_factor= 1.5f;
+
+    MinitTetris m_tetrisTest;
 };
 
 

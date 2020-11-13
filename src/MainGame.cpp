@@ -1,6 +1,7 @@
 #include "MainGame.hpp"
 
-MainGame::MainGame(sf::RenderWindow* fen)
+MainGame::MainGame(sf::RenderWindow* fen) :
+    m_tetrisTest(fen)
 {
     m_fen=fen;
 
@@ -13,18 +14,25 @@ MainGame::MainGame(sf::RenderWindow* fen)
     m_object.setFillColor(sf::Color::Red);
     m_object.setOrigin(50,50); // center
     m_object.setPosition(500,500);
+
+    m_tetrisTest.setPosition(50,50);
+    m_tetrisTest.setWindowSize(150,300);
+    m_tetrisTest.setTileSize(10,20);
+    m_tetrisTest.init();
+
+    m_tetrisTest.addPiece(5,5, T, sf::Color::Red, 0);
 }
 
 void MainGame::init()
 {
-
+    
 }
 
 void MainGame::event(sf::Event e)
 {
     if (e.type == sf::Event::Resized)
     {
-        updateOnResize(e);
+        updateOnResize();
     }
     else if (e.type == sf::Event::KeyPressed)
     {
@@ -66,7 +74,6 @@ void MainGame::event(sf::Event e)
     }
     else if (e.type == sf::Event::MouseWheelMoved)
     {
-        std::cout << e.mouseWheel.delta <<std::endl;
         if (e.mouseWheel.delta > 0)
         {
              m_viewZoom /= zoom_factor;
@@ -79,6 +86,8 @@ void MainGame::event(sf::Event e)
         }
         
     }
+
+    m_tetrisTest.event(e);
     
 
 }
@@ -102,14 +111,18 @@ void MainGame::update()
     }
     m_view.setCenter(m_persoTest.getPosition());
     m_fen->setView(m_view);
+
+    m_tetrisTest.update();
 }
 void MainGame::render()
 {
     m_fen->draw(m_persoTest);
     m_fen->draw(m_object);
+
+    m_tetrisTest.render();
 }
 
-void MainGame::updateOnResize(sf::Event& e)
+void MainGame::updateOnResize()
 {
-    m_view.setSize(e.size.width * m_viewZoom, e.size.height * m_viewZoom);
+    m_view.setSize((sf::Vector2f) m_fen->getSize() * m_viewZoom);
 }

@@ -26,6 +26,7 @@ void App::loadRessources()
     sf::sleep(sf::seconds(1)); // pour faire genre 
 
     m_step = GAME;
+    m_mainGame.updateOnResize();
 }
 
 void App::run()

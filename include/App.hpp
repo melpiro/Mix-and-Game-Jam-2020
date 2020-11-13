@@ -8,6 +8,7 @@
 #include "MainMenu.hpp"
 #include "MainGame.hpp"
 
+
 class App {
 
 public:
@@ -30,6 +31,7 @@ private:
     LoadingMenu m_loadingMenu;
     MainMenu m_mainMenu;
     MainGame m_mainGame;
+
 
 
     std::future<void> m_th_load_ressources;
