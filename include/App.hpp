@@ -6,6 +6,7 @@
 #include "LoadingMenu.hpp"
 #include <future>
 #include "MainMenu.hpp"
+#include "MainGame.hpp"
 
 class App {
 
@@ -28,6 +29,7 @@ private:
 
     LoadingMenu m_loadingMenu;
     MainMenu m_mainMenu;
+    MainGame m_mainGame;
 
 
     std::future<void> m_th_load_ressources;

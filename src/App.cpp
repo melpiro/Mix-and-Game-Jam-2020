@@ -3,7 +3,8 @@
 App::App() :
     m_fen(sf::VideoMode(1200,1000),"App"),
     m_loadingMenu(&m_fen),
-    m_mainMenu(&m_fen)
+    m_mainMenu(&m_fen),
+    m_mainGame(&m_fen)
 {
     m_fen.setFramerateLimit(60);
     m_th_load_ressources = std::async(std::launch::async, &App::loadRessources, this);
@@ -20,10 +21,11 @@ void App::loadRessources()
     // on charge les menu après les textures !! très important
     m_loadingMenu.init();
     m_mainMenu.init();
+    m_mainGame.init();
 
     sf::sleep(sf::seconds(1)); // pour faire genre 
 
-    m_step = MAIN_MENU;
+    m_step = GAME;
 }
 
 void App::run()
@@ -51,7 +53,6 @@ void App::event()
             sf::FloatRect visibleArea(0, 0, e.size.width, e.size.height);
 			m_fen.setView(sf::View(visibleArea));
         }
-
         if (m_step == LOADING_MENU)
         {
             m_loadingMenu.event(e);
@@ -59,6 +60,10 @@ void App::event()
         else if (m_step == MAIN_MENU)
         {
             m_mainMenu.event(e);
+        }
+        else if (m_step == GAME)
+        {
+            m_mainGame.event(e);
         }
     }
 }
@@ -73,6 +78,10 @@ void App::update()
     {
         m_mainMenu.update();
     }
+    else if (m_step == GAME)
+    {
+        m_mainGame.update();
+    }
 }
 
 void App::render()
@@ -86,6 +95,10 @@ void App::render()
     else if (m_step == MAIN_MENU)
     {
         m_mainMenu.render();
+    }
+    else if (m_step == GAME)
+    {
+        m_mainGame.render();
     }
 
     m_fen.display();
