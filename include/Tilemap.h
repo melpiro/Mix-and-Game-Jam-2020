@@ -22,7 +22,7 @@ public:
 
     void draw();
 
-    void update();
+    void update(float deltaTime);
 
     void setTMap(std::vector<std::vector<int>> tmap);
 

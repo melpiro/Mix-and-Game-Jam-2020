@@ -4,10 +4,6 @@
 MainGame::MainGame(sf::RenderWindow* fen)
 {
     m_fen=fen;
-
-
-
-
 }
 
 void MainGame::init()
@@ -17,16 +13,19 @@ void MainGame::init()
     for(int i = 0; i < 5; i++){
         v.emplace_back(O::graphics::ressourceManager.getTexture("t"+std::to_string(i)),10);
     }
+    v.emplace_back(O::graphics::ressourceManager.getTexture("test"),sf::Vector2i(2,2),0,1000,10);
 
     std::vector<std::vector<int>> tmpMap = {
             {0,1,2,3,0},
             {0,1,3,1,0},
             {0,0,2,3,0},
             {0,1,0,3,0},
-            {0,1,2,0,0},
+            {0,1,2,0,5},
     };
     m_tmap = Tilemap(sf::Vector2i(5,5),v,*m_fen);
     m_tmap.setTMap(tmpMap);
+
+    tstC.restart();
 }
 
 void MainGame::event(sf::Event e)
@@ -36,9 +35,9 @@ void MainGame::event(sf::Event e)
         updateOnResize();
     }
 }
-void MainGame::update()
+void MainGame::update(float dt)
 {
-
+    m_tmap.update(dt);
 }
 void MainGame::render()
 {

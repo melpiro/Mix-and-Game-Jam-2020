@@ -12,7 +12,7 @@ public:
 
 
     void event(sf::Event e);
-    void update();
+    void update(float dt);
     void render();
 
 private:
@@ -22,6 +22,8 @@ private:
     sf::RenderWindow* m_fen;
 
     Tilemap m_tmap ;
+
+    sf::Clock tstC;
     
 };
 
