@@ -61,7 +61,8 @@ EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Cha
 
 void EnemyCharacter::draw() {
     Character::draw();
-    miniTetris.render();
+    if(!miniTetris.defeat())
+        miniTetris.render();
 }
 
 void EnemyCharacter::event(sf::Event &e) {
