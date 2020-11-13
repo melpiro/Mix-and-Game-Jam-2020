@@ -47,8 +47,8 @@ void RessourceManager::addTextureAndLoadIt(const std::string& local, const std::
 
 void RessourceManager::loadAllTextures()
 {
-    auto it = m_allTextures.begin();
-    for (it; it != m_allTextures.end(); it++)
+    
+    for (auto it = m_allTextures.begin(); it != m_allTextures.end(); it++)
     {
         it->second.second.loadFromFile(m_defaultTextureDir+"/"+it->second.first);
     }
@@ -70,8 +70,8 @@ void RessourceManager::addAudio(const std::string& local, const std::string& nam
 }
 void RessourceManager::loadAllAudio()
 {
-    auto it = m_allSounds.begin();
-    for (it; it != m_allSounds.end(); it++)
+    
+    for (auto it = m_allSounds.begin(); it != m_allSounds.end(); it++)
     {
         it->second.second.loadFromFile(m_defaultAudioDir+"/"+it->second.first);
     }
@@ -103,8 +103,8 @@ void RessourceManager::addFontAndLoadIt(const std::string& local, const std::str
 
 void RessourceManager::loadAllFont()
 {
-    auto it = m_allFonts.begin();
-    for (it; it != m_allFonts.end(); it++)
+    
+    for (auto it = m_allFonts.begin(); it != m_allFonts.end(); it++)
     {
         it->second.second.loadFromFile(m_defaultFontDir+"/"+it->second.first);
     }

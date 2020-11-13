@@ -10,7 +10,8 @@ namespace graphics {
 
 	Sprite::Sprite(sf::RenderWindow* window, std::string textureName, float x, float y, float posRx, float posRy, bool centered) :
 		m_fen(window),
-		m_x(x), m_y(y), m_textureName(textureName),
+		m_textureName(textureName),
+		m_x(x), m_y(y), 
 		m_posRx(posRx), m_posRy(posRy),
 		m_isOrigineAsCenter(false)
 	{

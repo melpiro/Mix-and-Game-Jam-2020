@@ -44,7 +44,7 @@ public:
 
 private:
 
-	void updatePosForeground(double viewZoom = 1);
+	void updatePosForeground();
 
 	sf::RenderWindow* m_fen;
 

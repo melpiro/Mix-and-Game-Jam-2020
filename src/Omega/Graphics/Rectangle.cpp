@@ -8,8 +8,9 @@ namespace graphics {
 
 	}
 
-	Rectangle::Rectangle(sf::RenderWindow* window, float x, float y, float sizeX, float sizeY, float posRx, float posRy, bool centered) : m_rectangle(sf::Vector2f(sizeX,sizeY)),
+	Rectangle::Rectangle(sf::RenderWindow* window, float x, float y, float sizeX, float sizeY, float posRx, float posRy, bool centered) : 
 		m_fen(window),
+		m_rectangle(sf::Vector2f(sizeX,sizeY)),
 		m_x(x), m_y(y),
 		m_posRx(posRx), m_posRy(posRy),
 		m_isOrigineAsCenter(false)

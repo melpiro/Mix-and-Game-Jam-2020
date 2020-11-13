@@ -13,8 +13,8 @@ MainMenu::MainMenu(sf::RenderWindow* fen) :
     m_chargingBarTest(fen,  STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, 300,30, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, true),
     m_poucentage(fen, "mainFont",  STATIC::SYS::HALF_WIDTH + 300.0 / 2.0 + 40, STATIC::SYS::HALF_HIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, true),
 
-    m_line(fen, sf::Vector2f(STATIC::SYS::WIDTH, 0), sf::Vector2f(STATIC::SYS::WIDTH - 100, 200), 3, STATIC::SYS::WIDTH, 0),
     m_graph(fen, STATIC::SYS::HALF_WIDTH - 300, STATIC::SYS::HALF_HIGHT, 200,200, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, true),
+    m_line(fen, sf::Vector2f(STATIC::SYS::WIDTH, 0), sf::Vector2f(STATIC::SYS::WIDTH - 100, 200), 3, STATIC::SYS::WIDTH, 0),
 
     m_input(fen, "mainFont", STATIC::SYS::HALF_WIDTH - 500,  STATIC::SYS::HIGHT - 800, 300, 40, STATIC::SYS::HALF_WIDTH,  STATIC::SYS::HIGHT - 300, false),
     m_textInput(fen, "mainFont", STATIC::SYS::HALF_WIDTH + 250,  STATIC::SYS::HIGHT - 1000, 300, 500, STATIC::SYS::HALF_WIDTH,  STATIC::SYS::HIGHT - 300, false)
@@ -31,7 +31,7 @@ MainMenu::MainMenu(sf::RenderWindow* fen) :
     m_buttonTest.setOutlineThickness(3);
 
     m_boutonTextureTest.setString(O::graphics::ressourceManager.text(4));
-    m_boutonTextureTest.gT().setColor(sf::Color::Black);
+    m_boutonTextureTest.gT().setFillColor(sf::Color::Black);
     m_boutonTextureTest.setCharacterSize(30);
 
     m_chargingBarTest.setBackgroundColor(sf::Color::Black);

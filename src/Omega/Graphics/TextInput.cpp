@@ -65,7 +65,7 @@ namespace graphics {
 			else if (e.key.code == sf::Keyboard::Right)
 			{
 				m_cusorIndex++;
-				if (m_cusorIndex>m_text.getString().getSize()) m_cusorIndex = m_text.getString().getSize();
+				if (m_cusorIndex> (long int) m_text.getString().getSize()) m_cusorIndex = m_text.getString().getSize();
 
 				updatePosCursor();
 			}
@@ -166,7 +166,7 @@ namespace graphics {
 	{
 		if (m_haveFocus) updatePosCursor();
 		sf::FloatRect rect = m_rectangle.getGlobalBounds();
-		sf::FloatRect textRect = m_text.getGlobalBounds();
+		//sf::FloatRect textRect = m_text.getGlobalBounds();
 		Text::setPosition(rect.left + graphics::Button::gR().getOutlineThickness() + 2, rect.top + graphics::Button::gR().getOutlineThickness() + 2);
 		Text::update();
 	}
@@ -174,7 +174,7 @@ namespace graphics {
 	void TextInput::updatePosCursor()
 	{
 		int nbLine = 0;
-		for (size_t i = 0; i < m_cusorIndex; i++)
+		for (size_t i = 0; (long int) i < m_cusorIndex; i++)
 		{
 			if (m_text.getString()[i] == '\n') nbLine++;
 		}
@@ -192,7 +192,7 @@ namespace graphics {
 				m_text.getPosition().y + (nbLine) * (m_text.getFont()->getLineSpacing(m_text.getCharacterSize()))  + 5.0
 			);
 		}
-		else if (m_cusorIndex == m_text.getString().getSize())
+		else if (m_cusorIndex == (long int)m_text.getString().getSize())
 		{
 			m_cursor.setPosition(m_text.findCharacterPos(m_cusorIndex - 1).x + give_letter_size(m_text.getString()[m_cusorIndex - 1],*m_text.getFont(), m_text.getCharacterSize() + 2.0),
 				m_text.getPosition().y + (nbLine) * (m_text.getFont()->getLineSpacing(m_text.getCharacterSize()))  + 5.0
@@ -222,7 +222,7 @@ namespace graphics {
 		indexAddedReturn.clear();
 		int s_width = 0;
 		int last_word = 0;
-		for(int i = 0; i < text.getSize(); i++)
+		for(size_t i = 0; i < text.getSize(); i++)
 		{
 
 			if(s_width < width)
@@ -254,13 +254,13 @@ namespace graphics {
 				last_word = i;
 		}
 
-		if (lastIndexAddedReturnSize > indexAddedReturn.size())
+		if (lastIndexAddedReturnSize > (long int) indexAddedReturn.size())
 		{
-			decreaced = lastIndexAddedReturnSize-((int)indexAddedReturn.size());
+			decreaced = lastIndexAddedReturnSize-((long int)indexAddedReturn.size());
 		}
-		else if (lastIndexAddedReturnSize < indexAddedReturn.size())
+		else if (lastIndexAddedReturnSize < (long int)indexAddedReturn.size())
 		{
-			increaced = ((int)indexAddedReturn.size())-lastIndexAddedReturnSize;
+			increaced = ((long int)indexAddedReturn.size())-lastIndexAddedReturnSize;
 		}
 		lastIndexAddedReturnSize = indexAddedReturn.size();
 		return text;
@@ -370,7 +370,7 @@ namespace graphics {
 					posCursor--;
 					m_cusorIndex--;
 				}
-				if (posCursor + 1 < nonModifiedString.getSize() && (nonModifiedString[posCursor + 1] == ' '||nonModifiedString[posCursor+1] == ' '))
+				if (posCursor + 1 < (long int) nonModifiedString.getSize() && (nonModifiedString[posCursor + 1] == ' '||nonModifiedString[posCursor+1] == ' '))
 				{
 					while (posCursor>=0 && (nonModifiedString[posCursor] == ' '||nonModifiedString[posCursor] == '\n'))
 					{

@@ -143,7 +143,7 @@ void ChargingBar::draw()
 	m_foregroundRect.draw();
 }
 
-void ChargingBar::updatePosForeground(double viewZoom)
+void ChargingBar::updatePosForeground()
 {
 	sf::FloatRect bounds = m_backgroundRect.gR().getGlobalBounds();
 

@@ -128,6 +128,8 @@ namespace O
             matrix[2][0] = 0;
             matrix[2][1] = sin(angle);
             matrix[2][2] = cos(angle);
+
+            return matrix;
         }
         Matrix<float> create3DRotationMatrixAroundYRadf(float const& angle)
         {

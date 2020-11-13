@@ -47,7 +47,6 @@ namespace graphics {
 		void move(float x, float y);
 		void setSize(float length, float width);
 		void setPoints(sf::Vector2f p1, sf::Vector2f p2);
-		void setPoints(sf::Vector2f p1, sf::Vector2f p2, double viewZoom);
 		void setPoints(sf::Vector2f p, float angle, float length);
 		void setFillColor(sf::Color c);
 		void setWidth(float w);

@@ -142,7 +142,7 @@ void BarsGraphApp::updateView()
 		double posX = margin;
 		for (it = m_allBars.begin(); it != m_allBars.end(); it++)
 		{
-			double lastPosX = posX;
+			//double lastPosX = posX;
 			// pour chaques bares du groupe
 			for (size_t i = 0; i < it->second.size(); i++)
 			{
@@ -190,7 +190,7 @@ void BarsGraphApp::updateAdd()
 	for (size_t i = 0; i < m_tempResize.size(); i++)
 	{
 		auto it = m_allBars.find(m_tempResize[i].first.first);
-		if (it != m_allBars.end() && m_tempResize[i].first.second < it->second.size())
+		if (it != m_allBars.end() && (size_t) m_tempResize[i].first.second < it->second.size())
 		{
 			it->second[m_tempResize[i].first.second].first.first = m_tempResize[i].second;
 		}

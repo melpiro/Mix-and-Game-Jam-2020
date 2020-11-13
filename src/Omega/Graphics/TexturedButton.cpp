@@ -9,9 +9,9 @@ namespace graphics {
 	}
 
 	TexturedButton::TexturedButton(sf::RenderWindow* fen, std::string textureName, std::string fontName, float x, float y, float posRx, float posRy, bool centered) :
-		m_fen(fen),
 		Sprite(fen, textureName, x, y, posRx, posRy, centered),
-		Text(fen, fontName, x, y, 0, 0, true)// le texte est toujour centr� !
+		Text(fen, fontName, x, y, 0, 0, true),// le texte est toujour centr� !
+		m_fen(fen)
 	{
 		m_rectB = sf::IntRect(-1, -1, -1, -1);
 		m_rectHover = sf::IntRect(-1, -1, -1, -1);

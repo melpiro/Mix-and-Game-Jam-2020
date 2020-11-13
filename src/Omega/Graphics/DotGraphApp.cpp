@@ -171,7 +171,6 @@ void DotGraphApp::updateAdd(std::string name, sf::Vector2f coord)
 		it->second.first.first.push_back(coord);
 		if (it->second.first.first.size() >= 2)
 		{
-			sf::Vector2f pts1 = it->second.first.first[it->second.first.first.size() - 2];
 			sf::CircleShape circle(WIDTH_DOTS);
 			circle.setOrigin(WIDTH_DOTS, WIDTH_DOTS);
 			circle.setFillColor(it->second.second);

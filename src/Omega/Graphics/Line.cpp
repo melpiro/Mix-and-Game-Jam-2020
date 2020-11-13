@@ -119,17 +119,7 @@ namespace graphics {
 
 		update();
 	}
-	void Line::setPoints(sf::Vector2f p1, sf::Vector2f p2, double viewZoom)
-	{
-		m_p1 = p1;
-		m_p2 = p2;
-		m_length = math::getDistance((sf::Vector2f) p1, (sf::Vector2f) p2);
 
-		m_rectangle.setSize(sf::Vector2f(m_length, m_width));
-		m_rectangle.setRotation(math::getAngleDeg((sf::Vector2f) p1, (sf::Vector2f)p2));
-
-		update();
-	}
 	void Line::setPoints(sf::Vector2f p, float angle, float length)
 	{
 		m_p1 = p;

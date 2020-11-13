@@ -78,7 +78,7 @@ namespace graphics {
 			else if (e.key.code == sf::Keyboard::Right)
 			{
 				m_cusorIndex++;
-				if (m_cusorIndex>m_text.getString().getSize()) m_cusorIndex = m_text.getString().getSize();
+				if (m_cusorIndex> (long int)m_text.getString().getSize()) m_cusorIndex = m_text.getString().getSize();
 
 				updatePosCursor();
 			}
@@ -189,7 +189,6 @@ namespace graphics {
 	{
 		if (m_haveFocus) updatePosCursor();
 		sf::FloatRect rect = m_rectangle.getGlobalBounds();
-		sf::FloatRect textRect = m_text.getGlobalBounds();
 		Text::setPosition(rect.left + graphics::Button::gR().getOutlineThickness() + 2, rect.top + rect.height / 2.0 - ((double)m_text.getCharacterSize()) / 1.5 );
 		Text::update();
 	}
@@ -197,7 +196,7 @@ namespace graphics {
 	void Input::updatePosCursor()
 	{
 		int nbLine = 0;
-		for (size_t i = 0; i < m_cusorIndex; i++)
+		for (size_t i = 0; (long int) i < m_cusorIndex; i++)
 		{
 			if (m_text.getString()[i] == '\n') nbLine++;
 		}
@@ -215,7 +214,7 @@ namespace graphics {
 				m_text.getPosition().y + (nbLine) * (m_text.getFont()->getLineSpacing(m_text.getCharacterSize()))  + 5.0
 			);
 		}
-		else if (m_cusorIndex == m_text.getString().getSize())
+		else if (m_cusorIndex == (long int)m_text.getString().getSize())
 		{
 			m_cursor.setPosition(m_text.findCharacterPos(m_cusorIndex - 1).x +  m_text.getFont()->getGlyph(m_text.getString()[m_cusorIndex - 1], m_text.getCharacterSize(), false).advance,
 				m_text.getPosition().y + (nbLine) * (m_text.getFont()->getLineSpacing(m_text.getCharacterSize()))  + 5.0
@@ -297,7 +296,7 @@ namespace graphics {
 					string.erase(m_cusorIndex - 1);
 					m_cusorIndex--;
 				}
-				if (m_cusorIndex < string.getSize() && (string[m_cusorIndex] == ' '||string[m_cusorIndex] == ' '))
+				if (m_cusorIndex < (long int) string.getSize() && (string[m_cusorIndex] == ' '||string[m_cusorIndex] == ' '))
 				{
 					while (m_cusorIndex - 1>=0 && (string[m_cusorIndex - 1] == ' '||string[m_cusorIndex - 1] == '\n'))
 					{
@@ -316,9 +315,9 @@ namespace graphics {
 	{
 		// new computation
 		sf::String text = m_text.getString();
-		sf::Vector2f clicAbsolutePos = clic - m_text.getPosition();
+		//sf::Vector2f clicAbsolutePos = clic - m_text.getPosition();
 		int index = text.getSize();
-		bool find = false;
+		//bool find = false;
 		double minDistance = 1000000000;
 		for (size_t i = 0; i < text.getSize(); i++)
 		{
@@ -329,7 +328,7 @@ namespace graphics {
 			{
 				minDistance = std::abs(d);
 				index = i;
-				find = true;
+				//find = true;
 			}
 		
 		}

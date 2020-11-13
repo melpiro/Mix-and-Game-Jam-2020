@@ -12,9 +12,9 @@ namespace graphics {
 
 
 	Button::Button(sf::RenderWindow* window, std::string font, float x, float y, float sizeX, float sizeY, float posRx, float posRy, bool centered):
-		m_fen(window),
 		Rectangle(window, x, y, sizeX, sizeY, posRx, posRy, centered),
-		Text(window,font, x, y, 0, 0, true) // le texte est toujour en centered !
+		Text(window,font, x, y, 0, 0, true), // le texte est toujour en centered !
+		m_fen(window)
 	{
 		m_baseColor = sf::Color::Transparent;
 		m_hoverColor = sf::Color(255,255,255,150);

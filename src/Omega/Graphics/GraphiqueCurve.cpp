@@ -53,8 +53,7 @@ void GraphiqueCurve::setLineWidth(std::string name, float width)
 void GraphiqueCurve::setLineWidth(float width)
 {
 	m_ligneWidth = width;
-	auto it = m_allCourbe.begin();
-	for (it; it != m_allCourbe.end(); it++)
+	for (auto it = m_allCourbe.begin(); it != m_allCourbe.end(); it++)
 	{
 		for (size_t i = 0; i < it->second.first.second.size(); i++)
 		{
@@ -90,11 +89,7 @@ void GraphiqueCurve::addPoint(std::string name, sf::Vector2f coord)
 		// si il y a plus de deux point -> conection !
 		if (it->second.first.first.size() >= 2)
 		{
-			float lineWidth = m_ligneWidth;
-			if (it->second.first.second.size() > 0)
-			{
-				lineWidth = it->second.first.second.back().getWidth();
-			}
+			
 			sf::Vector2f pointRedi = m_background.getPointRedi();
 
 			graphics::Line newLine(m_fen, sf::Vector2f(0, 0), sf::Vector2f(0, 0), m_ligneWidth, pointRedi.x, pointRedi.y);
@@ -106,7 +101,7 @@ void GraphiqueCurve::addPoint(std::string name, sf::Vector2f coord)
 		int sizeMAx = m_sizeMaxForCurve[name];
 		if (sizeMAx != -1)
 		{
-			if (it->second.first.second.size()>0 && it->second.first.second.size() > sizeMAx) 
+			if (it->second.first.second.size()>0 && (long int)it->second.first.second.size() > sizeMAx) 
 			{
 				it->second.first.second.erase(it->second.first.second.begin());
 				it->second.first.first.erase(it->second.first.first.begin());
@@ -120,10 +115,8 @@ void GraphiqueCurve::addPoint(std::string name, sf::Vector2f coord)
 
 void GraphiqueCurve::setPosition(float x, float y)
 {
-	
 
-	auto it = m_allCourbe.begin();
-	for (it; it != m_allCourbe.end(); it++)
+	for (auto it = m_allCourbe.begin(); it != m_allCourbe.end(); it++)
 	{
 		for (size_t i = 0; i < it->second.first.second.size(); i++)
 		{
@@ -156,8 +149,7 @@ void GraphiqueCurve::update()
 
 	m_background.update();
 
-	auto it = m_allCourbe.begin();
-	for (it; it != m_allCourbe.end(); it++)
+	for (auto it = m_allCourbe.begin(); it != m_allCourbe.end(); it++)
 	{
 		for (size_t i = 0; i < it->second.first.second.size(); i++)
 		{
@@ -172,8 +164,7 @@ void GraphiqueCurve::draw()
 {
 	m_background.draw();
 
-	auto it = m_allCourbe.begin();
-	for (it; it != m_allCourbe.end(); it++)
+	for (auto it = m_allCourbe.begin(); it != m_allCourbe.end(); it++)
 	{
 		for (size_t i = 0; i < it->second.first.second.size(); i++)
 		{
@@ -189,8 +180,8 @@ void GraphiqueCurve::updateView()
 
 	float minY = 10000000;
 	float maxY = -10000000;
-	auto it = m_allCourbe.begin();
-	for (it; it != m_allCourbe.end(); it++)
+	
+	for (auto it = m_allCourbe.begin(); it != m_allCourbe.end(); it++)
 	{
 		///////////////////////////////////////////////////////////////:
 		// on calcule l'echelle des �lement que l'ont vas devoir repr�senter
@@ -216,8 +207,7 @@ void GraphiqueCurve::updateView()
 			}
 		}
 	}
-	it = m_allCourbe.begin();
-	for (it; it != m_allCourbe.end(); it++)
+	for (auto it = m_allCourbe.begin(); it != m_allCourbe.end(); it++)
 	{
 		///////////////////////////////////////////////////////////////:
 		// on d�termine le visuel

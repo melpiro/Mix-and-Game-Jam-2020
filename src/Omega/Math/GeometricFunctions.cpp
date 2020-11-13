@@ -41,8 +41,7 @@ namespace geo2d {
     bool intersect_point_convexPolygon(const sf::Vector2f& point, const std::vector<sf::Vector2f>&  poly)
     {
         if (poly.size() == 0) return false;
-        int i;
-        for(i=0;i<poly.size();i++)
+        for(size_t i=0;i<poly.size();i++)
         {
             sf::Vector2f A = poly[i];
             sf::Vector2f B;
@@ -63,12 +62,11 @@ namespace geo2d {
     }
     bool intersect_point_polygon(const sf::Vector2f& point, const std::vector<sf::Vector2f>&  poly)
     {
-        int i;
         sf::Vector2f I;
         I.x = 100000000 + rand()%100;
         I.y = 10000 + rand()%100;
         int nbintersections = 0;
-        for(i=0;i<poly.size();i++)
+        for(size_t i=0;i<poly.size();i++)
         {
             sf::Vector2f A = poly[i];
             sf::Vector2f B;
@@ -138,7 +136,7 @@ namespace geo2d {
     }
     bool intersect_cercle_convexPolygon(const sf::Vector2f& cercle_center, const float&  radius, const std::vector<sf::Vector2f>&  poly)
     {
-        intersect_cercle_polygon(cercle_center, radius, poly);
+        return intersect_cercle_polygon(cercle_center, radius, poly);
     }
     bool intersect_cercle_polygon(const sf::Vector2f& cercle_center, const float&  radius, const std::vector<sf::Vector2f>&  poly)
     {
@@ -146,7 +144,7 @@ namespace geo2d {
         for (size_t i = 0; i < poly.size(); i++)
         {
             int i_1 = i + 1;
-            if (i_1 == poly.size()) i_1 = 0;
+            if (i_1 == (long int)poly.size()) i_1 = 0;
             if (intersect_segment_cercle(poly[i], poly[i_1], cercle_center, radius)) return true;
         }
         return false;
@@ -198,7 +196,7 @@ namespace geo2d {
     }
     bool intersect_ligne_convexPolygon(const sf::Vector2f& A, const sf::Vector2f& B, const std::vector<sf::Vector2f>&  poly)
     {
-        intersect_ligne_polygon(A, B, poly);
+        return intersect_ligne_polygon(A, B, poly);
     }
     bool intersect_ligne_polygon(const sf::Vector2f& A, const sf::Vector2f& B, const std::vector<sf::Vector2f>&  poly)
     {
@@ -207,7 +205,7 @@ namespace geo2d {
         for (size_t i = 0; i < poly.size(); i++)
         {
             int i_1 = i + 1;
-            if (i_1 == poly.size()) i_1 = 0;
+            if (i_1 == (long int)poly.size()) i_1 = 0;
             if (intersect_segment_ligne(poly[i], poly[i_1], A, B)) return true;
         }
         return false;
@@ -263,7 +261,7 @@ namespace geo2d {
     }
     bool intersect_segment_convexPolygon(const sf::Vector2f& A, const sf::Vector2f& B, const std::vector<sf::Vector2f>&  poly)
     {
-        intersect_segment_polygon(A, B, poly);
+        return intersect_segment_polygon(A, B, poly);
     }
     bool intersect_segment_polygon(const sf::Vector2f& A, const sf::Vector2f& B, const std::vector<sf::Vector2f>&  poly)
     {
@@ -272,7 +270,7 @@ namespace geo2d {
         for (size_t i = 0; i < poly.size(); i++)
         {
             int i_1 = i + 1;
-            if (i_1 == poly.size()) i_1 = 0;
+            if (i_1 == (long int)poly.size()) i_1 = 0;
             if (intersect_segment_segment(poly[i], poly[i_1], A, B)) return true;
         }
         return false;
@@ -307,7 +305,7 @@ namespace geo2d {
     }
     bool intersect_AABB_convexPolygon(const sf::Vector2f& O, const sf::Vector2f& size, const std::vector<sf::Vector2f>&  poly)
     {
-        intersect_AABB_polygon(O, size, poly);
+        return intersect_AABB_polygon(O, size, poly);
     }
     bool intersect_AABB_polygon(const sf::Vector2f& O, const sf::Vector2f& size, const std::vector<sf::Vector2f>&  poly)
     {
@@ -397,11 +395,11 @@ namespace geo2d {
 
         for (size_t i = 0; i < poly1.size(); i++)
         {
-            int i_1 = i + 1;
+            size_t i_1 = i + 1;
             if (i_1 == poly1.size()) i_1 = 0;
             for (size_t j = 0; j < poly2.size(); j++)
             {
-                int j_1 = j + 1;
+                size_t j_1 = j + 1;
                 if (j_1 == poly2.size()) j_1 = 0;
 
                 if (intersect_segment_segment(poly1[i],poly1[i_1], poly2[j], poly2[j_1])) return true;
@@ -529,7 +527,7 @@ namespace geo2d {
         std::vector<sf::Vector2f> res;
         for (size_t i = 0; i < poly.size(); i++)
         {
-            int i_1 = i + 1;
+            size_t i_1 = i + 1;
             if (i_1 == poly.size()) i_1 = 0;
             O::vector::pushBack(res, cross_segment_cercle(poly[i], poly[i_1], cercle_center, radius));
         }
@@ -598,7 +596,7 @@ namespace geo2d {
         std::vector<sf::Vector2f> res;
         for (size_t i = 0; i < poly.size(); i++)
         {
-            int i_1 = i + 1;
+            size_t i_1 = i + 1;
             if (i_1 == poly.size()) i_1 = 0;
             O::vector::pushBack(res,cross_segment_ligne(poly[i], poly[i_1], A, B));
         }
@@ -655,7 +653,7 @@ namespace geo2d {
         std::vector<sf::Vector2f> res;
         for (size_t i = 0; i < poly.size(); i++)
         {
-            int i_1 = i + 1;
+            size_t i_1 = i + 1;
             if (i_1 == poly.size()) i_1 = 0;
             O::vector::pushBack(res,cross_segment_segment(poly[i], poly[i_1], A, B));
         }
@@ -755,11 +753,11 @@ namespace geo2d {
         std::vector<sf::Vector2f> res;
         for (size_t i = 0; i < poly1.size(); i++)
         {
-            int i_1 = i + 1;
+            size_t i_1 = i + 1;
             if (i_1 == poly1.size()) i_1 = 0;
             for (size_t j = 0; j < poly2.size(); j++)
             {
-                int j_1 = j + 1;
+                size_t j_1 = j + 1;
                 if (j_1 == poly2.size()) j_1 = 0;
 
                 O::vector::pushBack(res,cross_segment_segment(poly1[i],poly1[i_1], poly2[j], poly2[j_1]));

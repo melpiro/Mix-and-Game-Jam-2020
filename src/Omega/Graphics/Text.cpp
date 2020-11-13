@@ -28,7 +28,7 @@ namespace graphics {
 	}
 
 	Text::Text(sf::RenderWindow* window, std::string fontName, float x, float y, bool centered):
-		Text(window, fontName, x, y, 0, 0, false)
+		Text(window, fontName, x, y, 0, 0, centered)
 	{
 		
 	}
@@ -166,7 +166,7 @@ namespace graphics {
 	{
 		int s_width = 0;
 		int last_word = 0;
-		for(int i = 0; i < text.getSize(); i++)
+		for(size_t i = 0; i < text.getSize(); i++)
 		{
 			
 			if(s_width < width)

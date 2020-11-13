@@ -77,11 +77,11 @@ namespace str {
 	}
 	///////////////////////////////////////////////////////////////
 	bool isNumber(const std::string& str)
-	{
-		size_t i = 0;
+	{	
+		size_t start = 0;
 		bool point = false;
-		if (str[0] == '-' && str.size() > 1) i = 1;
-		for (i; i < str.size(); i++)
+		if (str[0] == '-' && str.size() > 1) start = 1;
+		for (size_t i = start; i < str.size(); i++)
 		{
 			if (!point && i > 0 && i < str.size() - 1 && str[i] == '.')
 			{
@@ -94,10 +94,10 @@ namespace str {
 	///////////////////////////////////////////////////////////////
 	bool isNumber(const sf::String& str)
 	{
-		size_t i = 0;
+		size_t start = 0;
 		bool point = false;
-		if (str[0] == '-' && str.getSize() > 1) i = 1;
-		for (i; i < str.getSize(); i++)
+		if (str[0] == '-' && str.getSize() > 1) start = 1;
+		for (size_t i = start; i < str.getSize(); i++)
 		{
 			if (!point && i > 0 && i < str.getSize() - 1 && str[i] == '.')
 			{
