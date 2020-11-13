@@ -34,7 +34,7 @@ namespace graphics {
 		if (Button::clicked(e))
 		{
 			m_haveFocus = true;
-			updatePosCursor(sf::Vector2f(e.mouseButton.x,e.mouseButton.y));
+			updatePosCursor(m_fen->mapPixelToCoords(sf::Vector2i(e.mouseButton.x,e.mouseButton.y)));
 		}
 		else if (e.type == sf::Event::MouseButtonReleased)
 		{

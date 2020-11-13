@@ -7,6 +7,9 @@ App::App() :
 {
     m_fen.setFramerateLimit(60);
     m_th_load_ressources = std::async(std::launch::async, &App::loadRessources, this);
+
+    sf::View v(sf::FloatRect(100,100,2000,1000));
+    m_fen.setView(v);
 }
 
 
@@ -45,8 +48,8 @@ void App::event()
         }
         else if (e.type == sf::Event::Resized)
         {
-            sf::FloatRect visibleArea(0, 0, e.size.width, e.size.height);
-			m_fen.setView(sf::View(visibleArea));
+            //sf::FloatRect visibleArea(0, 0, e.size.width, e.size.height);
+		//	m_fen.setView(sf::View(visibleArea));
         }
 
         if (m_step == LOADING_MENU)

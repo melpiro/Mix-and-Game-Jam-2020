@@ -146,7 +146,7 @@ namespace graphics {
 
 	bool Rectangle::hover()
 	{
-		auto p = sf::Mouse::getPosition(*m_fen);
+		auto p = m_fen->mapPixelToCoords(sf::Mouse::getPosition(*m_fen));
 		bool isIn = m_rectangle.getGlobalBounds().contains(p.x, p.y);
 		if (isIn)
 		{

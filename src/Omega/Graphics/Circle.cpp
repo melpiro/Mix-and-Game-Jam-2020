@@ -154,7 +154,7 @@ namespace graphics {
 
 	bool Circle::hover()
 	{
-		auto p = sf::Mouse::getPosition(*m_fen);
+		auto p = m_fen->mapPixelToCoords(sf::Mouse::getPosition(*m_fen));
 		sf::FloatRect b = m_circle.getGlobalBounds();
 
 		bool isIn = (getRadius() > math::getDistance(

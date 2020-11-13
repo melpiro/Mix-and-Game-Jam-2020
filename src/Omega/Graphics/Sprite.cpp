@@ -139,7 +139,7 @@ namespace graphics {
 
 	bool Sprite::hover()
 	{
-		auto p = sf::Mouse::getPosition(*m_fen);
+		auto p = m_fen->mapPixelToCoords(sf::Mouse::getPosition(*m_fen));
 		return (m_sprite.getGlobalBounds().contains(p.x, p.y));
 	}
 
