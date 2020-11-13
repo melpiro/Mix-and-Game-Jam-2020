@@ -1,6 +1,6 @@
-#include "MinitTetris.hpp"
+#include "MiniTetris.hpp"
 
-MinitTetris::MinitTetris(sf::RenderWindow* fen) :
+MiniTetris::MiniTetris(sf::RenderWindow* fen) :
     m_background(fen, 0,0,100,100, true)
 {
     m_fen=fen;
@@ -12,7 +12,7 @@ MinitTetris::MinitTetris(sf::RenderWindow* fen) :
     m_debug.setOrigin(5,5);
 }
 
-void MinitTetris::start()
+void MiniTetris::start()
 {
     float minX = m_background.getPosition().x - m_background.getSize().x /2.0 + padding;
     float minY = m_background.getPosition().y - m_background.getSize().y /2.0 + padding;
@@ -45,7 +45,7 @@ void MinitTetris::start()
 
 
 
-void MinitTetris::event(sf::Event e)
+void MiniTetris::event(sf::Event e)
 {
     if (m_running && !m_defeat)
     {
@@ -116,7 +116,7 @@ void MinitTetris::event(sf::Event e)
     }
     
 }
-void MinitTetris::update()
+void MiniTetris::update()
 {
     if (m_running && !m_defeat)
     {
@@ -187,7 +187,7 @@ void MinitTetris::update()
         }
     }
 }
-void MinitTetris::render()
+void MiniTetris::render()
 {
     if (m_running)
     {
@@ -206,7 +206,7 @@ void MinitTetris::render()
 }
 
 
-void MinitTetris::setPosition(float x, float y)
+void MiniTetris::setPosition(float x, float y)
 {
     m_background.setPosition(x, y);
 
@@ -225,7 +225,7 @@ void MinitTetris::setPosition(float x, float y)
 }
 
 
-void MinitTetris::setWindowSize(float x, float y)
+void MiniTetris::setWindowSize(float x, float y)
 {
     m_background.setSize(x, y);
 
@@ -244,14 +244,14 @@ void MinitTetris::setWindowSize(float x, float y)
    }
 }
 
-void MinitTetris::setTileSize(int nbCol, int nbLine)
+void MiniTetris::setTileSize(int nbCol, int nbLine)
 {
     m_nbLine = nbLine + 3;
     m_nbCol = nbCol;
 
 }
 
-void MinitTetris::addPiece(int x, int y, PIECE p, sf::Color coul, int rotation)
+void MiniTetris::addPiece(int x, int y, PIECE p, sf::Color coul, int rotation)
 {
     m_actualPiecePos = sf::Vector2i(x, y);
     pieceId = p;
@@ -262,7 +262,7 @@ void MinitTetris::addPiece(int x, int y, PIECE p, sf::Color coul, int rotation)
     m_pieceColor = coul;
 }
 
-void MinitTetris::rotateRight()
+void MiniTetris::rotateRight()
 {
     pieceRotation++;
     if (pieceRotation > 3) pieceRotation = 0;
@@ -271,7 +271,7 @@ void MinitTetris::rotateRight()
     
 
 }
-void MinitTetris::rotateLeft()
+void MiniTetris::rotateLeft()
 {
     pieceRotation--;
     if (pieceRotation < 0) pieceRotation = 3;
@@ -280,7 +280,7 @@ void MinitTetris::rotateLeft()
     m_piece = allPiece[(int)pieceId][pieceRotation];
 }
 
-std::pair<int, int> MinitTetris::getPieceSize(PIECE p, int rotation)
+std::pair<int, int> MiniTetris::getPieceSize(PIECE p, int rotation)
 {
     return std::make_pair(
         allPiece[(int)p][rotation].size(),
@@ -291,7 +291,7 @@ std::pair<int, int> MinitTetris::getPieceSize(PIECE p, int rotation)
 
 
 
-bool MinitTetris::checkCollision(sf::Vector2i futurePos)
+bool MiniTetris::checkCollision(sf::Vector2i futurePos)
 {
     for (size_t i = 0; i < m_piece.size(); i++)
     {
@@ -304,7 +304,7 @@ bool MinitTetris::checkCollision(sf::Vector2i futurePos)
     return false;
 }
 
-void MinitTetris::generateRdm()
+void MiniTetris::generateRdm()
 {
     PIECE p = (PIECE)O::math::rdm::randInt(0, allPiece.size());
     int rotation = O::math::rdm::randInt(0, 4);
@@ -312,12 +312,12 @@ void MinitTetris::generateRdm()
     auto size = getPieceSize(p, rotation);
 
     auto v = O::math::rdm::randInt(0, m_nbCol - 1 - size.first );
-    addPiece(v, 0, p, 
+    addPiece(v, 0, p,
         COLORS[O::math::rdm::randInt(0, COLORS.size())],
         rotation);
 }
 
-bool MinitTetris::checkDefeat()
+bool MiniTetris::checkDefeat()
 {
     // check defeat
     for (size_t i = 0; i < m_caseArray.size(); i++)
@@ -329,4 +329,12 @@ bool MinitTetris::checkDefeat()
         }
     }
     return false;
+}
+
+bool MiniTetris::defeat() const {
+    return m_defeat;
+}
+
+sf::Vector2f MiniTetris::getWindowSize() {
+    return m_background.getSize();
 }

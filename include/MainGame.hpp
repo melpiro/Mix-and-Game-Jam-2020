@@ -4,7 +4,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Omega/Operators/PrintFunctions.h"
-#include "MinitTetris.hpp"
 #include "Omega/Graphics/RessourceManager.h"
 #include "PlayerCharacter.h"
 #include "EnemyCharacter.h"
@@ -35,7 +34,7 @@ private:
 
     sf::RectangleShape m_object;
 
-    MinitTetris m_tetrisTest;
+    MiniTetris m_tetrisTest;
     float m_timeForTetrisAnimeTest;
 
 

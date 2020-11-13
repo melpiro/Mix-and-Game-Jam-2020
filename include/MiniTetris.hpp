@@ -14,11 +14,11 @@ enum PIECE{
 };
 
 
-class MinitTetris
+class MiniTetris
 {
 
 public:
-    MinitTetris(sf::RenderWindow* fen);
+    MiniTetris(sf::RenderWindow* fen);
 
     void start();
 
@@ -35,6 +35,10 @@ public:
     void addPiece(int x, int y, PIECE p, sf::Color coul, int rotation);
 
     bool checkCollision(sf::Vector2i futurePos);
+
+    bool defeat() const;
+
+    sf::Vector2f getWindowSize();
 
 private:
 

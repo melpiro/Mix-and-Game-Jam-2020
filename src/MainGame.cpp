@@ -51,6 +51,7 @@ void MainGame::event(sf::Event e)
     m_tetrisTest.event(e);
 
     m_character.event(e);
+    m_enemy.event(e);
 }
 void MainGame::update(float dt)
 {

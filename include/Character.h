@@ -46,7 +46,7 @@ protected:
 public:
 
     virtual void init();
-    void draw();
+    virtual void draw();
     virtual void update(float deltatime);
     virtual void event(sf::Event &e);
 

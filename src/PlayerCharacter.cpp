@@ -10,6 +10,8 @@ void PlayerCharacter::init() {
     sprite.setScale(4, 4);
 
     frameSize = 16;
+    sprite.setOrigin(frameSize*0.5f, frameSize*0.5f);
+
     nbrFrames = 3;
 
     animY = 0*frameSize*nbrFrames;
