@@ -16,7 +16,7 @@ class MinitTetris
 public:
     MinitTetris(sf::RenderWindow* fen);
 
-    void init();
+    void start();
 
     void setPosition(float x, float y);
     void setWindowSize(float x, float y);
@@ -73,6 +73,8 @@ private:
 
     sf::Clock m_timerDown;
     sf::Time m_timeDown = sf::seconds(0.2);
+
+    bool m_running = false;
 
 
 

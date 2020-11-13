@@ -12,7 +12,7 @@ MinitTetris::MinitTetris(sf::RenderWindow* fen) :
     m_debug.setOrigin(5,5);
 }
 
-void MinitTetris::init()
+void MinitTetris::start()
 {
     float minX = m_background.getPosition().x - m_background.getSize().x /2.0 + padding;
     float minY = m_background.getPosition().y - m_background.getSize().y /2.0 + padding;
@@ -35,88 +35,110 @@ void MinitTetris::init()
            m_allcase[i][j].setSize(sizeX,sizeY);
        }
    }
+
+   generateRdm();
+
+   m_running = true;
 }
 
 
 
 void MinitTetris::event(sf::Event e)
 {
-    if (e.type == sf::Event::KeyPressed)
+    if (m_running)
     {
-        if (e.key.code == sf::Keyboard::A)
+        if (e.type == sf::Event::KeyPressed)
         {
-            rotateLeft();
-        }
-        else if (e.key.code == sf::Keyboard::E)
-        {
-            rotateRight();
-        }
-        else if (e.key.code == sf::Keyboard::Q)
-        {
-            sf::Vector2i futurePos = m_actualPiecePos;
-            futurePos.x--;
-
-            if (futurePos.x < 0)
+            if (e.key.code == sf::Keyboard::A)
             {
-                futurePos.x = 0;
+                rotateLeft();
             }
-
-            if (!checkCollision(futurePos))
+            else if (e.key.code == sf::Keyboard::E)
             {
-                m_actualPiecePos = futurePos;
+                rotateRight();
             }
-
-        }
-        else if (e.key.code == sf::Keyboard::D)
-        {
-            sf::Vector2i futurePos = m_actualPiecePos;
-            futurePos.x ++;
-
-            if (futurePos.x + m_piece.size() > m_nbCol)
+            else if (e.key.code == sf::Keyboard::Q)
             {
-                futurePos.x = m_nbCol - (int) m_piece.size();
-            }
+                sf::Vector2i futurePos = m_actualPiecePos;
+                futurePos.x--;
 
-            if (!checkCollision(futurePos))
+                if (futurePos.x < 0)
+                {
+                    futurePos.x = 0;
+                }
+
+                if (!checkCollision(futurePos))
+                {
+                    m_actualPiecePos = futurePos;
+                }
+
+            }
+            else if (e.key.code == sf::Keyboard::D)
             {
-                m_actualPiecePos = futurePos;
-            }
+                sf::Vector2i futurePos = m_actualPiecePos;
+                futurePos.x ++;
 
+                if (futurePos.x + m_piece.size() > m_nbCol)
+                {
+                    futurePos.x = m_nbCol - (int) m_piece.size();
+                }
+
+                if (!checkCollision(futurePos))
+                {
+                    m_actualPiecePos = futurePos;
+                }
+
+            }
+            else if (e.key.code == sf::Keyboard::S)
+            {
+                m_timeDown = sf::seconds(0.05);
+            }
         }
-        else if (e.key.code == sf::Keyboard::S)
+        else if (e.type == sf::Event::KeyReleased)
         {
-            m_timeDown = sf::seconds(0.05);
-        }
-    }
-    else if (e.type == sf::Event::KeyReleased)
-    {
-        if (e.key.code == sf::Keyboard::S)
-        {
-            m_timeDown = sf::seconds(0.2);
+            if (e.key.code == sf::Keyboard::S)
+            {
+                m_timeDown = sf::seconds(0.2);
+            }
         }
     }
 }
 void MinitTetris::update()
 {
-    // for (int i = m_caseArray.size() - 2; i >= 0; i--)
-    // {
-    //     m_caseArray[i] = m_caseArray[i + 1];
-    // }
-
-    if (m_timerDown.getElapsedTime() > m_timeDown)
+    if (m_running)
     {
-        m_timerDown.restart();
-        sf::Vector2i futurePos = m_actualPiecePos;
-            
-        futurePos.y ++;
-        if (!checkCollision(futurePos))
+
+        if (m_timerDown.getElapsedTime() > m_timeDown)
         {
-            m_actualPiecePos = futurePos;
-            
-            if (m_actualPiecePos.y + m_piece.back().size() >= m_nbLine)
-            {
-                m_actualPiecePos.y = m_nbLine - (int) m_piece.back().size();
+            m_timerDown.restart();
+            sf::Vector2i futurePos = m_actualPiecePos;
                 
+            futurePos.y ++;
+            if (!checkCollision(futurePos))
+            {
+                m_actualPiecePos = futurePos;
+                
+                if (m_actualPiecePos.y + m_piece.back().size() >= m_nbLine)
+                {
+                    m_actualPiecePos.y = m_nbLine - (int) m_piece.back().size();
+                    
+                    for (size_t i = m_actualPiecePos.x; i < m_actualPiecePos.x+m_piece.size(); i++)
+                    {
+                        for (size_t j = m_actualPiecePos.y; j < m_actualPiecePos.y+m_piece.back().size(); j++)
+                        {
+                            if (m_piece[i - m_actualPiecePos.x][j - m_actualPiecePos.y])
+                            {
+                                m_caseArray[i][j] = true;
+                                m_caseColor[i][j] = m_pieceColor;
+                            }
+                        }
+                    }
+
+                    generateRdm();
+                }
+            }
+            else
+            {  
                 for (size_t i = m_actualPiecePos.x; i < m_actualPiecePos.x+m_piece.size(); i++)
                 {
                     for (size_t j = m_actualPiecePos.y; j < m_actualPiecePos.y+m_piece.back().size(); j++)
@@ -130,66 +152,52 @@ void MinitTetris::update()
                 }
 
                 generateRdm();
+
             }
+            
         }
-        else
-        {  
-            for (size_t i = m_actualPiecePos.x; i < m_actualPiecePos.x+m_piece.size(); i++)
+
+        for (int i = 0; i < m_allcase.size(); i++)
+        {
+            for (int j = 0; j < m_allcase[i].size(); j++)
             {
-                for (size_t j = m_actualPiecePos.y; j < m_actualPiecePos.y+m_piece.back().size(); j++)
-                {
-                    if (m_piece[i - m_actualPiecePos.x][j - m_actualPiecePos.y])
-                    {
-                        m_caseArray[i][j] = true;
-                        m_caseColor[i][j] = m_pieceColor;
-                    }
-                }
+                if (m_caseArray[i][j])
+                    m_allcase[i][j].setFillColor(m_caseColor[i][j]);
+                else
+                    m_allcase[i][j].setFillColor(NULL_COLOR);
             }
-
-            generateRdm();
-
+            
         }
-        
-    }
-
-    for (int i = 0; i < m_allcase.size(); i++)
-    {
-        for (int j = 0; j < m_allcase[i].size(); j++)
+        for (size_t i = 0; i < m_piece.size(); i++)
         {
-            if (m_caseArray[i][j])
-                m_allcase[i][j].setFillColor(m_caseColor[i][j]);
-            else
-                m_allcase[i][j].setFillColor(NULL_COLOR);
-        }
-        
-    }
-    for (size_t i = 0; i < m_piece.size(); i++)
-    {
-        for (size_t j = 0; j < m_piece.back().size(); j++)
-        {
-            std::cout << "ok" <<std::endl;
-            std::cout << i<<" "<<j <<std::endl;
-            std::cout << i + m_actualPiecePos.x<<" "<<j + m_actualPiecePos.y <<std::endl;
-            if (m_piece[i][j])
-                m_allcase[i + m_actualPiecePos.x][j  + m_actualPiecePos.y].setFillColor(m_pieceColor);
-            std::cout << "ok2" <<std::endl;
+            for (size_t j = 0; j < m_piece.back().size(); j++)
+            {
+                std::cout << "ok" <<std::endl;
+                std::cout << i<<" "<<j <<std::endl;
+                std::cout << i + m_actualPiecePos.x<<" "<<j + m_actualPiecePos.y <<std::endl;
+                if (m_piece[i][j])
+                    m_allcase[i + m_actualPiecePos.x][j  + m_actualPiecePos.y].setFillColor(m_pieceColor);
+                std::cout << "ok2" <<std::endl;
+            }
         }
     }
 }
 void MinitTetris::render()
 {
-    m_background.draw();
-
-    for (size_t i = 0; i < m_allcase.size(); i++)
+    if (m_running)
     {
-        for (size_t j = 3; j < m_allcase[i].size(); j++)
-        {
-            m_allcase[i][j].draw();
-        }
-    }
+        m_background.draw();
 
-    m_fen->draw(m_debug);
-    
+        for (size_t i = 0; i < m_allcase.size(); i++)
+        {
+            for (size_t j = 3; j < m_allcase[i].size(); j++)
+            {
+                m_allcase[i][j].draw();
+            }
+        }
+
+        m_fen->draw(m_debug);
+    }
 }
 
 
