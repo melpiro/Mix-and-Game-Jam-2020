@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include "Omega/Operators/PrintFunctions.h"
+
 
 class MainGame
 {
@@ -15,10 +17,23 @@ public:
 
 private:
 
-    void updateOnResize();
+    void updateOnResize(sf::Event& e);
 
     sf::RenderWindow* m_fen;
-    
+
+    sf::View m_view;
+    double m_viewZoom = 1.f;
+
+    bool m_left = false;
+    bool m_right = false;
+    bool m_up = false;
+    bool m_down = false;
+
+    sf::RectangleShape m_persoTest;
+    sf::RectangleShape m_object;
+
+    const float speed= 5.f;
+    const float zoom_factor= 1.5f;
 };
 
 

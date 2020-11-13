@@ -50,8 +50,14 @@ void App::event()
         }
         else if (e.type == sf::Event::Resized)
         {
-            sf::FloatRect visibleArea(0, 0, e.size.width, e.size.height);
-			m_fen.setView(sf::View(visibleArea));
+            if (m_step != GAME) // si c'est linterface
+            {
+                // redimention classique
+                sf::FloatRect visibleArea(0, 0, e.size.width, e.size.height);
+			    m_fen.setView(sf::View(visibleArea));
+            }
+            // sinon, c'est la class main game qui s'en occupe
+            
         }
         if (m_step == LOADING_MENU)
         {
