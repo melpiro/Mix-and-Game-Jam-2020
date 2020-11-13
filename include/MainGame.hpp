@@ -1,10 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "Omega/Operators/PrintFunctions.h"
 #include "MinitTetris.hpp"
-
 #include "Omega/Graphics/RessourceManager.h"
-#include "../src/PlayerCharacter.h"
-#include "../src/EnemyCharacter.h"
+#include "PlayerCharacter.h"
+#include "EnemyCharacter.h"
 
 class MainGame
 {

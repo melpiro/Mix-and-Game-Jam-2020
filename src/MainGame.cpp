@@ -33,7 +33,20 @@ void MainGame::event(sf::Event e)
     {
         updateOnResize();
     }
-
+    else if (e.type == sf::Event::MouseWheelMoved)
+    {
+        if (e.mouseWheel.delta > 0)
+        {
+             m_viewZoom /= cam_zoom_factor;
+             m_view.zoom(1.f/cam_zoom_factor);
+        }
+        else if (e.mouseWheel.delta < 0)
+        {
+            m_viewZoom *= cam_zoom_factor;
+            m_view.zoom(cam_zoom_factor);
+        }
+        
+    }
 
     m_tetrisTest.event(e);
 
@@ -49,7 +62,6 @@ void MainGame::update(float dt)
     m_character.update(dt);
     m_enemy.update(dt);
 }
-
 void MainGame::render()
 {
     m_fen->draw(m_object);

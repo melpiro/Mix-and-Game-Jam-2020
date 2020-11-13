@@ -49,15 +49,15 @@ void MinitTetris::event(sf::Event e)
     {
         if (e.type == sf::Event::KeyPressed)
         {
-            if (e.key.code == sf::Keyboard::A)
+            if (e.key.code == sf::Keyboard::Up)
             {
                 rotateLeft();
             }
-            else if (e.key.code == sf::Keyboard::E)
+            else if (false && e.key.code == sf::Keyboard::Right)
             {
                 rotateRight();
             }
-            else if (e.key.code == sf::Keyboard::Q)
+            else if (e.key.code == sf::Keyboard::Left)
             {
                 sf::Vector2i futurePos = m_actualPiecePos;
                 futurePos.x--;
@@ -73,7 +73,7 @@ void MinitTetris::event(sf::Event e)
                 }
 
             }
-            else if (e.key.code == sf::Keyboard::D)
+            else if (e.key.code == sf::Keyboard::Right)
             {
                 sf::Vector2i futurePos = m_actualPiecePos;
                 futurePos.x ++;
@@ -89,7 +89,7 @@ void MinitTetris::event(sf::Event e)
                 }
 
             }
-            else if (e.key.code == sf::Keyboard::S)
+            else if (e.key.code == sf::Keyboard::Down)
             {
                 m_timeDown = sf::seconds(0.05);
             }
@@ -172,12 +172,8 @@ void MinitTetris::update()
         {
             for (size_t j = 0; j < m_piece.back().size(); j++)
             {
-                std::cout << "ok" <<std::endl;
-                std::cout << i<<" "<<j <<std::endl;
-                std::cout << i + m_actualPiecePos.x<<" "<<j + m_actualPiecePos.y <<std::endl;
                 if (m_piece[i][j])
                     m_allcase[i + m_actualPiecePos.x][j  + m_actualPiecePos.y].setFillColor(m_pieceColor);
-                std::cout << "ok2" <<std::endl;
             }
         }
     }
@@ -224,6 +220,7 @@ void MinitTetris::addPiece(int x, int y, PIECE p, sf::Color coul, int rotation)
     m_actualPiecePos = sf::Vector2i(x, y);
     pieceId = p;
 
+    pieceRotation = rotation;
     m_piece = allPiece[(int)pieceId][pieceRotation];
 
     m_pieceColor = coul;
