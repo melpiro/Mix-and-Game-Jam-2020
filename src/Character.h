@@ -9,6 +9,8 @@
 
 class Character {
 
+protected:
+
     enum Direction {
         Left = 4,
         Down = 3,
@@ -26,8 +28,8 @@ class Character {
 
     float dash = 0;
 
-    // Sprite anim
     sf::Sprite sprite;
+    // Sprite anim
     int nbrFrames, frameSize;
     Direction direction = Down;
     int animStage = 0;
@@ -39,13 +41,14 @@ class Character {
     float dashCoolDown = 0.7f; // s
     float currentDashTime = 0;
 
-public:
-    Character(sf::RenderWindow* fen);
+    explicit Character(sf::RenderWindow* fen);
 
-    void init();
+public:
+
+    virtual void init();
     void draw();
-    void update(float deltatime = 0.016);
-    void event(sf::Event &e);
+    virtual void update(float deltatime);
+    virtual void event(sf::Event &e);
 
     void setAnim();
     void setPos(const sf::Vector2f &pos);

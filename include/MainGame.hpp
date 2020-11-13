@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "Omega/Operators/PrintFunctions.h"
 #include "Omega/Graphics/RessourceManager.h"
-#include "../src/Character.h"
+#include "../src/PlayerCharacter.h"
+#include "../src/EnemyCharacter.h"
 
 class MainGame
 {
@@ -13,7 +14,7 @@ public:
 
 
     void event(sf::Event e);
-    void update();
+    void update(float dt);
     void render();
 
 private:
@@ -30,7 +31,8 @@ private:
     const float cam_speed= 5.f;
     const float cam_zoom_factor= 1.5f;
 
-    Character m_character;
+    PlayerCharacter m_character;
+    EnemyCharacter m_enemy;
 };
 
 
