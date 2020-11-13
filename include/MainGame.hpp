@@ -12,7 +12,7 @@ public:
 
 
     void event(sf::Event e);
-    void update(float dt);
+    void update();
     void render();
 
 private:
