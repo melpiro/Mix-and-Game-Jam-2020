@@ -19,7 +19,7 @@ public:
     void run();
 
     void event();
-    void update();
+    void update(float dt);
     void render();
 
 

@@ -1,7 +1,7 @@
 #include "MainMenu.hpp"
 
 MainMenu::MainMenu(sf::RenderWindow* fen) :
-    m_background(fen, "loadingMenuBackground", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, true),
+    m_background(fen, "loadingMenuBackground", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, true),
     m_titre(fen, "mainFont", STATIC::SYS::HALF_WIDTH, 100, STATIC::SYS::HALF_WIDTH, 100, true)
 {
     m_fen=fen;

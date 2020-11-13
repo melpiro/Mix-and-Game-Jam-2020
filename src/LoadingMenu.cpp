@@ -1,9 +1,9 @@
 #include "LoadingMenu.hpp"
 
 LoadingMenu::LoadingMenu(sf::RenderWindow* fen) :
-    m_background(fen, "loadingMenuBackground", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, true),
-    m_loadingIcon(fen, "loadIcon", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, true),
-    m_loadingTitle(fen, "mainFont", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT - 170, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HIGHT, true)
+    m_background(fen, "loadingMenuBackground", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, true),
+    m_loadingIcon(fen, "loadIcon", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, true),
+    m_loadingTitle(fen, "mainFont", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT - 170, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, true)
 {
     m_fen=fen;
 

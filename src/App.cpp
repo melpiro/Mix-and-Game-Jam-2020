@@ -23,18 +23,20 @@ void App::loadRessources()
     m_mainMenu.init();
     m_mainGame.init();
 
-    sf::sleep(sf::seconds(1)); // pour faire genre 
-
     m_step = GAME;
     m_mainGame.updateOnResize();
 }
 
 void App::run()
 {
+    sf::Clock dtclock;
+
     while (m_fen.isOpen())
-    {   
+    {
+        float dt = dtclock.restart().asSeconds();
+
         event();
-        update();
+        update(dt);
         render();
     }
     
@@ -75,7 +77,7 @@ void App::event()
     }
 }
 
-void App::update()
+void App::update(float dt)
 {
     if (m_step == LOADING_MENU)
     {
@@ -87,7 +89,7 @@ void App::update()
     }
     else if (m_step == GAME)
     {
-        m_mainGame.update();
+        m_mainGame.update(dt);
     }
 }
 

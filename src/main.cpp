@@ -15,6 +15,9 @@ void init_texture_manager()
     
     
     O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");
+
+    // Tilemap
+    O::graphics::ressourceManager.addTexture("Tilemap/tilemap_packed.png", "et_tilemap");
 }
 
 int main()
