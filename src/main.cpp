@@ -4,10 +4,10 @@
 
 void init_texture_manager()
 {
-    O::graphics::ressourceManager.setDefaultTextureDir("Ressources/Graphics");
-    O::graphics::ressourceManager.setDefaultFontDir("Ressources/Fonts");
-    O::graphics::ressourceManager.setDefaultAudioDir("Ressources/Audio");
-    O::graphics::ressourceManager.loadLanguage("Ressources/Language/fr");
+    O::graphics::ressourceManager.setDefaultTextureDir("resources/Graphics");
+    O::graphics::ressourceManager.setDefaultFontDir("resources/Fonts");
+    O::graphics::ressourceManager.setDefaultAudioDir("resources/Audio");
+    O::graphics::ressourceManager.loadLanguage("resources/Language/fr");
 
 
     O::graphics::ressourceManager.addTextureAndLoadIt("LoadingMenu/loadIcon.png", "loadIcon");
