@@ -70,8 +70,9 @@ EnemyCharacter *PlayerCharacter::getEnemyAgro() const {
 
 void PlayerCharacter::setEnemyAgro(EnemyCharacter *enemyAgro) {
     PlayerCharacter::enemyAgro = enemyAgro;
+    attacked = enemyAgro != nullptr;
 }
 
-bool PlayerCharacter::isAttacked() {
-    return enemyAgro != nullptr;
+bool PlayerCharacter::isAttacked() const {
+    return attacked;
 }

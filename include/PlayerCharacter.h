@@ -11,7 +11,8 @@
 
 class PlayerCharacter : public Character {
 
-    EnemyCharacter* enemyAgro;
+    EnemyCharacter* enemyAgro = nullptr;
+    bool attacked = false;
 
 public:
 
@@ -24,7 +25,7 @@ public:
     EnemyCharacter *getEnemyAgro() const;
     void setEnemyAgro(EnemyCharacter *enemyAgro);
 
-    bool isAttacked();
+    bool isAttacked() const;
 };
 
 
