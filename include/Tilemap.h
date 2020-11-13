@@ -12,17 +12,31 @@
 class Tilemap {
 
 public:
-    Tilemap();
 
+    //TODO : faire un constructeur qui prend un fichier pour load une map
+    //en attendant la map sera hardcodée
+
+    Tilemap();
+    Tilemap(sf::Vector2i dimensions,std::vector<Tile> m_Tileset,sf::RenderWindow &fen);
+
+
+    void draw();
+
+    void update();
+
+    void setTMap(std::vector<std::vector<int>> tmap);
 
 private:
 
     sf::Vector2i m_dimensions;
-    sf::Vector2f m_position;
 
     std::vector<Tile> m_tileSet;
 
     std::vector<std::vector<int>> m_map;
+
+    sf::RenderWindow* m_fen;
+
+    int m_tileSize{};
 
 };
 
