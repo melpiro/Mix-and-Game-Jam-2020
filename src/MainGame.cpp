@@ -33,55 +33,17 @@ void MainGame::event(sf::Event e)
     {
         updateOnResize();
     }
-    else if (e.type == sf::Event::KeyPressed)
-    {
-        if (e.key.code == sf::Keyboard::Left)
-        {
-            m_left = true;
-        }
-        else if (e.key.code == sf::Keyboard::Right)
-        {
-            m_right = true;
-        }
-        else if (e.key.code == sf::Keyboard::Up)
-        {
-            m_up = true;
-        }
-        else if (e.key.code == sf::Keyboard::Down)
-        {
-            m_down = true;
-        }
-    }
-    else if (e.type == sf::Event::KeyReleased)
-    {
-        if (e.key.code == sf::Keyboard::Left)
-        {
-            m_left = false;
-        }
-        else if (e.key.code == sf::Keyboard::Right)
-        {   
-            m_right = false;
-        }
-        else if (e.key.code == sf::Keyboard::Up)
-        {
-            m_up = false;
-        }
-        else if (e.key.code == sf::Keyboard::Down)
-        {
-            m_down = false;
-        }
-    }
     else if (e.type == sf::Event::MouseWheelMoved)
     {
         if (e.mouseWheel.delta > 0)
         {
-             m_viewZoom /= zoom_factor;
-             m_view.zoom(1.f/zoom_factor);
+             m_viewZoom /= cam_zoom_factor;
+             m_view.zoom(1.f/cam_zoom_factor);
         }
         else if (e.mouseWheel.delta < 0)
         {
-            m_viewZoom *= zoom_factor;
-            m_view.zoom(zoom_factor);
+            m_viewZoom *= cam_zoom_factor;
+            m_view.zoom(cam_zoom_factor);
         }
         
     }
