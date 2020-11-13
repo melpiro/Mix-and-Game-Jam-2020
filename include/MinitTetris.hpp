@@ -20,6 +20,7 @@ public:
 
     void setPosition(float x, float y);
     void setWindowSize(float x, float y);
+    
     void setTileSize(int nbCol, int nbLine);
 
     void event(sf::Event e);
@@ -38,6 +39,8 @@ private:
     void rotateRight();
 
     void generateRdm();
+
+    bool checkDefeat();
 
 
     static std::pair<int, int> getPieceSize(PIECE p);
@@ -75,6 +78,7 @@ private:
     sf::Time m_timeDown = sf::seconds(0.2);
 
     bool m_running = false;
+    bool m_defeat = false;
 
 
 

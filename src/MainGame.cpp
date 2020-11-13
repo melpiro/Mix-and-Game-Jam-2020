@@ -61,6 +61,11 @@ void MainGame::update(float dt)
     m_tetrisTest.update();
     m_character.update(dt);
     m_enemy.update(dt);
+
+    m_timeForTetrisAnimeTest += 0.01;
+    m_tetrisTest.setPosition(std::cos(m_timeForTetrisAnimeTest) * 20 + 50, std::sin(m_timeForTetrisAnimeTest) * 20 + 50);
+    m_tetrisTest.setWindowSize((std::cos(m_timeForTetrisAnimeTest) + 1) * 15.0*5.0 + 150, (std::cos(m_timeForTetrisAnimeTest) + 1) * 30.0*5.0 + 300 );
+    
 }
 void MainGame::render()
 {

@@ -39,13 +39,15 @@ void MinitTetris::start()
    generateRdm();
 
    m_running = true;
+   m_defeat = false;
+   m_timeDown = sf::seconds(0.2);
 }
 
 
 
 void MinitTetris::event(sf::Event e)
 {
-    if (m_running)
+    if (m_running && !m_defeat)
     {
         if (e.type == sf::Event::KeyPressed)
         {
@@ -96,18 +98,28 @@ void MinitTetris::event(sf::Event e)
         }
         else if (e.type == sf::Event::KeyReleased)
         {
-            if (e.key.code == sf::Keyboard::S)
+            if (e.key.code == sf::Keyboard::Down)
             {
                 m_timeDown = sf::seconds(0.2);
             }
         }
     }
+    else
+    {
+        if (e.type== sf::Event::KeyPressed)
+        {
+            if (e.key.code == sf::Keyboard::Space)
+            {
+                start();
+            }
+        }
+    }
+    
 }
 void MinitTetris::update()
 {
-    if (m_running)
+    if (m_running && !m_defeat)
     {
-
         if (m_timerDown.getElapsedTime() > m_timeDown)
         {
             m_timerDown.restart();
@@ -133,8 +145,6 @@ void MinitTetris::update()
                             }
                         }
                     }
-
-                    generateRdm();
                 }
             }
             else
@@ -151,11 +161,15 @@ void MinitTetris::update()
                     }
                 }
 
-                generateRdm();
+                if (!checkDefeat())
+                    generateRdm();
 
             }
             
         }
+
+        
+        
 
         for (int i = 0; i < m_allcase.size(); i++)
         {
@@ -200,12 +214,39 @@ void MinitTetris::render()
 void MinitTetris::setPosition(float x, float y)
 {
     m_background.setPosition(x, y);
+
+    float minX = m_background.getPosition().x - m_background.getSize().x /2.0 + padding;
+    float minY = m_background.getPosition().y - m_background.getSize().y /2.0 + padding;
+    float sizeX = (m_background.getSize().x - 2.f * padding) / (float) m_nbCol;
+    float sizeY = (m_background.getSize().y - 2.f * padding) / (float) (m_nbLine - 3);
+
+   for (size_t i = 0; i < m_allcase.size(); i++)
+   {
+       for (int j = 0; j < m_allcase[i].size(); j++)
+       {
+           m_allcase[i][j].setPosition(minX + i * sizeX, minY + (j - 3) * sizeY);
+       }
+   }
 }
 
 
 void MinitTetris::setWindowSize(float x, float y)
 {
     m_background.setSize(x, y);
+
+    float minX = m_background.getPosition().x - m_background.getSize().x /2.0 + padding;
+    float minY = m_background.getPosition().y - m_background.getSize().y /2.0 + padding;
+    float sizeX = (m_background.getSize().x - 2.f * padding) / (float) m_nbCol;
+    float sizeY = (m_background.getSize().y - 2.f * padding) / (float) (m_nbLine - 3);
+
+   for (size_t i = 0; i < m_allcase.size(); i++)
+   {
+       for (int j = 0; j < m_allcase[i].size(); j++)
+       {
+           m_allcase[i][j].setPosition(minX + i * sizeX, minY + (j - 3) * sizeY);
+           m_allcase[i][j].setSize(sizeX, sizeY);
+       }
+   }
 }
 
 void MinitTetris::setTileSize(int nbCol, int nbLine)
@@ -279,4 +320,18 @@ void MinitTetris::generateRdm()
     addPiece(O::math::rdm::randInt(0, m_nbCol - size.first - 1), 0, p, 
         COLORS[O::math::rdm::randInt(0, COLORS.size())],
         O::math::rdm::randInt(0,3));
+}
+
+bool MinitTetris::checkDefeat()
+{
+    // check defeat
+    for (size_t i = 0; i < m_caseArray.size(); i++)
+    {
+        if (m_caseArray[i][3] == true)
+        {
+            m_defeat = true;
+            return true;
+        }
+    }
+    return false;
 }

@@ -32,6 +32,9 @@ private:
     sf::RectangleShape m_object;
 
     MinitTetris m_tetrisTest;
+    float m_timeForTetrisAnimeTest;
+
+
     const float cam_speed= 5.f;
     const float cam_zoom_factor= 1.5f;
 
