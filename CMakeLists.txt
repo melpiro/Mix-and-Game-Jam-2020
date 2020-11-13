@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 project(mixgamejam2020)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -39,6 +39,7 @@ endif(WIN32)
 # Linux
 if (UNIX AND NOT APPLE)
     # ICICICICICICICICICICICICI
+    target_link_libraries(mixgamejam2020  -lX11 sfml-system sfml-window sfml-graphics sfml-network sfml-audio -pthread -lxdo)
 endif (UNIX AND NOT APPLE)
 
 
