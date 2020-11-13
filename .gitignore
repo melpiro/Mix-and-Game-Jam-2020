@@ -6,5 +6,6 @@ build/CMakeCache.txt
 build/main
 build/makefile
 build/DartConfiguration.tcl
+build/*
 .idea/
 cmake-build-debug/
