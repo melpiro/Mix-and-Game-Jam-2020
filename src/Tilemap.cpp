@@ -21,11 +21,13 @@ void Tilemap::draw() {
         }
     }
 
+
+
 }
 
-void Tilemap::update(float deltaTime) {
-    for(auto t : m_tileSet){
-        t.update(deltaTime);
+void Tilemap::update() {
+    for(Tile &t : m_tileSet){
+        t.update();
     }
 }
 

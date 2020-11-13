@@ -17,10 +17,10 @@ void init_texture_manager()
     for(int i = 0; i < 5; i++){
         O::graphics::ressourceManager.addTexture("TileSet/tile_"+std::to_string(i)+".png", "t"+ std::to_string(i));
     }
-
     O::graphics::ressourceManager.addTexture("TileSet/test.png","test");
-    
-    
+    O::graphics::ressourceManager.addTexture("TileSet/test2.png","test2");
+
+
     O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");
 }
 
