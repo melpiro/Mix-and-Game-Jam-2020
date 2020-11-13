@@ -2,7 +2,6 @@
 #include "Omega/Operators/PrintFunctions.h"
 #include "MinitTetris.hpp"
 
-=======
 #include "Omega/Graphics/RessourceManager.h"
 #include "../src/PlayerCharacter.h"
 #include "../src/EnemyCharacter.h"
