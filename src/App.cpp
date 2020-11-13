@@ -9,7 +9,7 @@ App::App() :
     m_th_load_ressources = std::async(std::launch::async, &App::loadRessources, this);
 
     //sf::View v(sf::FloatRect(100,100,2000,1000));
-    m_fen.setView(v);
+    //m_fen.setView(v);
 }
 
 
