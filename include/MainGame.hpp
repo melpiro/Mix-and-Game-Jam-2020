@@ -24,7 +24,7 @@ public:
 
 
     void event(sf::Event e);
-    void update(float dt);
+    Step update(float dt);
     void render();
 
 
@@ -56,7 +56,7 @@ private:
 
     Peuzeul m_peuzeul;
 
-    O::graphics::ChargingBar m_vie;
+    O::graphics::ChargingBar m_healthBar;
 
 };
 

@@ -1,5 +1,6 @@
 #include <EnemyManager.h>
 #include <Enemies/SpitterEnemy.h>
+#include <Step.hpp>
 #include "MainGame.hpp"
 
 MainGame::MainGame(sf::RenderWindow* fen) :
@@ -84,13 +85,15 @@ void MainGame::init()
 
     });
 
-    m_vie = O::graphics::ChargingBar(m_fen,5,5,150,30);
-    m_vie.setMaxChargingValue(5);
-    m_vie.setMinChargingValue(0);
-    m_vie.setOutlineColor(sf::Color::Black);
-    m_vie.setBackgroundColor(sf::Color::Red);
-    m_vie.setOutlineThickness(5);
-    m_vie.setChargingValue(m_character.getLife());
+    m_healthBar = O::graphics::ChargingBar(m_fen, 0, 0, m_character.getRect().width*0.7f, m_character.getRect().height*0.1f);
+    m_healthBar.setMaxChargingValue(m_character.getLife());
+    m_healthBar.setMinChargingValue(0);
+    m_healthBar.setOutlineColor(sf::Color::Black);
+    m_healthBar.setBackgroundColor(sf::Color::Red);
+    m_healthBar.setForgroundColor(sf::Color::Green);
+    m_healthBar.setOutlineThickness(5);
+    m_healthBar.setChargingValue(m_character.getLife());
+    m_healthBar.setOrigineAsCenter();
 
 }
 
@@ -133,7 +136,7 @@ void MainGame::event(sf::Event e)
     EnemyManager::event(e);
     m_peuzeul.event(e);
 }
-void MainGame::update(float dt)
+Step MainGame::update(float dt)
 {
 
     auto cameraDir = m_character.getCameraPos() - m_view.getCenter();
@@ -143,9 +146,11 @@ void MainGame::update(float dt)
 
     m_character.update(dt);
 
+    if(m_character.isDead())
+        return MAIN_MENU;
+
     m_inventory.update();
 
-    m_vie.setPosition(m_view.getCenter().x- (m_view.getSize().x/2) + 100,m_view.getCenter().y-(m_view.getSize().y/2)+50);
 
     m_itemDrawer.update();
 
@@ -157,9 +162,15 @@ void MainGame::update(float dt)
 
     m_peuzeul.update();
 
-    m_vie.update();
+    m_healthBar.setPosition(m_character.getPos().x, m_character.getPos().y - m_character.getRect().height*0.5f);
+    m_healthBar.setChargingValue(m_character.getLife());
+    m_healthBar.update();
 
+
+
+    return GAME;
 }
+
 void MainGame::render()
 {
     m_map.draw();
@@ -171,7 +182,7 @@ void MainGame::render()
 
     EnemyManager::draw();
 
-    m_vie.draw();
+    m_healthBar.draw();
 }
 
 void MainGame::updateOnResize()

@@ -57,16 +57,24 @@ void EnemyCharacter::update(float deltatime) {
 
         vel = O::math::normalise(player->getPos() - pos) * speed;
 
-        if(miniTetris.defeat() || miniTetris.getScore() >= life) {
+        if(miniTetris.getScore() >= life) {
+            kill();
             player->removeEnemyAgro(this);
             isAttacking = false;
             EnemyManager::killEnemy(id);
         }
 
+        else if(miniTetris.defeat()) {
+            player->applyDamage(1);
+            miniTetris.start();
+        }
+
+
         else if(O::math::getDistanceCarre(pos, player->getPos()) > loseAgroDist*loseAgroDist) {
             player->removeEnemyAgro(this);
             isAttacking = false;
         }
+
 
     }
 

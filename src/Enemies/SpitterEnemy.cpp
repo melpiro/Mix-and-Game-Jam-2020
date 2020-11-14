@@ -22,7 +22,7 @@ void SpitterEnemy::init() {
     setAnim();
     playAnim = false;
 
-    speed = 200;
+    speed = 250;
 }
 
 void SpitterEnemy::update(float deltatime) {

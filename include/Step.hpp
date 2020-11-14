@@ -1,6 +1,6 @@
 #pragma once
 
-enum Steps{
+enum Step{
     LOADING_MENU,
     MAIN_MENU,
     GAME

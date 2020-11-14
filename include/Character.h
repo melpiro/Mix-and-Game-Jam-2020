@@ -26,7 +26,7 @@ protected:
     sf::Vector2f vel;
 
     float friction = 0.9f;
-    float speed = 175.0f;
+    float speed = 200.0f;
 
     float dash = 0;
 
@@ -44,7 +44,7 @@ protected:
     float currentDashTime = 0;
 
     float life = 1;
-
+    bool dead = false;
 
     explicit Character(sf::RenderWindow* fen);
 
@@ -72,6 +72,12 @@ public:
 
     const sf::Vector2f &getPos() const;
     sf::FloatRect getRect() const;
+
+    void applyDamage(float dmg);
+    void kill();
+
+    bool isDead() const;
+
 
     ///sf::RectangleShape m_rect;
 };

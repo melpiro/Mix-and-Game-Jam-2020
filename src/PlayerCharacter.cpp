@@ -105,4 +105,3 @@ sf::Vector2f PlayerCharacter::getCameraPos() {
     }
     return pos;
 }
-

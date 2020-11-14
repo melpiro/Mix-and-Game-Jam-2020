@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Graphics/RessourceManager.h"
-#include "Steps.hpp"
+#include "Step.hpp"
 #include "LoadingMenu.hpp"
 #include <future>
 #include "MainMenu.hpp"
@@ -26,7 +26,7 @@ public:
 private:
 
     sf::RenderWindow m_fen;
-    Steps m_step = LOADING_MENU;
+    Step m_step = LOADING_MENU;
 
     LoadingMenu m_loadingMenu;
     MainMenu m_mainMenu;
