@@ -53,7 +53,7 @@ void EnemyCharacter::update(float deltatime) {
 
     }
 
-    if(isAttacking) {
+    else if(isAttacking) {
 
         vel = O::math::normalise(player->getPos() - pos) * speed;
 
@@ -61,6 +61,11 @@ void EnemyCharacter::update(float deltatime) {
             player->removeEnemyAgro(this);
             isAttacking = false;
             EnemyManager::killEnemy(id);
+        }
+
+        else if(O::math::getDistanceCarre(pos, player->getPos()) > loseAgroDist*loseAgroDist) {
+            player->removeEnemyAgro(this);
+            isAttacking = false;
         }
 
     }
