@@ -2,7 +2,7 @@
 // Created by etien on 14/11/2020.
 //
 
-#include "BlobEnemy.h"
+#include "Enemies/BlobEnemy.h"
 
 BlobEnemy::BlobEnemy(sf::RenderWindow *fen, PlayerCharacter *pc) : EnemyCharacter(fen, pc) {}
 

@@ -1,4 +1,5 @@
 #include <EnemyManager.h>
+#include <Enemies/SpitterEnemy.h>
 #include "MainGame.hpp"
 
 MainGame::MainGame(sf::RenderWindow* fen) :
@@ -20,13 +21,17 @@ void MainGame::init()
 
     auto* enemy = new EnemyCharacter(m_fen, &m_character);
     auto* enemy2 = new BlobEnemy(m_fen, &m_character);
+    auto* enemy3 = new SpitterEnemy(m_fen, &m_character);
     enemy->init();
     enemy2->init();
+    enemy3->init();
     enemy->setPos({500, 500});
     enemy2->setPos({800, 500});
+    enemy3->setPos({800, 800});
 
     EnemyManager::addEnemy(enemy);
     EnemyManager::addEnemy(enemy2);
+    EnemyManager::addEnemy(enemy3);
 
     //Initialisation de la tilemap
     std::vector<Tile> tileSet;
