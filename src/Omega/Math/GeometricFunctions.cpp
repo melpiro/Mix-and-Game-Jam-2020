@@ -63,8 +63,9 @@ namespace geo2d {
     bool intersect_point_polygon(const sf::Vector2f& point, const std::vector<sf::Vector2f>&  poly)
     {
         sf::Vector2f I;
-        I.x = 100000000 + rand()%100;
-        I.y = 10000 + rand()%100;
+        I.x = std::cos(O::math::rdm::randFloat(0, 10)) * 100000.0; 
+        I.y = std::sin(O::math::rdm::randFloat(0, 10)) * 100000.0; 
+        
         int nbintersections = 0;
         for(size_t i=0;i<poly.size();i++)
         {
@@ -74,8 +75,14 @@ namespace geo2d {
                 B = poly[0];
             else           // sinon on relie au suivant.
                 B = poly[i+1];
-            bool iseg = O::math::geo2d::intersect_segment_segment(A,B,I,point);
+
+            int iseg = intersect_segment_segment(A,B,I,point);
+            if (iseg == -1)
+                return intersect_point_polygon(point,poly);  // cas limite, on relance la fonction.
+            
             nbintersections+=iseg;
+
+           
         }
         if (nbintersections%2==1)  // nbintersections est-il impair ?
             return true;
@@ -229,24 +236,24 @@ namespace geo2d {
         return intersect_ligne_segment(A2, B2, A1, B1);
     }
 
-    bool intersect_segment_segment(const sf::Vector2f& A1, const sf::Vector2f& B1, const sf::Vector2f& A2, const sf::Vector2f& B2)
+    int intersect_segment_segment(const sf::Vector2f& A1, const sf::Vector2f& B1, const sf::Vector2f& A2, const sf::Vector2f& B2)
     {
         sf::Vector2f D,E;
         D.x = B1.x - A1.x;
         D.y = B1.y - A1.y;
         E.x = B2.x - A2.x;
         E.y = B2.y - A2.y;
-        float denom = D.x*E.y - D.y*E.x;
-        if (abs(denom)<=0.00000000001)
-            return false;
-        
-        float t = - (A1.x*E.y-A2.x*E.y-E.x*A1.y+E.x*A2.y) / denom;
+        double denom = D.x*E.y - D.y*E.x;
+        if (denom==0)
+            return -1;   // erreur, cas limite
+        double t = - (A1.x*E.y-A2.x*E.y-E.x*A1.y+E.x*A2.y) / denom;
         if (t<0 || t>=1)
-            return false;
-        float u = - (-D.x*A1.y+D.x*A2.y+D.y*A1.x-D.y*A2.x) / denom;
+            return 0;
+        double u = - (-D.x*A1.y+D.x*A2.y+D.y*A1.x-D.y*A2.x) / denom;
         if (u<0 || u>=1)
-            return false;
-        return true;
+            return 0;
+        return 1;
+
     }
 
     bool intersect_segment_AABB(const sf::Vector2f& A, const sf::Vector2f& B, const sf::Vector2f& O, const sf::Vector2f& size)
