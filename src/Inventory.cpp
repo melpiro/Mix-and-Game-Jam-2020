@@ -213,3 +213,8 @@ bool Inventory::haveSelectedItem()
 {
     return (indexItemSelected != -1);
 }
+void Inventory::openClose() {
+    m_isOpen = !m_isOpen;
+    if (m_isOpen) m_openAnimate = true, m_closeAnimate = false;
+    else m_openAnimate = false, m_closeAnimate = true;
+}

@@ -140,3 +140,17 @@ void Character::setTileMap(Tilemap* map)
 float Character::getLife() const {
     return life;
 }
+
+void Character::kill() {
+    dead = true;
+}
+
+bool Character::isDead() const {
+    return dead;
+}
+
+void Character::applyDamage(float dmg) {
+    life -= dmg;
+    if(life <= 0)
+        kill();
+}

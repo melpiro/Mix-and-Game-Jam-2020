@@ -19,6 +19,7 @@ public:
 
     int getSelectedItemIndex();
     bool haveSelectedItem();
+    void openClose();
 
 private:
 

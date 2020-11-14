@@ -89,7 +89,7 @@ void App::update(float dt)
     }
     else if (m_step == GAME)
     {
-        m_mainGame.update(dt);
+        m_step = m_mainGame.update(dt);
     }
 }
 

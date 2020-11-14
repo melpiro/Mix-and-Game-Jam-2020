@@ -61,6 +61,7 @@ void PlayerCharacter::event(sf::Event &e) {
                     if(isAttacked())
                         targetedEnemy = (targetedEnemy + 1)%enemiesAgro.size();
                     break;
+
             }
             break;
 
@@ -104,4 +105,3 @@ sf::Vector2f PlayerCharacter::getCameraPos() {
     }
     return pos;
 }
-
