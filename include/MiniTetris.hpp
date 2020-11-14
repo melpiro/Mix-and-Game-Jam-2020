@@ -80,9 +80,6 @@ private:
 
     int m_score = 0;
 
-    
-
-
     sf::Clock m_timerDown;
     sf::Time m_timeDown = sf::seconds(0.2);
     sf::Time m_timeDownNormal = sf::seconds(0.2);
@@ -95,11 +92,6 @@ private:
 
     bool m_leftPressed = false;
     bool m_rightPressed = false;
-
-
-
-    const sf::Color NULL_COLOR = sf::Color::Transparent;
-    
     
 };
 

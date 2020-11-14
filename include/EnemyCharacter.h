@@ -13,12 +13,15 @@ class PlayerCharacter;
 
 class EnemyCharacter : public Character {
 
+    static int nextID;
+    int id;
+
     PlayerCharacter* player;
     bool isAttacking = false;
 
     MiniTetris miniTetris;
 
-    float agroDist = 100;
+    float agroDist = 500;
 
 public:
 
@@ -32,6 +35,10 @@ public:
     void event(sf::Event &e) override;
 
     MiniTetris* getMiniTetris();
+
+    int getId() const;
+
+    int operator==(const EnemyCharacter& other) const;
 };
 
 

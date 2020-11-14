@@ -176,12 +176,14 @@ const std::vector<std::vector<std::vector<std::vector<bool>>>> allPiece =
 const int NB_PIECE = allPiece.size();
 
 const std::vector<sf::Color> COLORS = {
-    sf::Color(26, 188, 156),
-    sf::Color(46, 204, 113),
-    sf::Color(52, 152, 219),
-    sf::Color(241, 196, 15),
-    sf::Color(231, 76, 60),
-    sf::Color(230, 126, 34),
-    sf::Color(155, 89, 182),
+
+        sf::Color(26, 188, 156),
+        sf::Color(46, 204, 113),
+        sf::Color(52, 152, 219),
+        sf::Color(241, 196, 15),
+        sf::Color(231, 76, 60),
+        sf::Color(230, 126, 34),
+        sf::Color(155, 89, 182),
 };
 
+const sf::Color NULL_COLOR = sf::Color::Transparent;

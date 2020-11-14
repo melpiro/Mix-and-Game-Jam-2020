@@ -3,8 +3,21 @@
 //
 
 #include <Omega/Graphics/RessourceManager.h>
+#include <EnemyManager.h>
 #include "EnemyCharacter.h"
 #include "PlayerCharacter.h"
+
+int EnemyCharacter::nextID = 0;
+
+EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Character(fen), miniTetris(fen) {
+    player = pc;
+
+    miniTetris.setPosition(pos.x, pos.y);
+    miniTetris.setWindowSize(50,130);
+    miniTetris.setTileSize(5,13);
+
+    id = nextID++;
+}
 
 void EnemyCharacter::init() {
     sprite = sf::Sprite(O::graphics::ressourceManager.getTexture("et_tilemap"));
@@ -47,18 +60,11 @@ void EnemyCharacter::update(float deltatime) {
         if(miniTetris.defeat() || miniTetris.getScore() >= life) {
             player->removeEnemyAgro(this);
             isAttacking = false;
+            EnemyManager::killEnemy(id);
         }
 
     }
 
-}
-
-EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Character(fen), miniTetris(fen) {
-    player = pc;
-
-    miniTetris.setPosition(pos.x, pos.y);
-    miniTetris.setWindowSize(50,130);
-    miniTetris.setTileSize(5,13);
 }
 
 void EnemyCharacter::draw() {
@@ -71,4 +77,12 @@ void EnemyCharacter::event(sf::Event &e) {
 
 MiniTetris* EnemyCharacter::getMiniTetris() {
     return &miniTetris;
+}
+
+int EnemyCharacter::operator==(const EnemyCharacter &other) const {
+    return id == other.id;
+}
+
+int EnemyCharacter::getId() const {
+    return id;
 }
