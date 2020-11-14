@@ -155,7 +155,7 @@
     {
       "type": "spawner",
       "typeMob": "blob",
-      "spawnDelay": 10,
+      "spawnDelay": 90,
       "x": 2016,
       "y": 1792
     }
