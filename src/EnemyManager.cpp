@@ -2,6 +2,9 @@
 // Created by etien on 14/11/2020.
 //
 
+#include <JsonData.hpp>
+#include <Enemies/BlobEnemy.h>
+#include <Enemies/SpitterEnemy.h>
 #include "EnemyManager.h"
 
 std::map<int, EnemyCharacter*> EnemyManager::enemies;
@@ -46,6 +49,32 @@ void EnemyManager::event(sf::Event &e) {
 
 void EnemyManager::addProjectile(Projectile projectile) {
     projectiles.push_back(projectile);
+}
+
+void EnemyManager::loadEnemiesFromFiles(const std::string &path, sf::RenderWindow* win, PlayerCharacter* character) {
+    JsonData json;
+    json.readFile(path);
+
+    auto data = (std::vector<JsonData>*)json["enemies"].getValue();
+    for(auto enemy : *data) {
+        sf::String type = *((sf::String*)enemy["type"].getValue());
+        double x = *((double *)enemy["x"].getValue());
+        double y = *((double *)enemy["y"].getValue());
+
+        std::cout << type << std::endl;
+
+        EnemyCharacter* e;
+        if(type == "blob")
+            e = new BlobEnemy(win, character);
+        else if(type == "spitter")
+            e = new SpitterEnemy(win, character);
+        else
+            e = new EnemyCharacter(win, character);
+
+        e->init();
+        e->setPos({static_cast<float>(x), static_cast<float>(y)});
+        addEnemy(e);
+    }
 }
 
 // Projectile =================================
