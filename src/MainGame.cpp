@@ -30,14 +30,19 @@ void MainGame::init()
 
     //Initialisation de la tilemap
     std::vector<Tile> tileSet;
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,5);
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),5);
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),5);
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),5);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,4);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);
+
+    //les tiles solides
+    tileSet[0].setSolid(true);
+    tileSet[2].setSolid(true);
+    tileSet[3].setSolid(true);
 
     m_map = Tilemap(tileSet,*m_fen,"resources/data/map1.json");
 
-    m_character.setPos({14*16*5,12*16*5});
+    m_character.setPos({16*16*4,12*16*4});
 
 }
 

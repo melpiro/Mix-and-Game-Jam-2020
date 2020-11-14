@@ -23,10 +23,6 @@ Tilemap::Tilemap(std::vector<Tile> tileset, sf::RenderWindow &fen, std::string p
 
     m_rects = getColliders();
 
-    for(auto r : m_rects){
-        std::cout << "Rect a x:" << r.left << " y:" << r.top << " avec h:" << r.height << " et w:" << r.width << std::endl;
-    }
-
 }
 
 void Tilemap::draw() {
@@ -37,14 +33,6 @@ void Tilemap::draw() {
         }
     }
 
-    sf::RectangleShape rc = sf::RectangleShape(sf::Vector2f(0,0));
-    rc.setFillColor(sf::Color(255,0,0,100));
-
-    for(auto r : m_rects){
-        rc.setSize(sf::Vector2f(r.width,r.height));
-        rc.setPosition(r.left,r.top);
-        m_fen->draw(rc);
-    }
 
 }
 
@@ -83,7 +71,6 @@ void Tilemap::loadlevelFromFile(std::string path) {
     m_dimensions.x = *((double *)j["mapSize"]["x"].getValue());
     m_dimensions.y = *((double *)j["mapSize"]["y"].getValue());
 
-    std::cout << *((double *)j["mapSize"]["x"].getValue()) << "   " << m_dimensions.y << std::endl;
 
     for(int y = 0; y < m_dimensions.y ; y++){
         m_map.emplace_back(std::vector<int>());
