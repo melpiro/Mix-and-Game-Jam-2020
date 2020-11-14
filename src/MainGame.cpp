@@ -38,11 +38,15 @@ void MainGame::init()
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6
 
     //les tiles solides
     tileSet[0].setSolid(true);
     tileSet[2].setSolid(true);
     tileSet[3].setSolid(true);
+    tileSet[6].setSolid(true);
 
     m_map = Tilemap(tileSet,*m_fen,"resources/data/map1.json");
 
