@@ -14,7 +14,7 @@
 #include "Graphics/Input.h"
 #include "Graphics/TextInput.h"
 #include "Omega/Graphics/RessourceManager.h"
-#include "Steps.hpp"
+#include "Step.hpp"
 
 class MainMenu
 {
