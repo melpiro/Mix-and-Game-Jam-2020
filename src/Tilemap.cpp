@@ -167,3 +167,18 @@ std::vector<line*> Tilemap::cutLines(std::vector<std::vector<int>> map) {
 
     return lignes;
 }
+
+bool Tilemap::intersectSolidArea(sf::Vector2f point) {
+
+    for(auto r : m_rects){
+        if(r.contains(point)) return true;
+    }
+    return false;
+}
+
+bool Tilemap::intersectSolidArea(sf::FloatRect rect) {
+    for(auto r : m_rects){
+        if(r.intersects(rect)) return true;
+    }
+    return false;
+}

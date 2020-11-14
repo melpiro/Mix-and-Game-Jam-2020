@@ -37,6 +37,9 @@ public:
 
     std::vector<sf::FloatRect> getColliders(); // retourne toutes les zones de collision de la map
 
+    bool intersectSolidArea(sf::Vector2f point);
+    bool intersectSolidArea(sf::FloatRect rect);
+
 private:
 
 
