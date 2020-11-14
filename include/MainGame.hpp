@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include "Omega/Operators/PrintFunctions.h"
 #include "Omega/Graphics/RessourceManager.h"
+#include "Omega/Graphics/ChargingBar.h"
 #include "PlayerCharacter.h"
 #include "EnemyCharacter.h"
 #include "Inventory.hpp"
@@ -54,6 +55,8 @@ private:
     ItemDrawer m_itemDrawer;
 
     Peuzeul m_peuzeul;
+
+    O::graphics::ChargingBar m_vie;
 
 };
 

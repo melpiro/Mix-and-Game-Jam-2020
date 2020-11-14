@@ -19,6 +19,7 @@ void MainGame::init()
     m_inventory.init();
     m_itemDrawer.init();
 
+
     EnemyManager::loadEnemiesFromFiles("resources/data/enemies1.json", m_fen, &m_character);
     
 
@@ -82,6 +83,14 @@ void MainGame::init()
 
     });
 
+    m_vie = O::graphics::ChargingBar(m_fen,5,5,150,30);
+    m_vie.setMaxChargingValue(5);
+    m_vie.setMinChargingValue(0);
+    m_vie.setOutlineColor(sf::Color::Black);
+    m_vie.setBackgroundColor(sf::Color::Red);
+    m_vie.setOutlineThickness(5);
+    m_vie.setChargingValue(m_character.getLife());
+
 }
 
 void MainGame::event(sf::Event e)
@@ -125,6 +134,9 @@ void MainGame::update(float dt)
     m_character.update(dt);
 
     m_inventory.update();
+
+    m_vie.setPosition(m_view.getCenter().x- (m_view.getSize().x/2) + 100,m_view.getCenter().y-(m_view.getSize().y/2)+50);
+
     m_itemDrawer.update();
 
     m_itemManager.pickItem(m_character.getRect());
@@ -134,6 +146,8 @@ void MainGame::update(float dt)
     m_map.update();
 
     m_peuzeul.update();
+
+    m_vie.update();
 
 }
 void MainGame::render()
@@ -146,9 +160,12 @@ void MainGame::render()
     m_inventory.render();
 
     EnemyManager::draw();
+
+    m_vie.draw();
 }
 
 void MainGame::updateOnResize()
 {
     m_view.setSize((sf::Vector2f) m_fen->getSize() * m_viewZoom);
 }
+

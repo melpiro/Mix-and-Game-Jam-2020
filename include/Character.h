@@ -67,6 +67,9 @@ public:
     void setCurrentAnim(Direction currentAnim);
     void setPlayAnim(bool playAnim);
 
+
+    float getLife() const;
+
     const sf::Vector2f &getPos() const;
     sf::FloatRect getRect() const;
 };

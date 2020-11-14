@@ -131,3 +131,7 @@ void Character::setTileMap(Tilemap* map)
 {
     m_map = map;
 }
+
+float Character::getLife() const {
+    return life;
+}
