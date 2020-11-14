@@ -14,31 +14,38 @@ ItemManager::ItemManager(sf::FloatRect rect, int nbMaxItem)
 
 void ItemManager::pickItem(sf::FloatRect playerRect)
 {
-    m_haveChanged = false;
-    std::vector<Item> pickedItems;
-    sf::Vector2f playerRectPos(playerRect.left, playerRect.top);
-    sf::Vector2f playerRectSize(playerRect.width, playerRect.height);
-    for (size_t i = 0; i < m_allItems.size(); i++)
+    if (m_inventory.size() < MAX_INV_ITEM)
     {
-        sf::Vector2f itemPos(m_allItems[i].x, m_allItems[i].y);
-        if (O::math::geo2d::intersect_AABB_cercle(playerRectPos, playerRectSize, itemPos, ITEM_SIZE))
+        m_haveChanged = false;
+        std::vector<Item> pickedItems;
+        sf::Vector2f playerRectPos(playerRect.left, playerRect.top);
+        sf::Vector2f playerRectSize(playerRect.width, playerRect.height);
+        for (size_t i = 0; i < m_allItems.size(); i++)
         {
-            pickedItems.push_back(m_allItems[i]);
-            m_allItems.erase(m_allItems.begin() + i);
-            i--;
+            sf::Vector2f itemPos(m_allItems[i].x, m_allItems[i].y);
+            if (O::math::geo2d::intersect_AABB_cercle(playerRectPos, playerRectSize, itemPos, ITEM_SIZE))
+            {
+                pickedItems.push_back(m_allItems[i]);
+                m_allItems.erase(m_allItems.begin() + i);
+                i--;
+                if (m_inventory.size() >= MAX_INV_ITEM) break;
+            }
+        }
+        for (size_t i = 0; i < pickedItems.size(); i++)
+        {
+            addItemRdm();
+            m_inventory.push_back(pickedItems[i]);
         }
     }
-    for (size_t i = 0; i < pickedItems.size(); i++)
-    {
-        addItemRdm();
-        m_inventory.push_back(pickedItems[i]);
-    }
-    
 }
 
 std::vector<Item>& ItemManager::getItems()
 {
     return m_allItems;
+}
+std::vector<Item>& ItemManager::getMyItems()
+{
+    return m_inventory;
 }
 
 void ItemManager::addItemRdm()

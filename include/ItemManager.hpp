@@ -21,6 +21,7 @@ public:
 
     void pickItem(sf::FloatRect playerRect);
     std::vector<Item>& getItems();
+    std::vector<Item>& getMyItems();
     static const float ITEM_SIZE;
 
     bool haveChanged();
@@ -37,6 +38,7 @@ private:
     bool m_haveChanged = false;
 
     std::vector<Item> m_inventory;
+    const int MAX_INV_ITEM = 30;
 
 
 };

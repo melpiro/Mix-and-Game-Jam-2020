@@ -16,6 +16,11 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("Tetris/cell.png", "tetrisCell");
     O::graphics::ressourceManager.addTexture("Inventory/background.png", "inventoryBackground");
     O::graphics::ressourceManager.addTexture("Inventory/box.png", "boxIcon");
+
+    O::graphics::ressourceManager.addTexture("TileSet/bordGrass.png","bordGrass");
+    O::graphics::ressourceManager.addTexture("TileSet/grass.png","grass");
+    O::graphics::ressourceManager.addTexture("TileSet/murGrass.png","muGrass");
+    O::graphics::ressourceManager.addTexture("TileSet/water.png","water");
     
     
     O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");
