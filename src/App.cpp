@@ -23,7 +23,7 @@ void App::loadRessources()
     m_mainMenu.init();
     m_mainGame.init();
 
-    m_step = GAME;
+    m_step = MAIN_MENU;
     m_mainGame.updateOnResize();
 }
 
@@ -68,7 +68,7 @@ void App::event()
         }
         else if (m_step == MAIN_MENU)
         {
-            m_mainMenu.event(e);
+            m_step = m_mainMenu.event(e);
         }
         else if (m_step == GAME)
         {
@@ -85,7 +85,7 @@ void App::update(float dt)
     }
     else if (m_step == MAIN_MENU)
     {
-        m_mainMenu.update();
+        m_mainMenu.update(dt);
     }
     else if (m_step == GAME)
     {
