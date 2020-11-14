@@ -3,14 +3,22 @@
 #define MINITETRIS_HPP
 
 #include <SFML/Graphics.hpp>
+#include "Omega/Graphics/Sprite.h"
 #include "Omega/Graphics/Rectangle.h"
 #include "Omega/Math/RandomFunctions.h"
 #include "Omega/Vector/VectorFunctions.h"
 #include "Omega/Data/triplet.h"
 #include "Omega/Math/Matrix.h"
 
-enum PIECE{
-    T = 0
+enum class PIECE{
+    T = 0,
+    Z,
+    O,
+    I,
+    L,
+    J,
+    b,
+    P
 };
 
 
@@ -40,7 +48,13 @@ public:
 
     sf::Vector2f getWindowSize();
 
+    int getScore();
+
 private:
+
+    void updateMoves();
+    void updateGameDisplay();
+    void updateGameCollide();
 
 
     void rotateLeft();
@@ -49,6 +63,8 @@ private:
     void generateRdm();
 
     bool checkDefeat();
+
+    void checkLines();
 
 
     std::pair<int, int> getPieceSize(PIECE p, int rotation);
@@ -61,7 +77,7 @@ private:
     sf::Vector2i m_actualPiecePos;
     std::vector<std::vector<bool>> m_piece;
     sf::Color m_pieceColor;
-    std::vector<std::vector<O::graphics::Rectangle>> m_allcase;
+    std::vector<std::vector<O::graphics::Sprite>> m_allcase;
     std::vector<std::vector<bool>> m_caseArray;
     std::vector<std::vector<sf::Color>> m_caseColor;
     PIECE pieceId;
@@ -71,26 +87,37 @@ private:
     int m_nbLine = 10;
     double padding = 5;
 
+    int m_score = 0;
+
 
     const std::vector<sf::Color> COLORS = {
-        sf::Color::Red,
-        sf::Color::Green,
-        sf::Color::Blue
+        sf::Color(26, 188, 156),
+        sf::Color(46, 204, 113),
+        sf::Color(52, 152, 219),
+        sf::Color(241, 196, 15),
+        sf::Color(231, 76, 60),
+        sf::Color(230, 126, 34),
+        sf::Color(155, 89, 182),
     };
 
-    sf::CircleShape m_debug;
 
     sf::Clock m_timerDown;
     sf::Time m_timeDown = sf::seconds(0.2);
+    sf::Clock m_timerMove;
+    sf::Time m_timeMove = sf::seconds(0.1);
 
     bool m_running = false;
     bool m_defeat = false;
 
+    bool m_leftPressed = false;
+    bool m_rightPressed = false;
 
 
-    const sf::Color NULL_COLOR = sf::Color::White;
+
+    const sf::Color NULL_COLOR = sf::Color::Transparent;
     
-    const std::vector<std::vector<std::vector<std::vector<bool>>>> allPiece = {
+    const std::vector<std::vector<std::vector<std::vector<bool>>>> allPiece = 
+    {
         {
             {
                 {0,1,0},
@@ -109,29 +136,6 @@ private:
                 {1,0},
                 {1,1},
                 {1,0},
-            }
-            
-        },
-        {
-            {
-                {0,1,0},
-                {1,1,1},
-                {0,1,0}
-            },
-            {
-                {0,1,0},
-                {1,1,1},
-                {0,1,0}
-            },
-            {
-                {0,1,0},
-                {1,1,1},
-                {0,1,0}
-            },
-            {
-                {0,1,0},
-                {1,1,1},
-                {0,1,0}
             }
             
         },
@@ -157,28 +161,120 @@ private:
         },
         {
             {
-                {0,1,0,0},
-                {0,1,0,0},
-                {0,1,0,0},
-                {0,1,0,0}
+                {1,1},
+                {1,1}
             },
             {
-                {0,0,0,0},
-                {1,1,1,1},
-                {0,0,0,0},
-                {0,0,0,0}
+                {1,1},
+                {1,1}
             },
             {
-                {0,0,1,0},
-                {0,0,1,0},
-                {0,0,1,0},
-                {0,0,1,0}
+                {1,1},
+                {1,1}
             },
             {
-                {0,0,0,0},
-                {0,0,0,0},
-                {1,1,1,1},
-                {0,0,0,0}
+                {1,1},
+                {1,1}
+            }
+        },
+        {
+            {
+                {1},
+                {1},
+                {1},
+                {1}
+            },
+            {
+                {1,1,1,1}
+            },
+            {
+                {1},
+                {1},
+                {1},
+                {1}
+            },
+            {
+                {1,1,1,1}
+            }
+        },
+        {
+            {
+                {1,0},
+                {1,0},
+                {1,1}
+            },
+            {
+                {0,0,1},
+                {1,1,1}
+            },
+            {
+                {1,1},
+                {0,1},
+                {0,1}
+            },
+            {
+                {1,1,1},
+                {1,0,0}
+            }
+        },
+        {
+            {
+                {0,1},
+                {0,1},
+                {1,1}
+            },
+            {
+                {1,0,0},
+                {1,1,1}
+            },
+            {
+                {1,1},
+                {1,0},
+                {1,0}
+            },
+            {
+                {1,1,1},
+                {0,0,1}
+            }
+        },
+        {
+            {
+                {0,1},
+                {1,1},
+                {1,1}
+            },
+            {
+                {1,1,0},
+                {1,1,1}
+            },
+            {
+                {1,1},
+                {1,1},
+                {1,0}
+            },
+            {
+                {1,1,1},
+                {0,1,1}
+            }
+        },
+        {
+            {
+                {1,0},
+                {1,1},
+                {1,1}
+            },
+            {
+                {1,1,1},
+                {1,1,0}
+            },
+            {
+                {1,1},
+                {1,1},
+                {0,1}
+            },
+            {
+                {0,1,1},
+                {1,1,1}
             }
         }
     };

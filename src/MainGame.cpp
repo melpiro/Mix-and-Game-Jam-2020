@@ -16,7 +16,6 @@ MainGame::MainGame(sf::RenderWindow* fen) :
     m_tetrisTest.setPosition(50,50);
     m_tetrisTest.setWindowSize(150,300);
     m_tetrisTest.setTileSize(10,20);
-    m_tetrisTest.start();
 
     m_enemy.setPos({500, 500});
 }
@@ -25,6 +24,9 @@ void MainGame::init()
 {
     m_character.init();
     m_enemy.init();
+
+
+    m_tetrisTest.start();
 }
 
 void MainGame::event(sf::Event e)
