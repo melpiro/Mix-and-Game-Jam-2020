@@ -42,15 +42,12 @@ private:
     const float cam_zoom_factor= 1.5f;
 
     PlayerCharacter m_character;
-    EnemyCharacter m_enemy;
-    BlobEnemy m_enemy2;
 
 
     Inventory m_inventory;
     ItemManager m_itemManager;
     ItemDrawer m_itemDrawer;
 
-    
 };
 
 

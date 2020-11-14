@@ -80,17 +80,6 @@ private:
 
     int m_score = 0;
 
-    const std::vector<sf::Color> COLORS = {
-        sf::Color(26, 188, 156),
-        sf::Color(46, 204, 113),
-        sf::Color(52, 152, 219),
-        sf::Color(241, 196, 15),
-        sf::Color(231, 76, 60),
-        sf::Color(230, 126, 34),
-        sf::Color(155, 89, 182),
-    };
-
-
     sf::Clock m_timerDown;
     sf::Time m_timeDown = sf::seconds(0.2);
     sf::Time m_timeDownNormal = sf::seconds(0.2);
@@ -103,11 +92,6 @@ private:
 
     bool m_leftPressed = false;
     bool m_rightPressed = false;
-
-
-
-    const sf::Color NULL_COLOR = sf::Color::Transparent;
-    
     
 };
 

@@ -43,6 +43,7 @@ protected:
 
     float life = 1;
 
+
     explicit Character(sf::RenderWindow* fen);
 
 public:
