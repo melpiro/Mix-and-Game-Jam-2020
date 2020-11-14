@@ -23,7 +23,7 @@ void App::loadRessources()
     m_mainMenu.init();
     m_mainGame.init();
 
-    m_step = MAIN_MENU;
+    m_step = GAME;
     m_mainGame.updateOnResize();
 }
 
