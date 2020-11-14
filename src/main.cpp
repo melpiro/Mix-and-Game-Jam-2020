@@ -21,6 +21,10 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("TileSet/grass.png","grass");
     O::graphics::ressourceManager.addTexture("TileSet/murGrass.png","murGrass");
     O::graphics::ressourceManager.addTexture("TileSet/water.png","water");
+
+    O::graphics::ressourceManager.addTexture("TileSet/pontBord.png","pontBord");
+    O::graphics::ressourceManager.addTexture("TileSet/pontHorBas.png","pontHorBas");
+    O::graphics::ressourceManager.addTexture("TileSet/pontHorhaut.png","pontHorHaut");
     
     
     O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");
