@@ -28,6 +28,8 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("TileSet/pontGauche.png","pontGauche");
     O::graphics::ressourceManager.addTexture("TileSet/pontDroite.png","pontDroite");
     O::graphics::ressourceManager.addTexture("TileSet/ladder.png","ladder");
+
+    O::graphics::ressourceManager.addTexture("MainMenu/titre.png","titreJeu");
     
     
     O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");

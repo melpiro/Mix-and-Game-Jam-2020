@@ -10,10 +10,13 @@
 #include "EnemyCharacter.h"
 
 struct Projectile {
-    Projectile(sf::RenderWindow *win, const sf::Vector2f &pos, const sf::Vector2f &vel) : win(win), pos(pos), vel(vel) {}
+    static int nextID;
+    int id;
+    Projectile(sf::RenderWindow *win, const sf::Vector2f &pos, const sf::Vector2f &vel);
     sf::RenderWindow* win;
     sf::Vector2f pos;
     sf::Vector2f vel;
+    float dmg = 1;
     float lifeTime = 2, currentLifeTime = 0;
     bool dead = false;
     void update(float dt);
@@ -31,6 +34,9 @@ public:
     static void killEnemy(int id);
 
     static void addProjectile(Projectile projectile);
+    static std::list<Projectile> &getProjectiles();
+
+    static void killProjectile(int id);
 
     static void update(float dt);
     static void draw();
@@ -39,6 +45,10 @@ public:
     static void loadEnemiesFromFiles(const std::string& path, sf::RenderWindow* win, PlayerCharacter* character);
 
     static void setTileMap(Tilemap *tilemap);
+
+    static void reset();
+
+    static Tilemap *tilemap;
 };
 
 

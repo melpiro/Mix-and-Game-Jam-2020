@@ -11,6 +11,8 @@
 
 class PlayerCharacter;
 
+
+
 class EnemyCharacter : public Character {
 
     static int nextID;

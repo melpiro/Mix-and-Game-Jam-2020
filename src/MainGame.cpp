@@ -21,7 +21,7 @@ void MainGame::init()
     m_itemDrawer.init();
 
 
-    EnemyManager::loadEnemiesFromFiles("resources/data/enemies1.json", m_fen, &m_character);
+    EnemyManager::loadEnemiesFromFiles("resources/data/map1.json", m_fen, &m_character);
     
 
     //Initialisation de la tilemap
@@ -77,17 +77,6 @@ void MainGame::init()
     //     sf::Vector2i(-1,1),
     //     sf::Vector2i(-1,0)
     // });
-
-
-    m_healthBar = O::graphics::ChargingBar(m_fen, 0, 0, m_character.getRect().width*0.7f, m_character.getRect().height*0.1f);
-    m_healthBar.setMaxChargingValue(m_character.getLife());
-    m_healthBar.setMinChargingValue(0);
-    m_healthBar.setOutlineColor(sf::Color::Black);
-    m_healthBar.setBackgroundColor(sf::Color::Red);
-    m_healthBar.setForgroundColor(sf::Color::Green);
-    m_healthBar.setOutlineThickness(5);
-    m_healthBar.setChargingValue(m_character.getLife());
-    m_healthBar.setOrigineAsCenter();
 
 }
 
@@ -160,9 +149,7 @@ Step MainGame::update(float dt)
 
     m_peuzeul.update();
 
-    m_healthBar.setPosition(m_character.getPos().x, m_character.getPos().y - m_character.getRect().height*0.5f);
-    m_healthBar.setChargingValue(m_character.getLife());
-    m_healthBar.update();
+
 
 
     m_peuzeul.setSelectedItemIndex(m_inventory.getSelectedItemIndex());
@@ -182,16 +169,58 @@ void MainGame::render()
     m_peuzeul.render();
     m_itemDrawer.render();
 
+    EnemyManager::draw();
+
     m_character.draw();
     m_inventory.render();
 
-    EnemyManager::draw();
 
-    m_healthBar.draw();
 }
 
 void MainGame::updateOnResize()
 {
     m_view.setSize((sf::Vector2f) m_fen->getSize() * m_viewZoom);
+}
+
+void MainGame::reset() {
+    EnemyManager::reset();
+
+    m_character = PlayerCharacter(m_fen);
+    m_inventory = Inventory(m_fen, &m_viewZoom, &m_itemManager);
+    m_itemManager = ItemManager(sf::FloatRect(0, 0, 50 * 16 * 4,50 * 16 * 4), 30);
+    m_itemDrawer = ItemDrawer(m_fen, &m_itemManager);
+    m_peuzeul = Peuzeul(m_fen, &m_itemManager);
+
+    m_character.init();
+    m_inventory.init();
+    m_itemDrawer.init();
+
+    EnemyManager::loadEnemiesFromFiles("resources/data/map1.json", m_fen, &m_character);
+
+    m_character.setPos({16*16*4,12*16*4});
+    m_character.setTileMap(&m_map);
+    EnemyManager::setTileMap(&m_map);
+
+    m_itemManager.setTileMap(&m_map);
+
+
+    m_itemManager.init();
+
+    m_peuzeul.setPositon(sf::Vector2i(22,12));
+    m_peuzeul.polygon(std::vector<sf::Vector2i> {
+            sf::Vector2i(0,0),
+            sf::Vector2i(6,0),
+            sf::Vector2i(6,1),
+            sf::Vector2i(7,1),
+            sf::Vector2i(7,2),
+            sf::Vector2i(8,2),
+            sf::Vector2i(8,3),
+            sf::Vector2i(7,3),
+            sf::Vector2i(7,4),
+            sf::Vector2i(1,4),
+            sf::Vector2i(1,3),
+            sf::Vector2i(0,3)
+    });
+
 }
 

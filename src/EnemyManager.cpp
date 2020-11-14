@@ -9,8 +9,11 @@
 
 std::map<int, EnemyCharacter*> EnemyManager::enemies;
 std::list<Projectile> EnemyManager::projectiles;
+Tilemap* EnemyManager::tilemap = nullptr;
 
 void EnemyManager::addEnemy(EnemyCharacter* enemy) {
+    if(tilemap != nullptr)
+        enemy->setTileMap(tilemap);
     enemies[enemy->getId()] = enemy;
 }
 
@@ -25,7 +28,7 @@ void EnemyManager::update(float dt) {
         enemies[pair.first]->update(dt);
 
     auto it = projectiles.begin();
-    for (;it != projectiles.end();){
+    while (it != projectiles.end()){
         it->update(dt);
         if(it->dead)
             it = projectiles.erase(it);
@@ -76,11 +79,21 @@ void EnemyManager::loadEnemiesFromFiles(const std::string &path, sf::RenderWindo
 }
 
 void EnemyManager::setTileMap(Tilemap *tilemap) {
+    EnemyManager::tilemap = tilemap;
     for(auto pair : enemies)
         pair.second->setTileMap(tilemap);
 }
 
+std::list<Projectile> &EnemyManager::getProjectiles() {
+    return projectiles;
+}
+
 // Projectile =================================
+int Projectile::nextID = 0;
+
+Projectile::Projectile(sf::RenderWindow *win, const sf::Vector2f &pos, const sf::Vector2f &vel) : win(win), pos(pos), vel(vel) {
+    id = nextID++;
+}
 
 void Projectile::update(float dt) {
     pos += vel;
@@ -93,4 +106,19 @@ void Projectile::draw() const {
     rect.setFillColor(sf::Color::Red);
     rect.setPosition(pos);
     win->draw(rect);
+}
+
+void EnemyManager::killProjectile(int id) {
+    auto it = projectiles.begin();
+    while (it != projectiles.end()) {
+        if(it->id == id)
+            it = projectiles.erase(it);
+        else
+            it++;
+    }
+}
+
+void EnemyManager::reset() {
+    enemies.clear();
+    projectiles.clear();
 }

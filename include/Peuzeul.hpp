@@ -41,7 +41,7 @@ private:
 
     sf::Vector2i m_pos;
 
-    const float WIDTH_OUTLINE = 5;
+    float WIDTH_OUTLINE = 5;
 
     int indexSelectedInventoryPiece = -1;
     Item m_selectedItem;

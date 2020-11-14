@@ -4,6 +4,9 @@
 #include "ItemManager.hpp"
 #include "Graphics/Text.h"
 
+
+
+//TODO : Gérer le fait de pouvoir équiper des pièces
 class Inventory
 {
 
@@ -31,9 +34,9 @@ private:
     bool m_isOpen = false;
     bool m_openAnimate = false;
     bool m_closeAnimate = false;
-    const float MOVE_SPEED = 40.f;
+    float MOVE_SPEED = 40.f;
     float backgroundDelta = 0;
-    const float backgroundDeltaMax = 350;
+    float backgroundDeltaMax = 350;
 
     sf::RenderWindow* m_fen;
     float* m_viewZoom;
@@ -41,10 +44,10 @@ private:
     O::graphics::Sprite m_invBackground;
     O::graphics::Sprite m_invIcon;
     O::graphics::Text m_title;
-    const float ITEM_SIZE = 45;
-    const float ITEM_MARGIN = 25;
+    float ITEM_SIZE = 45;
+    float ITEM_MARGIN = 25;
 
-    const int nbItemPerLine = 3;
+    int nbItemPerLine = 3;
 
     ItemManager* m_itemManager;
     

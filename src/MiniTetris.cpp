@@ -461,3 +461,7 @@ void MiniTetris::setSpeed(sf::Time updateSpeed)
 {
     m_timeDownNormal = updateSpeed;
 }
+
+void MiniTetris::setScore(int mScore) {
+    m_score = mScore;
+}

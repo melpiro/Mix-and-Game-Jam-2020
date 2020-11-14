@@ -6,9 +6,11 @@
 #define MIXGAMEJAM2020_CHARACTER_H
 
 #include <SFML/Graphics.hpp>
+#include <Omega/Graphics/ChargingBar.h>
 #include "Tilemap.h"
 #include "Omega/Math/MathFunctions.h"
 
+//TODO Bouger la barre de vie dans cette classe (etienne saura)
 class Character {
 
 protected:
@@ -45,11 +47,15 @@ protected:
 
     float life = 1;
     bool dead = false;
+    O::graphics::ChargingBar m_healthBar;
+
 
     explicit Character(sf::RenderWindow* fen);
 
 
     Tilemap* m_map = NULL;
+
+    void initHealthBar();
 
 public:
 
@@ -79,7 +85,10 @@ public:
     bool isDead() const;
 
 
+
     ///sf::RectangleShape m_rect;
+    sf::FloatRect getHitbox();
+
 };
 
 

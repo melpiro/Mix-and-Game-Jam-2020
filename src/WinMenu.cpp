@@ -5,7 +5,7 @@ WinMenu::WinMenu(sf::RenderWindow* fen) :
 {
     m_fen=fen;
 
-    m_title.setString(O::graphics::ressourceManager.text(4));
+    m_title.setString(O::graphics::ressourceManager.text(5));
     m_title.setCharacterSize(50);
 }
 
