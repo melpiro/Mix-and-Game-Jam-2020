@@ -70,6 +70,7 @@ void MainGame::update(float dt)
 }
 void MainGame::render()
 {
+    m_itemDrawer.render();
     m_enemy.draw();
     m_enemy2.draw();
     m_character.draw();

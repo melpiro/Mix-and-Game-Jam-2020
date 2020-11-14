@@ -39,6 +39,8 @@ public:
 
     int getScore();
 
+    void setSpeed(sf::Time updateSpeed);
+
 private:
 
     void updateMoves();
@@ -91,6 +93,8 @@ private:
 
     sf::Clock m_timerDown;
     sf::Time m_timeDown = sf::seconds(0.2);
+    sf::Time m_timeDownNormal = sf::seconds(0.2);
+    sf::Time m_timeDownFast = sf::seconds(0.05);
     sf::Clock m_timerMove;
     sf::Time m_timeMove = sf::seconds(0.1);
 

@@ -22,6 +22,8 @@ void EnemyCharacter::init() {
 
     speed = 100;
 
+    miniTetris.setSpeed(sf::seconds(0.5));
+
 }
 
 void EnemyCharacter::update(float deltatime) {

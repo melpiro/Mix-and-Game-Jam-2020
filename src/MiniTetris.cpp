@@ -38,7 +38,7 @@ void MiniTetris::start()
 
    m_running = true;
    m_defeat = false;
-   m_timeDown = sf::seconds(0.2);
+   m_timeDown = m_timeDownNormal;
    m_leftPressed = false;
    m_rightPressed = false;
 }
@@ -69,14 +69,14 @@ void MiniTetris::event(sf::Event e)
             }
             else if (e.key.code == sf::Keyboard::Down)
             {
-                m_timeDown = sf::seconds(0.05);
+                m_timeDown = m_timeDownFast;
             }
         }
         else if (e.type == sf::Event::KeyReleased)
         {
             if (e.key.code == sf::Keyboard::Down)
             {
-                m_timeDown = sf::seconds(0.2);
+                m_timeDown = m_timeDownNormal;
             }
         
             else if (e.key.code == sf::Keyboard::Left)
@@ -455,4 +455,9 @@ void MiniTetris::checkLines()
 
 int MiniTetris::getScore() {
     return m_score;
+}
+
+void MiniTetris::setSpeed(sf::Time updateSpeed)
+{
+    m_timeDownNormal = updateSpeed;
 }
