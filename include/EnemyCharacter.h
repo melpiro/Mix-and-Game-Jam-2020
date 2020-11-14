@@ -24,6 +24,7 @@ protected:
     MiniTetris miniTetris;
 
     float agroDist = 500;
+    float loseAgroDist = 800;
 
 public:
 
@@ -41,6 +42,8 @@ public:
     int getId() const;
 
     int operator==(const EnemyCharacter& other) const;
+
+
 };
 
 
