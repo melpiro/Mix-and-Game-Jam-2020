@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Graphics/Sprite.h"
 #include "ItemManager.hpp"
+#include "Graphics/Text.h"
 
 class Inventory
 {
@@ -35,9 +36,12 @@ private:
 
     O::graphics::Sprite m_invBackground;
     O::graphics::Sprite m_invIcon;
+    O::graphics::Text m_title;
 
     ItemManager* m_itemManager;
     
+    std::vector<std::vector<O::graphics::Sprite>> m_items;
+    std::vector<std::vector<sf::Vector2f>> relativItemPos;
 };
 
 

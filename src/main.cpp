@@ -8,7 +8,7 @@ void init_texture_manager()
     O::graphics::ressourceManager.setDefaultFontDir("resources/Fonts");
     O::graphics::ressourceManager.setDefaultAudioDir("resources/Audio");
 
-    O::graphics::ressourceManager.loadLanguage("resources/Language/fr");
+    O::graphics::ressourceManager.loadLanguage("resources/Language/en");
 
     O::graphics::ressourceManager.addTextureAndLoadIt("LoadingMenu/loadIcon.png", "loadIcon");
     O::graphics::ressourceManager.addTexture("LoadingMenu/background.jpg", "loadingMenuBackground");
