@@ -39,11 +39,9 @@ m_frameCount(1){
 
 void Tile::draw(float x,float y,sf::RenderWindow* fen) {
     if(m_frameCount == 1){
-        //TODO : faire l'affichage simple d'un sprite
         m_img.setPosition(x,y);
         fen->draw(m_img);
     }else{
-        //TODO: gérer les sprite animés
         m_img.setPosition(x,y);
         int size = m_img.getTexture()->getSize().x/m_nbrOfSprite.x;
         if(m_nbrOfSprite.y == 1){
@@ -58,7 +56,6 @@ void Tile::draw(float x,float y,sf::RenderWindow* fen) {
 }
 
 void Tile::update() {
-    //TODO: gerer l'avancement des anim
     if(m_frameCount == 1) return;
     if(m_animClock.getElapsedTime().asMilliseconds() > m_animSpeed){
         m_currentFrame++;

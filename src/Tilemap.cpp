@@ -38,3 +38,7 @@ Tilemap::Tilemap() {
 void Tilemap::setTMap(std::vector<std::vector<int>> tmap) {
     m_map = tmap;
 }
+
+std::vector<sf::FloatRect> Tilemap::getColliders() {
+    return std::vector<sf::FloatRect>();
+}

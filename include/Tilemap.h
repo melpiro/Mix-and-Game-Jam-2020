@@ -26,6 +26,8 @@ public:
 
     void setTMap(std::vector<std::vector<int>> tmap);
 
+    std::vector<sf::FloatRect> getColliders(); // retourne toutes les zones de collision de la map
+
 private:
 
     sf::Vector2i m_dimensions;
