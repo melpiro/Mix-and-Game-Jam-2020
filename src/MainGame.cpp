@@ -27,6 +27,18 @@ void MainGame::init()
 
     EnemyManager::addEnemy(enemy);
     EnemyManager::addEnemy(enemy2);
+
+    //Initialisation de la tilemap
+    std::vector<Tile> tileSet;
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,5);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),5);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),5);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),5);
+
+    m_map = Tilemap(tileSet,*m_fen,"resources/data/map1.json");
+
+    m_character.setPos({14*16*5,12*16*5});
+
 }
 
 void MainGame::event(sf::Event e)
@@ -73,9 +85,12 @@ void MainGame::update(float dt)
 
     EnemyManager::update(dt);
 
+    m_map.update();
+
 }
 void MainGame::render()
 {
+    m_map.draw();
     m_itemDrawer.render();
 
     m_character.draw();

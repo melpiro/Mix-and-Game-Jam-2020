@@ -10,6 +10,7 @@
 #include "Inventory.hpp"
 #include "ItemDrawer.hpp"
 #include "BlobEnemy.h"
+#include "Tilemap.h"
 
 class MainGame
 {
@@ -42,6 +43,8 @@ private:
     const float cam_zoom_factor= 1.5f;
 
     PlayerCharacter m_character;
+
+    Tilemap m_map;
 
 
     Inventory m_inventory;
