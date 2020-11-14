@@ -23,7 +23,7 @@ void MainMenu::init()
     m_bouttonJouer.setFillColor(sf::Color(133, 130, 130));
 }
 
-Steps MainMenu::event(sf::Event e)
+Step MainMenu::event(sf::Event e)
 {
     if (e.type == sf::Event::Resized)
     {
