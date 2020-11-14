@@ -182,3 +182,15 @@ bool Tilemap::intersectSolidArea(sf::FloatRect rect) {
     }
     return false;
 }
+
+std::vector<sf::Vector2f> Tilemap::crossSolidArea(sf::FloatRect rect) {
+
+    std::vector<sf::Vector2f> pointsCol;
+
+    for(auto r : m_rects){
+        std::vector<sf::Vector2f> points =  O::math::geo2d::cross_AABB_AABB({rect.left,rect.top},{rect.width,rect.height},{r.left,r.top},{r.width,r.height});
+        for(auto p : points){ pointsCol.push_back(p);}
+    }
+
+    return pointsCol;
+}
