@@ -13,6 +13,8 @@
 
 #include "Graphics/Input.h"
 #include "Graphics/TextInput.h"
+#include "Omega/Graphics/RessourceManager.h"
+#include "Steps.hpp"
 
 class MainMenu
 {
@@ -23,8 +25,8 @@ public:
     void init();
 
 
-    void event(sf::Event e);
-    void update();
+    Steps event(sf::Event e);
+    void update(float dt);
     void render();
 
 private:
@@ -33,8 +35,14 @@ private:
 
     sf::RenderWindow* m_fen;
 
+    O::graphics::Sprite m_titre;
+
+    float m_pxAnimMin = 250;
+    float m_pxAnimMax = 300;
+    float m_pxDir = 20;
+
     O::graphics::Sprite m_background;
-    O::graphics::Text m_titre;
+    O::graphics::Button m_bouttonJouer;
 };
 
 
