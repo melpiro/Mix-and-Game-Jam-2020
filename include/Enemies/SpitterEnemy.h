@@ -13,7 +13,7 @@ class SpitterEnemy : public EnemyCharacter {
 
     float shootDistance = 300;
 
-    float fireRate = 0.2f;
+    float fireRate = 0.9f;
     float fireRateTime = 0;
 
 public:

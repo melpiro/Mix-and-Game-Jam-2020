@@ -93,7 +93,7 @@ void MainGame::event(sf::Event e)
 void MainGame::update(float dt)
 {
 
-    m_view.setCenter(m_character.getPos());
+    m_view.setCenter(m_character.getCameraPos());
     m_fen->setView(m_view);
 
     m_character.update(dt);

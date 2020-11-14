@@ -14,7 +14,7 @@ struct Projectile {
     sf::RenderWindow* win;
     sf::Vector2f pos;
     sf::Vector2f vel;
-    float lifeTime = 5, currentLifeTime = 0;
+    float lifeTime = 2, currentLifeTime = 0;
     bool dead = false;
     void update(float dt);
     void draw() const;

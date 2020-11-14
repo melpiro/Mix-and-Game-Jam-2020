@@ -52,7 +52,7 @@ void EnemyManager::addProjectile(Projectile projectile) {
 
 void Projectile::update(float dt) {
     pos += vel;
-    lifeTime += dt;
+    currentLifeTime += dt;
     dead = currentLifeTime >= lifeTime;
 }
 
