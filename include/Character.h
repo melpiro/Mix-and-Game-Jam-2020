@@ -79,7 +79,9 @@ public:
     bool isDead() const;
 
 
+
     ///sf::RectangleShape m_rect;
+    sf::FloatRect getHitbox();
 };
 
 

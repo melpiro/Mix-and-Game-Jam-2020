@@ -94,11 +94,7 @@ void Character::update(float deltatime) {
     {
         auto nextpos = pos + vel * deltatime;
 
-        auto bound = sprite.getGlobalBounds();
-        bound.height /= 2.0;
-        bound.width /= 2.0;
-        bound.top +=bound.height;
-        bound.left += bound.width*0.5f;
+        auto bound = getHitbox();
 
         auto nextBoundX = bound;
         nextBoundX.left = nextpos.x - bound.width/2.0;
@@ -153,4 +149,13 @@ void Character::applyDamage(float dmg) {
     life -= dmg;
     if(life <= 0)
         kill();
+}
+
+sf::FloatRect Character::getHitbox() {
+    auto bound = sprite.getGlobalBounds();
+    bound.height /= 2.0;
+    bound.width /= 2.0;
+    bound.top +=bound.height;
+    bound.left += bound.width*0.5f;
+    return bound;
 }

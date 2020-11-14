@@ -170,10 +170,11 @@ void MainGame::render()
     m_peuzeul.render();
     m_itemDrawer.render();
 
+    EnemyManager::draw();
+
     m_character.draw();
     m_inventory.render();
 
-    EnemyManager::draw();
 
     m_healthBar.draw();
 }

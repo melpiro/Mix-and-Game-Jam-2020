@@ -3,6 +3,7 @@
 //
 
 #include <Omega/Graphics/RessourceManager.h>
+#include "EnemyManager.h"
 #include "PlayerCharacter.h"
 
 void PlayerCharacter::init() {
@@ -40,6 +41,17 @@ void PlayerCharacter::update(float deltatime) {
 
     if(isAttacked())
         enemiesAgro[targetedEnemy]->getMiniTetris()->update();
+
+    // Check des projectiles
+    for(auto& proj : EnemyManager::getProjectiles()) {
+        if(getHitbox().contains(proj.pos)) {
+            applyDamage(proj.dmg);
+            // Knockback
+            vel = O::math::normalise(pos - proj.pos) * 1000.f;
+            EnemyManager::killProjectile(proj.id);
+        }
+    }
+
 }
 
 void PlayerCharacter::event(sf::Event &e) {
