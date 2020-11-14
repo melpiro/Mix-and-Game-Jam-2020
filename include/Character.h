@@ -9,6 +9,7 @@
 #include "Tilemap.h"
 #include "Omega/Math/MathFunctions.h"
 
+//TODO Bouger la barre de vie dans cette classe (etienne saura)
 class Character {
 
 protected:
