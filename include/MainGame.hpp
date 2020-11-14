@@ -35,6 +35,7 @@ private:
 
     sf::View m_view;
     float m_viewZoom = 1.f;
+    float cameraSpeed = 0.1f;
 
     float m_timeForTetrisAnimeTest;
 
