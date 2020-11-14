@@ -9,7 +9,7 @@
 #include "EnemyCharacter.h"
 #include "Inventory.hpp"
 #include "ItemDrawer.hpp"
-#include "BlobEnemy.h"
+#include "Enemies/BlobEnemy.h"
 #include "Tilemap.h"
 
 class MainGame

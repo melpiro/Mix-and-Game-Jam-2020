@@ -7,7 +7,7 @@
 std::map<int, EnemyCharacter*> EnemyManager::enemies;
 
 void EnemyManager::addEnemy(EnemyCharacter* enemy) {
-    enemies.insert(std::make_pair(enemy->getId(), enemy));
+    enemies[enemy->getId()] = enemy;
 }
 
 void EnemyManager::killEnemy(int id) {
@@ -16,8 +16,9 @@ void EnemyManager::killEnemy(int id) {
 }
 
 void EnemyManager::update(float dt) {
-    for(auto pair : enemies)
-        pair.second->update(dt);
+    auto en2 = enemies;
+    for(auto pair : en2)
+        enemies[pair.first]->update(dt);
 }
 
 void EnemyManager::draw() {

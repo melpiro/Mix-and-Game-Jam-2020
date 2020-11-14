@@ -5,7 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 include_directories("include")
 
-file(GLOB SRCS "./src/*.cpp" )
+file(GLOB SRCS
+        "./src/*.cpp"
+        "./src/Enemies/*.cpp")
 file(GLOB SRCS_OMEGA
         "./src/Omega/*.cpp"
         "./src/Omega/Data/*.cpp"
