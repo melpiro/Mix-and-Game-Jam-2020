@@ -18,6 +18,8 @@ void PlayerCharacter::init() {
 
     setAnim();
     playAnim = false;
+
+    life = 10;
 }
 
 void PlayerCharacter::update(float deltatime) {
@@ -36,7 +38,8 @@ void PlayerCharacter::update(float deltatime) {
         vel.x = std::max(speed, vel.x);
     }
 
-
+    if(isAttacked())
+        enemiesAgro[targetedEnemy]->getMiniTetris()->update();
 }
 
 void PlayerCharacter::event(sf::Event &e) {
@@ -48,13 +51,15 @@ void PlayerCharacter::event(sf::Event &e) {
             switch (e.key.code) {
 
                 case sf::Keyboard::Key::LShift:
-
                     if(currentDashTime >= dashCoolDown) {
                         dash = 0.5f;
                         currentDashTime = 0;
                     }
+                    break;
 
-
+                case sf::Keyboard::Key::RControl:
+                    if(isAttacked())
+                        targetedEnemy = (targetedEnemy + 1)%enemiesAgro.size();
                     break;
             }
             break;
@@ -62,19 +67,32 @@ void PlayerCharacter::event(sf::Event &e) {
 
     }
 
+    if(isAttacked())
+        enemiesAgro[targetedEnemy]->getMiniTetris()->event(e);
 }
 
 PlayerCharacter::PlayerCharacter(sf::RenderWindow *fen) : Character(fen) {}
 
-EnemyCharacter *PlayerCharacter::getEnemyAgro() const {
-    return enemyAgro;
-}
-
-void PlayerCharacter::setEnemyAgro(EnemyCharacter *enemyAgro) {
-    PlayerCharacter::enemyAgro = enemyAgro;
-    attacked = enemyAgro != nullptr;
+void PlayerCharacter::addEnemyAgro(EnemyCharacter *enemy) {
+    PlayerCharacter::enemiesAgro.push_back(enemy);
 }
 
 bool PlayerCharacter::isAttacked() const {
-    return attacked;
+    return !enemiesAgro.empty();
+}
+
+void PlayerCharacter::removeEnemyAgro(EnemyCharacter *enemy) {
+    for(int i = 0; i < enemiesAgro.size(); i++)
+        if(enemiesAgro[i] == enemy)
+            enemiesAgro.erase(enemiesAgro.begin()+i);
+
+    if(targetedEnemy >= enemiesAgro.size())
+        targetedEnemy = 0;
+}
+
+void PlayerCharacter::draw() {
+    Character::draw();
+
+    if(isAttacked())
+        enemiesAgro[targetedEnemy]->getMiniTetris()->render();
 }

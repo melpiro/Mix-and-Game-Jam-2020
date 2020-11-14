@@ -43,6 +43,7 @@ private:
 
     PlayerCharacter m_character;
     EnemyCharacter m_enemy;
+    EnemyCharacter m_enemy2;
 };
 
 

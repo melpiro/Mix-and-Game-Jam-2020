@@ -41,6 +41,8 @@ protected:
     float dashCoolDown = 0.7f; // s
     float currentDashTime = 0;
 
+    float life = 1;
+
     explicit Character(sf::RenderWindow* fen);
 
 public:
