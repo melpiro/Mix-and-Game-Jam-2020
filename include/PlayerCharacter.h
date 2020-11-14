@@ -31,6 +31,8 @@ public:
 
     void draw() override;
 
+
+
     sf::Vector2f getCameraPos();
 };
 
