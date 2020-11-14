@@ -34,8 +34,6 @@ private:
     sf::View m_view;
     float m_viewZoom = 1.f;
 
-    sf::RectangleShape m_object;
-
     float m_timeForTetrisAnimeTest;
 
 

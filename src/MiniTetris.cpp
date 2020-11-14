@@ -29,7 +29,7 @@ void MiniTetris::start()
        {
             m_allcase[i][j].setPosition(minX + i * sizeX, minY + (j - 3) * sizeY);
             m_allcase[i][j].setColor(NULL_COLOR);
-            m_allcase[i][j].setScale(sizeX/200.f,sizeY/200.f);
+            m_allcase[i][j].setScale(sizeX/(float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().x,sizeY/(float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().y);
             m_allcase[i][j].loadTexture();
        }
    }
@@ -270,7 +270,7 @@ void MiniTetris::setWindowSize(float x, float y)
        for (int j = 0; j < m_allcase[i].size(); j++)
        {
            m_allcase[i][j].setPosition(minX + i * sizeX, minY + (j - 3) * sizeY);
-           m_allcase[i][j].setScale(sizeX /200.f, sizeY/200.f);
+           m_allcase[i][j].setScale(sizeX /(float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().x, sizeY/(float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().y);
        }
    }
 }
