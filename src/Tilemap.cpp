@@ -33,6 +33,16 @@ void Tilemap::draw() {
         }
     }
 
+    /*sf::RectangleShape rec = sf::RectangleShape({0,0});
+    rec.setFillColor(sf::Color(255,0,0,200));
+    rec.setOutlineColor(sf::Color::Black);
+    rec.setOutlineThickness(4);
+    for(auto r : m_rects){
+        rec.setSize({r.width,r.height});
+        rec.setPosition({r.left,r.top});
+        m_fen->draw(rec);
+    }*/
+
 
 }
 
@@ -178,7 +188,7 @@ bool Tilemap::intersectSolidArea(sf::Vector2f point) {
 
 bool Tilemap::intersectSolidArea(sf::FloatRect rect) {
     for(auto r : m_rects){
-        if(r.intersects(rect)) return true;
+        if(rect.intersects(r)) return true;
     }
     return false;
 }
