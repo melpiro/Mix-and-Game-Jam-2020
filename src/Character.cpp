@@ -92,13 +92,15 @@ void Character::update(float deltatime) {
     {
         auto nextposX = pos + sf::Vector2f(vel.x, 0) * deltatime;
 
-        std::cout << vel.x<<" "<<vel.y <<std::endl;
         auto bound = sprite.getGlobalBounds();
         bound.height /= 2.0;
         bound.top +=bound.height;
-        if (m_map->intersectSolidArea(bound))
+
+        auto collides = m_map->crossSolidArea(bound);
+        
+        if (collides.size() > 0)
         {
-            vel.x = (-vel.x) * 1.f;
+            //O::math::
         }
         
         auto nextposY = pos + sf::Vector2f(0, vel.y) * deltatime;

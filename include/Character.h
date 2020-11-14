@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Tilemap.h"
+#include "Omega/Math/MathFunctions.h"
 
 class Character {
 
