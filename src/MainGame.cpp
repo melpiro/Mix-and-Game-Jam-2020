@@ -58,7 +58,8 @@ void MainGame::init()
 
     m_itemManager.init();
 
-    m_peuzeul.init("resources/data/peuzeul1.json");
+    m_peuzeul.init("resources/data/map1.json");
+
     // m_peuzeul.setPositon(sf::Vector2i(22,12));
     // m_peuzeul.polygon(std::vector<sf::Vector2i> {
     //     sf::Vector2i(0,0),
@@ -182,7 +183,7 @@ void MainGame::updateOnResize()
     m_view.setSize((sf::Vector2f) m_fen->getSize() * m_viewZoom);
 }
 
-void MainGame::reset() {
+void MainGame::reset(const std::string& path) {
     EnemyManager::reset();
 
     m_character = PlayerCharacter(m_fen);
@@ -221,6 +222,36 @@ void MainGame::reset() {
             sf::Vector2i(1,3),
             sf::Vector2i(0,3)
     });
+
+    if(!path.empty()) {
+
+        EnemyManager::loadEnemiesFromFiles(path, m_fen, &m_character);
+
+
+        //Initialisation de la tilemap
+        std::vector<Tile> tileSet;
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,4);
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontGauche"),4);// 7
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontDroite"),4);// 8
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("ladder"),4);// 9
+
+
+        //les tiles solides
+        tileSet[0].setSolid(true);
+        tileSet[2].setSolid(true);
+        tileSet[3].setSolid(true);
+        tileSet[6].setSolid(true);
+
+        m_map = Tilemap(tileSet,*m_fen,path);
+
+    }
+
 
 }
 
