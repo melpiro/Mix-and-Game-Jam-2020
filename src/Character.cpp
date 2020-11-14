@@ -92,7 +92,6 @@ void Character::update(float deltatime) {
     {
         auto nextposX = pos + sf::Vector2f(vel.x, 0) * deltatime;
 
-        std::cout << vel.x<<" "<<vel.y <<std::endl;
         auto bound = sprite.getGlobalBounds();
         bound.height /= 2.0;
         bound.top +=bound.height;
