@@ -28,7 +28,7 @@ void MiniTetris::start()
        for (int j = 0; j < m_allcase[i].size(); j++)
        {
             m_allcase[i][j].setPosition(minX + i * sizeX, minY + (j - 3) * sizeY);
-            m_allcase[i][j].setColor(sf::Color::Cyan);
+            m_allcase[i][j].setColor(NULL_COLOR);
             m_allcase[i][j].setScale(sizeX/200.f,sizeY/200.f);
             m_allcase[i][j].loadTexture();
        }

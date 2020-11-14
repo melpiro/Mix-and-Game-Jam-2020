@@ -34,7 +34,6 @@ private:
 
     sf::RectangleShape m_object;
 
-    MiniTetris m_tetrisTest;
     float m_timeForTetrisAnimeTest;
 
 
