@@ -54,8 +54,9 @@ void Inventory::update()
     {
         for (size_t j = 0; j < m_items[i].size(); j++)
         {
-            sf::Vector2f itemPos = relativItemPos[i][j] + pos + sf::Vector2f(225, 60);
+            sf::Vector2f itemPos = relativItemPos[i][j] * (*m_viewZoom) + pos + sf::Vector2f(225, 80) * (*m_viewZoom);
             m_items[i][j].setPosition(itemPos.x, itemPos.y);
+            m_items[i][j].setScale(m_itemscale[i] * (*m_viewZoom), m_itemscale[i] * (*m_viewZoom) );
         }
         
     }
@@ -63,7 +64,7 @@ void Inventory::update()
 
 
     m_title.setCharacterSize(40* (*m_viewZoom));
-    m_title.setPosition(pos.x + 325. * (*m_viewZoom), pos.y + 30 * (*m_viewZoom));
+    m_title.setPosition(pos.x + 325 * (*m_viewZoom), pos.y + 30 * (*m_viewZoom));
 
     
 
@@ -95,31 +96,52 @@ void Inventory::updateRender()
 {
     m_items.clear();
     relativItemPos.clear();
+    m_itemscale.clear();
     for (size_t i = 0; i < m_itemManager->getMyItems().size(); i++)
     {
-        std::cout << i <<std::endl;
         std::vector<O::graphics::Sprite> item;
         std::vector<sf::Vector2f> itempos;
-        float nbCellX = allPiece[(int)m_itemManager->getMyItems()[i].type][0].back().size();
-        float nbCellY = allPiece[(int)m_itemManager->getMyItems()[i].type][0].size();
-        float cell_size = std::min(ITEM_SIZE / nbCellY, ITEM_SIZE / nbCellX);
-        float deltaXForCenter =  (ITEM_SIZE - nbCellX * cell_size) / 2.0;
-
-        for (size_t y = 0; y < allPiece[(int)m_itemManager->getMyItems()[i].type][0].size(); y++)
+        float nbCellX = allPiece[(int)m_itemManager->getMyItems()[i].type][m_itemManager->getMyItems()[i].rotation].back().size();
+        float nbCellY = allPiece[(int)m_itemManager->getMyItems()[i].type][m_itemManager->getMyItems()[i].rotation].size();
+        float cell_size;
+        float deltaXForCenter = 0;
+        float deltaYForCenter = 0;
+        if (ITEM_SIZE / nbCellY  <  ITEM_SIZE / nbCellX)
         {
-            for (size_t x = 0; x < allPiece[(int)m_itemManager->getMyItems()[i].type][0].back().size(); x++)
+            cell_size = ITEM_SIZE / nbCellY;
+            deltaXForCenter =  (ITEM_SIZE - nbCellX * cell_size) / 2.0;
+        }
+        else
+        {
+
+            cell_size = ITEM_SIZE / nbCellX;
+            deltaYForCenter =  (ITEM_SIZE - nbCellY * cell_size) / 2.0;
+        }
+        
+        
+
+        for (size_t y = 0; y < allPiece[(int)m_itemManager->getMyItems()[i].type][m_itemManager->getMyItems()[i].rotation].size(); y++)
+        {
+            for (size_t x = 0; x < allPiece[(int)m_itemManager->getMyItems()[i].type][m_itemManager->getMyItems()[i].rotation].back().size(); x++)
             {
-                if (allPiece[(int)m_itemManager->getMyItems()[i].type][0][y][x] )
+                if (allPiece[(int)m_itemManager->getMyItems()[i].type][m_itemManager->getMyItems()[i].rotation][y][x] )
                 {
                     item.push_back(O::graphics::Sprite(m_fen, "tetrisCell", 0,0));
                     item.back().loadTexture();
-                    itempos.push_back(sf::Vector2f(deltaXForCenter + x * cell_size  + (i % nbItemPerLine) * (ITEM_SIZE + ITEM_MARGIN),   y *  cell_size + (i / nbItemPerLine) * (ITEM_SIZE + ITEM_MARGIN) ));
+                    itempos.push_back(
+                        sf::Vector2f(
+                            deltaXForCenter + x * cell_size  + (i % nbItemPerLine) * (ITEM_SIZE + ITEM_MARGIN),
+                            deltaYForCenter + y *  cell_size + (i / nbItemPerLine) * (ITEM_SIZE + ITEM_MARGIN) ));
+
                     item.back().setScale(cell_size / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().x, cell_size / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().y);
-                    item.back().setColor(sf::Color::Cyan);
+                    
+                    item.back().setColor(m_itemManager->getMyItems()[i].coul);
+
                 }
                 
             }
         }
+        m_itemscale.push_back(cell_size / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().x);
         m_items.push_back(item);
         relativItemPos.push_back(itempos);
     }
