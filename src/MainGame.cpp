@@ -2,6 +2,7 @@
 #include <Enemies/SpitterEnemy.h>
 #include <Step.hpp>
 #include "MainGame.hpp"
+#include "ObjectManager.h"
 
 MainGame::MainGame(sf::RenderWindow* fen) :
     m_character(fen),
@@ -20,9 +21,11 @@ void MainGame::init()
     m_inventory.init();
     m_itemDrawer.init();
 
+    ObjectManager::init();
 
     EnemyManager::loadEnemiesFromFiles("resources/data/map1.json", m_fen, &m_character);
-    
+
+
 
     //Initialisation de la tilemap
     std::vector<Tile> tileSet;
@@ -79,10 +82,16 @@ void MainGame::init()
     //     sf::Vector2i(-1,0)
     // });
 
+    ObjectManager::setTileMap(&m_map);
+    ObjectManager::setFen(m_fen);
+    ObjectManager::setHero(&m_character);
+    ObjectManager::loadObjectsFromFile("resources/data/map1.json");
+
 }
 
 void MainGame::event(sf::Event e)
 {
+    ObjectManager::event(e);
     if (e.type == sf::Event::Resized)
     {
         updateOnResize();
@@ -151,7 +160,7 @@ Step MainGame::update(float dt)
     m_peuzeul.update();
 
 
-
+    ObjectManager::update(dt);
 
     m_peuzeul.setSelectedItemIndex(m_inventory.getSelectedItemIndex());
 
@@ -171,6 +180,8 @@ void MainGame::render()
     m_itemDrawer.render();
 
     EnemyManager::draw();
+
+    ObjectManager::draw();
 
     m_character.draw();
     m_inventory.render();

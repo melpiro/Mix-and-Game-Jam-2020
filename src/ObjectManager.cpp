@@ -28,8 +28,9 @@ void ObjectManager::loadObjectsFromFile(std::string path) {
     JsonData json;
     json.readFile(path);
 
-    auto data = (std::vector<JsonData>*)json["objects"].getValue();
+    auto data = (std::vector<JsonData>*)json["Objects"].getValue();
     for(auto obj : *data){
+        std::cout << "TEST" << std::endl;
         sf::String type = *((sf::String *)obj["type"].getValue());
         double x = *((double *)obj["x"].getValue());
         double y = *((double *)obj["y"].getValue());
@@ -37,15 +38,17 @@ void ObjectManager::loadObjectsFromFile(std::string path) {
         Object* o;
         if(type == "spawner"){
             sf::String typeMob = *((sf::String *)obj["typeMob"].getValue());
-            o = new Spawner(O::str::convert_SFML_string_to_UTF8_string(typeMob),30,sf::Vector2f(x,y),m_tileMap,m_hero,m_fen);
+            double delay = *((double *)obj["spawnDelay"].getValue());
+            o = new Spawner(O::str::convert_SFML_string_to_UTF8_string(typeMob),delay,sf::Vector2f(x,y),m_tileMap,m_hero,m_fen);
         }//switch pour les items
 
         o->init();
         o->setPosition({static_cast<float>(x), static_cast<float>(y)});
         o->setFen(m_fen);
         addObject(o);
+        std::cout << "TEST" << std::endl;
     }
-
+    std::cout << "TEST" << std::endl;
 }
 
 void ObjectManager::draw() {
