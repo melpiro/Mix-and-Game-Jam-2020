@@ -46,11 +46,18 @@ void MainGame::init()
 
     m_map = Tilemap(tileSet,*m_fen,"resources/data/map1.json");
 
+
     m_character.setPos({16*16*4,12*16*4});
+
     m_character.setTileMap(&m_map);
 
+
     m_itemManager.setTileMap(&m_map);
+
+
     m_itemManager.init();
+
+
 
 }
 
@@ -99,6 +106,8 @@ void MainGame::update(float dt)
     EnemyManager::update(dt);
 
     m_map.update();
+
+
 
 }
 void MainGame::render()
