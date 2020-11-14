@@ -15,10 +15,10 @@ void MainGame::init()
     std::vector<Tile> v;
 
 
+    v.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,5);
     v.emplace_back(O::graphics::ressourceManager.getTexture("grass"),5);
     v.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),5);
     v.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),5);
-    v.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,5);
 
     std::vector<std::vector<int>> tmpMap = {
             {3,3,3,3,3},
@@ -27,8 +27,8 @@ void MainGame::init()
             {3,2,2,2,3},
             {3,3,3,3,3},
     };
-    m_tmap = Tilemap(sf::Vector2i(5,5),v,*m_fen);
-    m_tmap.setTMap(tmpMap);
+    m_tmap = Tilemap(sf::Vector2i(5,5),v,*m_fen,"resources/data/map1.json");
+    //m_tmap.setTMap(tmpMap);
 }
 
 void MainGame::event(sf::Event e)

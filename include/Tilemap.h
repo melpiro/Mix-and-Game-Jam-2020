@@ -18,6 +18,7 @@ public:
 
     Tilemap();
     Tilemap(sf::Vector2i dimensions,std::vector<Tile> m_Tileset,sf::RenderWindow &fen);
+    Tilemap(sf::Vector2i dimensions,std::vector<Tile> m_Tileset,sf::RenderWindow &fen,std::string path);
 
 
     void draw();
