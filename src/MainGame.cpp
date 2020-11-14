@@ -41,6 +41,10 @@ void MainGame::init()
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontGauche"),4);// 7
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontDroite"),4);// 8
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("ladder"),4);// 9
+
 
     //les tiles solides
     tileSet[0].setSolid(true);

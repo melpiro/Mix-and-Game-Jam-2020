@@ -25,6 +25,9 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("TileSet/bordPont.png","pontBord");
     O::graphics::ressourceManager.addTexture("TileSet/pontHorBas.png","pontHorBas");
     O::graphics::ressourceManager.addTexture("TileSet/pontHorhaut.png","pontHorHaut");
+    O::graphics::ressourceManager.addTexture("TileSet/pontGauche.png","pontGauche");
+    O::graphics::ressourceManager.addTexture("TileSet/pontDroite.png","pontDroite");
+    O::graphics::ressourceManager.addTexture("TileSet/ladder.png","ladder");
     
     
     O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");
