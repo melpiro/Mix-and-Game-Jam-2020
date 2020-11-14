@@ -95,6 +95,7 @@ void PlayerCharacter::draw() {
 
     if(isAttacked())
         enemiesAgro[targetedEnemy]->getMiniTetris()->render();
+
 }
 
 sf::Vector2f PlayerCharacter::getCameraPos() {

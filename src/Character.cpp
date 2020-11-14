@@ -100,15 +100,12 @@ void Character::update(float deltatime) {
 
         auto bound = sprite.getGlobalBounds();
         bound.height /= 2.0;
-        bound.left -= 50;
-        bound.top +=bound.height;
         bound.width /= 2.0;
-        
+        bound.top +=bound.height;
+        bound.left += bound.width*0.5f;
+
         auto nextBoundX = bound;
         nextBoundX.left = nextpos.x - bound.width/2.0;
-
-        m_rect.setPosition(nextBoundX.left, nextBoundX.top);
-        m_rect.setSize(sf::Vector2f(nextBoundX.width, nextBoundX.height));
 
         if (m_map->intersectSolidArea(nextBoundX)) {
             std::cout << "intersectX" <<std::endl;
@@ -122,6 +119,9 @@ void Character::update(float deltatime) {
             std::cout << "intersectY" <<std::endl;
             vel.y = 0;
         }
+
+        m_rect.setPosition(bound.left, bound.top);
+        m_rect.setSize(sf::Vector2f(bound.width, bound.height));
         
         pos += vel * deltatime;
     }

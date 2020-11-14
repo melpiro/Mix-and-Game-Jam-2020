@@ -61,8 +61,6 @@ void EnemyManager::loadEnemiesFromFiles(const std::string &path, sf::RenderWindo
         double x = *((double *)enemy["x"].getValue());
         double y = *((double *)enemy["y"].getValue());
 
-        std::cout << type << std::endl;
-
         EnemyCharacter* e;
         if(type == "blob")
             e = new BlobEnemy(win, character);

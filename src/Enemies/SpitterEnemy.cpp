@@ -33,10 +33,12 @@ void SpitterEnemy::update(float deltatime) {
         vel = {0, 0};
     }
 
-    fireRateTime += deltatime;
-    if(fireRateTime >= fireRate) {
-        EnemyManager::addProjectile(Projectile(fen, sf::Vector2f(pos), O::math::normalise(player->getPos() - pos) * 5.f));
-        fireRateTime = 0;
+    if(isAttacking) {
+        fireRateTime += deltatime;
+        if(fireRateTime >= fireRate) {
+            EnemyManager::addProjectile(Projectile(fen, sf::Vector2f(pos), O::math::normalise(player->getPos() - pos) * 5.f));
+            fireRateTime = 0;
+        }
     }
 
 }
