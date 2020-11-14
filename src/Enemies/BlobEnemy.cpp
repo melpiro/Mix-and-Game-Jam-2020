@@ -7,7 +7,7 @@
 BlobEnemy::BlobEnemy(sf::RenderWindow *fen, PlayerCharacter *pc) : EnemyCharacter(fen, pc) {}
 
 void BlobEnemy::init() {
-     sprite = sf::Sprite(O::graphics::ressourceManager.getTexture("blob_enemy"));
+    sprite = sf::Sprite(O::graphics::ressourceManager.getTexture("blob_enemy"));
     sprite.setScale(4, 4);
 
     frameSize = 16;
@@ -21,4 +21,8 @@ void BlobEnemy::init() {
     playAnim = false;
 
     speed = 100;
+
+    life = 4;
+
+    initHealthBar();
 }

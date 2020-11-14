@@ -69,6 +69,10 @@ void App::event()
         else if (m_step == MAIN_MENU)
         {
             m_step = m_mainMenu.event(e);
+            if(m_step == GAME) {
+                m_mainGame.reset();
+                m_mainGame.updateOnResize();
+            }
         }
         else if (m_step == GAME)
         {

@@ -49,7 +49,7 @@ private:
     bool m_haveChanged = false;
 
     std::vector<Item> m_inventory;
-    const int MAX_INV_ITEM = 30;
+    int MAX_INV_ITEM = 30;
 
 
 };

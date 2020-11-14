@@ -9,8 +9,11 @@
 
 std::map<int, EnemyCharacter*> EnemyManager::enemies;
 std::list<Projectile> EnemyManager::projectiles;
+Tilemap* EnemyManager::tilemap = nullptr;
 
 void EnemyManager::addEnemy(EnemyCharacter* enemy) {
+    if(tilemap != nullptr)
+        enemy->setTileMap(tilemap);
     enemies[enemy->getId()] = enemy;
 }
 
@@ -76,6 +79,7 @@ void EnemyManager::loadEnemiesFromFiles(const std::string &path, sf::RenderWindo
 }
 
 void EnemyManager::setTileMap(Tilemap *tilemap) {
+    EnemyManager::tilemap = tilemap;
     for(auto pair : enemies)
         pair.second->setTileMap(tilemap);
 }
@@ -112,4 +116,9 @@ void EnemyManager::killProjectile(int id) {
         else
             it++;
     }
+}
+
+void EnemyManager::reset() {
+    enemies.clear();
+    projectiles.clear();
 }

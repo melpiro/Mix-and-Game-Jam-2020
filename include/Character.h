@@ -6,6 +6,7 @@
 #define MIXGAMEJAM2020_CHARACTER_H
 
 #include <SFML/Graphics.hpp>
+#include <Omega/Graphics/ChargingBar.h>
 #include "Tilemap.h"
 #include "Omega/Math/MathFunctions.h"
 
@@ -46,11 +47,15 @@ protected:
 
     float life = 1;
     bool dead = false;
+    O::graphics::ChargingBar m_healthBar;
+
 
     explicit Character(sf::RenderWindow* fen);
 
 
     Tilemap* m_map = NULL;
+
+    void initHealthBar();
 
 public:
 
@@ -83,6 +88,7 @@ public:
 
     ///sf::RectangleShape m_rect;
     sf::FloatRect getHitbox();
+
 };
 
 
