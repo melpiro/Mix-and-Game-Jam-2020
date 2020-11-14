@@ -21,6 +21,8 @@ void PlayerCharacter::init() {
     playAnim = false;
 
     life = 10;
+
+    initHealthBar();
 }
 
 void PlayerCharacter::update(float deltatime) {

@@ -5,11 +5,19 @@
 #include <Omega/Graphics/RessourceManager.h>
 #include "Character.h"
 
-Character::Character(sf::RenderWindow* fen) : fen(fen) {
+Character::Character(sf::RenderWindow* fen) : fen(fen),  m_healthBar(fen, 0, 0, 0, 0){
 }
 
-void Character::init() {
-
+void Character::initHealthBar() {
+    m_healthBar.setSize(getRect().width*0.7f, getRect().height*0.1f);
+    m_healthBar.setMaxChargingValue(life);
+    m_healthBar.setMinChargingValue(0);
+    m_healthBar.setOutlineColor(sf::Color::Black);
+    m_healthBar.setBackgroundColor(sf::Color::Red);
+    m_healthBar.setForgroundColor(sf::Color::Green);
+    m_healthBar.setOutlineThickness(5);
+    m_healthBar.setChargingValue(life);
+    m_healthBar.setOrigineAsCenter();
 }
 
 void Character::draw() {
@@ -17,7 +25,7 @@ void Character::draw() {
     setAnim();
     fen->draw(sprite);
 
-
+    m_healthBar.draw();
 }
 
 void Character::setAnim() {
@@ -122,6 +130,9 @@ void Character::update(float deltatime) {
     vel *= friction;
 
     currentDashTime += deltatime;
+
+    m_healthBar.setPosition(pos.x, pos.y - getRect().height*0.5f);
+    m_healthBar.update();
 }
 
 void Character::event(sf::Event &e) {
@@ -147,6 +158,7 @@ bool Character::isDead() const {
 
 void Character::applyDamage(float dmg) {
     life -= dmg;
+    m_healthBar.setChargingValue(life);
     if(life <= 0)
         kill();
 }
@@ -158,4 +170,8 @@ sf::FloatRect Character::getHitbox() {
     bound.top +=bound.height;
     bound.left += bound.width*0.5f;
     return bound;
+}
+
+void Character::init() {
+
 }

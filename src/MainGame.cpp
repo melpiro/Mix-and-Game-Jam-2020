@@ -74,17 +74,6 @@ void MainGame::init()
         sf::Vector2i(0,3)
     });
 
-
-    m_healthBar = O::graphics::ChargingBar(m_fen, 0, 0, m_character.getRect().width*0.7f, m_character.getRect().height*0.1f);
-    m_healthBar.setMaxChargingValue(m_character.getLife());
-    m_healthBar.setMinChargingValue(0);
-    m_healthBar.setOutlineColor(sf::Color::Black);
-    m_healthBar.setBackgroundColor(sf::Color::Red);
-    m_healthBar.setForgroundColor(sf::Color::Green);
-    m_healthBar.setOutlineThickness(5);
-    m_healthBar.setChargingValue(m_character.getLife());
-    m_healthBar.setOrigineAsCenter();
-
 }
 
 void MainGame::event(sf::Event e)
@@ -152,9 +141,7 @@ Step MainGame::update(float dt)
 
     m_peuzeul.update();
 
-    m_healthBar.setPosition(m_character.getPos().x, m_character.getPos().y - m_character.getRect().height*0.5f);
-    m_healthBar.setChargingValue(m_character.getLife());
-    m_healthBar.update();
+
 
 
     m_peuzeul.setSelectedItemIndex(m_inventory.getSelectedItemIndex());
@@ -176,7 +163,6 @@ void MainGame::render()
     m_inventory.render();
 
 
-    m_healthBar.draw();
 }
 
 void MainGame::updateOnResize()
@@ -223,17 +209,6 @@ void MainGame::reset() {
             sf::Vector2i(1,3),
             sf::Vector2i(0,3)
     });
-
-
-    m_healthBar = O::graphics::ChargingBar(m_fen, 0, 0, m_character.getRect().width*0.7f, m_character.getRect().height*0.1f);
-    m_healthBar.setMaxChargingValue(m_character.getLife());
-    m_healthBar.setMinChargingValue(0);
-    m_healthBar.setOutlineColor(sf::Color::Black);
-    m_healthBar.setBackgroundColor(sf::Color::Red);
-    m_healthBar.setForgroundColor(sf::Color::Green);
-    m_healthBar.setOutlineThickness(5);
-    m_healthBar.setChargingValue(m_character.getLife());
-    m_healthBar.setOrigineAsCenter();
 
 }
 

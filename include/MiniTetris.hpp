@@ -38,6 +38,7 @@ public:
     sf::Vector2f getWindowSize();
 
     int getScore();
+    void setScore(int mScore);
 
     void setSpeed(sf::Time updateSpeed);
 

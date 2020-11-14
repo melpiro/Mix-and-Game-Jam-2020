@@ -13,7 +13,7 @@ EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Cha
     player = pc;
 
     miniTetris.setPosition(pos.x, pos.y);
-    miniTetris.setWindowSize(60,140);
+    miniTetris.setWindowSize(60*1.5f,140*1.5f);
     miniTetris.setTileSize(5,13);
 
     id = nextID++;
@@ -41,7 +41,7 @@ void EnemyCharacter::init() {
 
 void EnemyCharacter::update(float deltatime) {
     Character::update(deltatime);
-    miniTetris.setPosition(pos.x, pos.y -(sprite.getLocalBounds().height*0.5f * sprite.getScale().y + miniTetris.getWindowSize().y*0.5f));
+    miniTetris.setPosition(pos.x, pos.y -(sprite.getLocalBounds().height*0.5f * sprite.getScale().y + miniTetris.getWindowSize().y*0.5f) - getRect().height*0.1f);
 
 
     // Pour que l'enemie agro le joueur
@@ -57,11 +57,14 @@ void EnemyCharacter::update(float deltatime) {
 
         vel = O::math::normalise(player->getPos() - pos) * speed;
 
-        if(miniTetris.getScore() >= life) {
-            kill();
-            player->removeEnemyAgro(this);
-            isAttacking = false;
-            EnemyManager::killEnemy(id);
+        if(miniTetris.getScore() > 0) {
+            miniTetris.setScore(miniTetris.getScore()-1);
+            applyDamage(1);
+            if(dead) {
+                player->removeEnemyAgro(this);
+                isAttacking = false;
+                EnemyManager::killEnemy(id);
+            }
         }
 
         else if(miniTetris.defeat()) {

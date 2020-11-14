@@ -58,7 +58,6 @@ private:
 
     Peuzeul m_peuzeul;
 
-    O::graphics::ChargingBar m_healthBar;
 
 };
 

@@ -25,6 +25,8 @@ void SpitterEnemy::init() {
     playAnim = false;
 
     speed = 250;
+
+    initHealthBar();
 }
 
 void SpitterEnemy::update(float deltatime) {
