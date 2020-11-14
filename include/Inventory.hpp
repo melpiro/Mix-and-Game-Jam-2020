@@ -37,9 +37,14 @@ private:
     O::graphics::Sprite m_invBackground;
     O::graphics::Sprite m_invIcon;
     O::graphics::Text m_title;
+    const float ITEM_SIZE = 50;
+    const float ITEM_MARGIN = 30;
+
+    const int nbItemPerLine = 3;
 
     ItemManager* m_itemManager;
     
+
     std::vector<std::vector<O::graphics::Sprite>> m_items;
     std::vector<std::vector<sf::Vector2f>> relativItemPos;
 };
