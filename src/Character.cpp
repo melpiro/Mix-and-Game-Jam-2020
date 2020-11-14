@@ -90,23 +90,22 @@ void Character::update(float deltatime) {
         pos += vel * deltatime;
     else
     {
-        auto nextposX = pos + sf::Vector2f(vel.x, 0) * deltatime;
+        auto nextpos = pos + vel * deltatime;
 
         auto bound = sprite.getGlobalBounds();
         bound.height /= 2.0;
         bound.top +=bound.height;
 
-        auto collides = m_map->crossSolidArea(bound);
-        
-        if (collides.size() > 0)
-        {
-            //O::math::
+        auto nextBoundX = bound;
+        nextBoundX.left = nextpos.x;
+        if (m_map->intersectSolidArea(nextBoundX)) {
+            vel.x = 0;
         }
         
-        auto nextposY = pos + sf::Vector2f(0, vel.y) * deltatime;
-        if (m_map->intersectSolidArea(bound))
-        {
-            vel.y = (-vel.y) * 1.f;
+        auto nextBoundY = bound;
+        nextBoundY.top = nextpos.y;
+        if (m_map->intersectSolidArea(nextBoundY)) {
+            vel.y = 0;
         }
         
         pos += vel * deltatime;
