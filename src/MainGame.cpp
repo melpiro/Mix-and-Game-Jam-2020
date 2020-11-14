@@ -4,7 +4,7 @@ MainGame::MainGame(sf::RenderWindow* fen) :
     m_character(fen),
     m_enemy(fen, &m_character),
     m_enemy2(fen, &m_character),
-    m_inventory(fen, &m_viewZoom),
+    m_inventory(fen, &m_viewZoom, &m_itemManager),
     m_itemManager(sf::FloatRect(-1000,-1000,2000,2000), 30),
     m_itemDrawer(fen, &m_itemManager)
 {

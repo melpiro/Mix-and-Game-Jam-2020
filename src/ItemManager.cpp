@@ -14,6 +14,7 @@ ItemManager::ItemManager(sf::FloatRect rect, int nbMaxItem)
 
 void ItemManager::pickItem(sf::FloatRect playerRect)
 {
+    m_haveChanged = false;
     std::vector<Item> pickedItems;
     sf::Vector2f playerRectPos(playerRect.left, playerRect.top);
     sf::Vector2f playerRectSize(playerRect.width, playerRect.height);
@@ -56,13 +57,7 @@ void ItemManager::addItemRdm()
 
 bool ItemManager::haveChanged()
 {
-    if (m_haveChanged)
-    {
-
-        m_haveChanged = false;
-        return true;
-    }
-    return false;
+    return m_haveChanged;
 }
 
 const float ItemManager::ITEM_SIZE = 10;
