@@ -3,7 +3,8 @@
 MainGame::MainGame(sf::RenderWindow* fen) :
     m_tetrisTest(fen),
     m_character(fen),
-    m_enemy(fen, &m_character)
+    m_enemy(fen, &m_character),
+    m_enemy2(fen, &m_character)
 {
     m_fen=fen;
 
@@ -18,13 +19,14 @@ MainGame::MainGame(sf::RenderWindow* fen) :
     m_tetrisTest.setTileSize(10,20);
 
     m_enemy.setPos({500, 500});
+    m_enemy2.setPos({800, 500});
 }
 
 void MainGame::init()
 {
     m_character.init();
     m_enemy.init();
-
+    m_enemy2.init();
 
     m_tetrisTest.start();
 }
@@ -54,6 +56,7 @@ void MainGame::event(sf::Event e)
 
     m_character.event(e);
     m_enemy.event(e);
+    m_enemy2.event(e);
 }
 void MainGame::update(float dt)
 {
@@ -64,6 +67,7 @@ void MainGame::update(float dt)
     m_tetrisTest.update();
     m_character.update(dt);
     m_enemy.update(dt);
+    m_enemy2.update(dt);
 
     m_timeForTetrisAnimeTest += 0.01;
     m_tetrisTest.setPosition(std::cos(m_timeForTetrisAnimeTest) * 20 + 50, std::sin(m_timeForTetrisAnimeTest) * 20 + 50);
@@ -75,8 +79,9 @@ void MainGame::render()
     m_fen->draw(m_object);
 
     m_tetrisTest.render();
-    m_character.draw();
     m_enemy.draw();
+    m_enemy2.draw();
+    m_character.draw();
 }
 
 void MainGame::updateOnResize()

@@ -30,6 +30,8 @@ public:
     void draw() override;
 
     void event(sf::Event &e) override;
+
+    MiniTetris* getMiniTetris();
 };
 
 

@@ -11,8 +11,8 @@
 
 class PlayerCharacter : public Character {
 
-    EnemyCharacter* enemyAgro = nullptr;
-    bool attacked = false;
+    std::vector<EnemyCharacter*> enemiesAgro;
+    size_t targetedEnemy = 0;
 
 public:
 
@@ -22,10 +22,12 @@ public:
     void update(float deltatime) override;
     void event(sf::Event &e) override;
 
-    EnemyCharacter *getEnemyAgro() const;
-    void setEnemyAgro(EnemyCharacter *enemyAgro);
+    void addEnemyAgro(EnemyCharacter *enemy);
+    void removeEnemyAgro(EnemyCharacter *enemy);
 
     bool isAttacked() const;
+
+    void draw() override;
 };
 
 
