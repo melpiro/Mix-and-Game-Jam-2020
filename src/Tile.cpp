@@ -60,7 +60,6 @@ void Tile::update() {
     if(m_animClock.getElapsedTime().asMilliseconds() > m_animSpeed){
         m_currentFrame++;
         m_currentFrame %= m_frameCount;
-        std::cout << m_currentFrame << std::endl;
 
         m_animClock.restart();
     }
