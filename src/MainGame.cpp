@@ -49,6 +49,7 @@ void MainGame::init()
     m_character.setPos({16*16*4,12*16*4});
 
     m_character.setTileMap(&m_map);
+    EnemyManager::setTileMap(&m_map);
 
 
     m_itemManager.setTileMap(&m_map);

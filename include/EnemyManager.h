@@ -38,6 +38,7 @@ public:
 
     static void loadEnemiesFromFiles(const std::string& path, sf::RenderWindow* win, PlayerCharacter* character);
 
+    static void setTileMap(Tilemap *tilemap);
 };
 
 

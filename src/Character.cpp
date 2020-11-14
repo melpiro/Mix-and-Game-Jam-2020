@@ -108,15 +108,12 @@ void Character::update(float deltatime) {
         nextBoundX.left = nextpos.x - bound.width/2.0;
 
         if (m_map->intersectSolidArea(nextBoundX)) {
-            std::cout << "intersectX" <<std::endl;
-            //pos-= vel*deltatime;
             vel.x = 0;
         }
         
         auto nextBoundY = bound;
         nextBoundY.top = nextpos.y;
         if (m_map->intersectSolidArea(nextBoundY)) {
-            std::cout << "intersectY" <<std::endl;
             vel.y = 0;
         }
 

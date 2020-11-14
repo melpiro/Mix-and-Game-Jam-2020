@@ -75,6 +75,11 @@ void EnemyManager::loadEnemiesFromFiles(const std::string &path, sf::RenderWindo
     }
 }
 
+void EnemyManager::setTileMap(Tilemap *tilemap) {
+    for(auto pair : enemies)
+        pair.second->setTileMap(tilemap);
+}
+
 // Projectile =================================
 
 void Projectile::update(float dt) {
