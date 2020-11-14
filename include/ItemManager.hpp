@@ -11,6 +11,8 @@ struct Item
     float x;
     float y;
     PIECE type;
+    sf::Color coul;
+    int rotation;
 }; 
 
 
@@ -28,8 +30,10 @@ public:
 private:
 
     void addItemRdm();
+    bool canAdd(Item it);
 
     std::vector<Item> m_allItems;
+    sf::FloatRect playerRectCpy;
 
     sf::FloatRect m_rect;
     int nbItem;

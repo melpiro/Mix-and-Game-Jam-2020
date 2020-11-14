@@ -14,6 +14,7 @@ ItemManager::ItemManager(sf::FloatRect rect, int nbMaxItem)
 
 void ItemManager::pickItem(sf::FloatRect playerRect)
 {
+    playerRectCpy = playerRect;
     if (m_inventory.size() < MAX_INV_ITEM)
     {
         m_haveChanged = false;
@@ -50,16 +51,40 @@ std::vector<Item>& ItemManager::getMyItems()
 
 void ItemManager::addItemRdm()
 {
-    sf::Vector2f pos;
-    Item it;
-    it.x = O::math::rdm::randFloat(m_rect.left, m_rect.left + m_rect.width);
-    it.y = O::math::rdm::randFloat(m_rect.top, m_rect.top + m_rect.height);
-    it.type = (PIECE) O::math::rdm::randInt(0, NB_PIECE);
 
+    Item it;
+    do
+    {
+        sf::Vector2f pos;
+        it.x = O::math::rdm::randFloat(m_rect.left, m_rect.left + m_rect.width);
+        it.y = O::math::rdm::randFloat(m_rect.top, m_rect.top + m_rect.height);
+        it.type = (PIECE) O::math::rdm::randInt(0, NB_PIECE);
+        it.coul= COLORS[O::math::rdm::randInt(0, COLORS.size())];
+        it.rotation = O::math::rdm::randInt(0, 4);
+    } while (!canAdd(it));
+    
+    
     m_allItems.push_back(it);
 
 
     m_haveChanged = true;
+}
+
+
+bool ItemManager::canAdd(Item it)
+{
+    if (O::math::geo2d::intersect_AABB_cercle(
+        sf::Vector2f(playerRectCpy.left, playerRectCpy.top),
+        sf::Vector2f(playerRectCpy.width, playerRectCpy.height), sf::Vector2f(it.x, it.y), ITEM_SIZE)) return false;
+
+    for (size_t i = 0; i < m_allItems.size(); i++)
+    {
+        if (O::math::geo2d::intersect_cercle_cercle(
+            sf::Vector2f(m_allItems[i].x, m_allItems[i].y), ITEM_SIZE,
+            sf::Vector2f(it.x, it.y), ITEM_SIZE)) 
+                return false;
+    }
+    return true;
 }
 
 bool ItemManager::haveChanged()
@@ -67,4 +92,4 @@ bool ItemManager::haveChanged()
     return m_haveChanged;
 }
 
-const float ItemManager::ITEM_SIZE = 10;
+const float ItemManager::ITEM_SIZE = 50;

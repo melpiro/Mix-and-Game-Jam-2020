@@ -176,6 +176,7 @@ const std::vector<std::vector<std::vector<std::vector<bool>>>> allPiece =
 const int NB_PIECE = allPiece.size();
 
 const std::vector<sf::Color> COLORS = {
+
         sf::Color(26, 188, 156),
         sf::Color(46, 204, 113),
         sf::Color(52, 152, 219),
