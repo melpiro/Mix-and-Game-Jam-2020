@@ -18,7 +18,7 @@ public:
 
     Tilemap();
     Tilemap(sf::Vector2i dimensions,std::vector<Tile> m_Tileset,sf::RenderWindow &fen);
-    Tilemap(sf::Vector2i dimensions,std::vector<Tile> m_Tileset,sf::RenderWindow &fen,std::string path);
+    Tilemap(std::vector<Tile> m_Tileset,sf::RenderWindow &fen,std::string path);
 
 
     void draw();
@@ -26,6 +26,8 @@ public:
     void update();
 
     void setTMap(std::vector<std::vector<int>> tmap);
+
+    void loadlevelFromFile(std::string path);
 
     std::vector<sf::FloatRect> getColliders(); // retourne toutes les zones de collision de la map
 

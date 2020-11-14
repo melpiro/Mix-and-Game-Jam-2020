@@ -27,7 +27,7 @@ void MainGame::init()
             {3,2,2,2,3},
             {3,3,3,3,3},
     };
-    m_tmap = Tilemap(sf::Vector2i(5,5),v,*m_fen,"resources/data/map1.json");
+    m_tmap = Tilemap(v,*m_fen,"resources/data/map1.json");
     //m_tmap.setTMap(tmpMap);
 }
 
