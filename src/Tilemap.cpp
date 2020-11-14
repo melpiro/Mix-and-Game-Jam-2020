@@ -66,3 +66,75 @@ void Tilemap::loadlevelFromFile(std::string path) {
         }
     }
 }
+
+
+line* Tilemap::getLineUnder(line* ligne, std::vector<line*>* lignes,std::vector<line*> *excluded) {
+
+    if(ligne == nullptr) return nullptr;
+
+    for(line* l : *lignes){
+        if( l->y == ligne->y + 1 && l->x == ligne->x && l->size == ligne->size){
+            excluded->push_back(l);
+            return l;
+        }
+    }
+}
+
+/*def getLinesUnder(a_line,a_lines,a_excludeList):
+    if a_line == None:
+        return None
+
+    lastLine = getLineUnder(a_line,a_lines,a_excludeList)
+    lines = []
+
+    if lastLine == None:
+        return None
+    else:
+        lines.append(lastLine)
+
+    while lastLine != None:
+        lastLine = getLineUnder(lastLine,a_lines,a_excludeList)
+        if lastLine != None: lines.append(lastLine)
+    return lines*/
+std::vector<line*>* Tilemap::getLinesUnder(line* ligne, std::vector<line*>* lignes,
+                                        std::vector<line*> *excluded) {
+    if(ligne == nullptr) return nullptr;
+
+    line* lastLine = getLineUnder(ligne,lignes,excluded);
+    std::vector<line*>* t_lines = new std::vector<line*>();
+
+    if(lastLine == nullptr) return nullptr;
+    else t_lines->push_back(lastLine);
+
+    while(lastLine != nullptr){
+        lastLine = getLineUnder(lastLine,lignes,excluded);
+        if(lastLine != nullptr) t_lines->push_back(lastLine);
+    }
+
+    return t_lines;
+}
+
+/*def getRect(a_line,a_lines,a_excludedLines):
+    if a_line == None: return None
+    tab = []
+    tab.append(a_line)
+    linesUnders = getLinesUnder(a_line,a_lines,a_excludedLines)
+
+    if linesUnders == None:
+        return (a_line[0],a_line[1],1,a_line[2])
+
+    for line in linesUnders:
+        tab.append(line)
+    return (a_line[0],a_line[1],(tab[len(tab)-1][0]+1) - a_line[0],a_line[2])*/
+
+sf::FloatRect* Tilemap::getRect(line* ligne, std::vector<line*>* lignes,
+                                  std::vector<line*>* excluded) {
+    if(ligne == nullptr) return nullptr;
+    std::vector<line*>* tab = new std::vector<line*>();
+    tab->push_back(ligne);
+
+    std::vector<line*>* linesUnder = getLinesUnder(ligne,lignes,excluded);
+
+    /*if(linesUnder == nullptr)
+        return new sf::FloatRect(ligne->y,ligne->x,ligne->size);*/
+}

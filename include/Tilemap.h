@@ -9,6 +9,12 @@
 #include <stdio.h>
 #include "Tile.h"
 
+struct line{
+    int x;
+    int y;
+    int size;
+};
+
 class Tilemap {
 
 public:
@@ -32,6 +38,11 @@ public:
     std::vector<sf::FloatRect> getColliders(); // retourne toutes les zones de collision de la map
 
 private:
+
+
+    line* getLineUnder(line* ligne, std::vector<line*>* lignes,std::vector<line*>* excluded);
+    std::vector<line*>* getLinesUnder(line* ligne, std::vector<line*>* lignes,std::vector<line*>* excluded);
+    sf::FloatRect* getRect(line* ligne, std::vector<line*>* lignes,std::vector<line*>* excluded);
 
     sf::Vector2i m_dimensions;
 
