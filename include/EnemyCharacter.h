@@ -14,6 +14,8 @@ class PlayerCharacter;
 class EnemyCharacter : public Character {
 
     static int nextID;
+
+protected:
     int id;
 
     PlayerCharacter* player;
