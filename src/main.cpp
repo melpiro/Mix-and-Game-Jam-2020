@@ -19,7 +19,7 @@ void init_texture_manager()
 
     O::graphics::ressourceManager.addTexture("TileSet/bordGrass.png","bordGrass");
     O::graphics::ressourceManager.addTexture("TileSet/grass.png","grass");
-    O::graphics::ressourceManager.addTexture("TileSet/murGrass.png","muGrass");
+    O::graphics::ressourceManager.addTexture("TileSet/murGrass.png","murGrass");
     O::graphics::ressourceManager.addTexture("TileSet/water.png","water");
     
     

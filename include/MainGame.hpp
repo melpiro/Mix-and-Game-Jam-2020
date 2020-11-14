@@ -10,6 +10,7 @@
 #include "Inventory.hpp"
 #include "ItemDrawer.hpp"
 #include "BlobEnemy.h"
+#include "Tilemap.h"
 
 class MainGame
 {
@@ -44,6 +45,8 @@ private:
     PlayerCharacter m_character;
     EnemyCharacter m_enemy;
     BlobEnemy m_enemy2;
+
+    Tilemap m_map;
 
 
     Inventory m_inventory;
