@@ -23,3 +23,10 @@ void SpitterEnemy::init() {
 
     speed = 200;
 }
+
+void SpitterEnemy::update(float deltatime) {
+    EnemyCharacter::update(deltatime);
+
+
+
+}
