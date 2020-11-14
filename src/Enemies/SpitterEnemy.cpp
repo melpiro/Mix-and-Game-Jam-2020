@@ -2,6 +2,7 @@
 // Created by etien on 14/11/2020.
 //
 
+#include "EnemyManager.h"
 #include "Enemies/SpitterEnemy.h"
 
 SpitterEnemy::SpitterEnemy(sf::RenderWindow *fen, PlayerCharacter *pc) : EnemyCharacter(fen, pc) {}
@@ -28,5 +29,14 @@ void SpitterEnemy::update(float deltatime) {
     EnemyCharacter::update(deltatime);
 
 
+    if(O::math::getDistanceCarre(player->getPos(), pos) <= shootDistance*shootDistance) {
+        vel = {0, 0};
+    }
+
+    fireRateTime += deltatime;
+    if(fireRateTime >= fireRate) {
+        EnemyManager::addProjectile(Projectile(fen, sf::Vector2f(pos), O::math::normalise(player->getPos() - pos) * 15.f));
+        fireRateTime = 0;
+    }
 
 }

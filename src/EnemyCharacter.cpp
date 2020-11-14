@@ -13,7 +13,7 @@ EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Cha
     player = pc;
 
     miniTetris.setPosition(pos.x, pos.y);
-    miniTetris.setWindowSize(50,130);
+    miniTetris.setWindowSize(60,140);
     miniTetris.setTileSize(5,13);
 
     id = nextID++;

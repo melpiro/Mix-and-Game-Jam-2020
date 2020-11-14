@@ -30,6 +30,8 @@ public:
     bool isAttacked() const;
 
     void draw() override;
+
+    sf::Vector2f getCameraPos();
 };
 
 

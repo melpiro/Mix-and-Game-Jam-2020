@@ -39,18 +39,27 @@ void MainGame::init()
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);
     tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6
 
     //les tiles solides
     tileSet[0].setSolid(true);
     tileSet[2].setSolid(true);
     tileSet[3].setSolid(true);
+    tileSet[6].setSolid(true);
 
     m_map = Tilemap(tileSet,*m_fen,"resources/data/map1.json");
 
+
     m_character.setPos({16*16*4,12*16*4});
+
     m_character.setTileMap(&m_map);
 
+
     m_itemManager.setTileMap(&m_map);
+
+
     m_itemManager.init();
 
     m_peuzeul.init();
@@ -115,7 +124,9 @@ void MainGame::event(sf::Event e)
 void MainGame::update(float dt)
 {
 
-    m_view.setCenter(m_character.getPos());
+    auto cameraDir = m_character.getCameraPos() - m_view.getCenter();
+    auto cameraNextStep = m_view.getCenter() + cameraDir * cameraSpeed;
+    m_view.setCenter(cameraNextStep);
     m_fen->setView(m_view);
 
     m_character.update(dt);
