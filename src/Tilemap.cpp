@@ -33,6 +33,26 @@ void Tilemap::draw() {
         }
     }
 
+    sf::RectangleShape rec = sf::RectangleShape({0,0});
+    rec.setFillColor(sf::Color(255,0,0,100));
+    rec.setOutlineColor(sf::Color::Black);
+    rec.setOutlineThickness(4);
+    for(int i = 0; i<m_rects.size();i++){
+        rec.setSize({m_rects[i].width,m_rects[i].height});
+        rec.setPosition({m_rects[i].left,m_rects[i].top});
+
+        if (idCollid == i)
+        {
+            rec.setFillColor(sf::Color(0,0,255, 100));
+        }
+        else
+        {
+            rec.setFillColor(sf::Color(255,0,0, 100));
+        }
+        m_fen->draw(rec);
+    }
+
+
 }
 
 void Tilemap::update() {
@@ -176,9 +196,19 @@ bool Tilemap::intersectSolidArea(sf::Vector2f point) {
 }
 
 bool Tilemap::intersectSolidArea(sf::FloatRect rect) {
-    for(auto r : m_rects){
-        if(r.intersects(rect)) return true;
+    for(int i = 0; i < m_rects.size();i++){
+        if(O::math::geo2d::intersect_AABB_AABB(
+            sf::Vector2f(rect.left, rect.top), sf::Vector2f(rect.width, rect.height),
+            sf::Vector2f(m_rects[i].left, m_rects[i].top), sf::Vector2f(m_rects[i].width, m_rects[i].height)
+            
+            )
+        )
+        {
+            idCollid = i;
+             return true;
+        }
     }
+    idCollid  = -1;
     return false;
 }
 

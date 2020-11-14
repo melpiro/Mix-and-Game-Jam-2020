@@ -64,6 +64,8 @@ private:
 
     int m_tileSize{};
 
+    int idCollid;
+
 };
 
 
