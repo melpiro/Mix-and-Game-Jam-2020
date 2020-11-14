@@ -15,6 +15,8 @@ public:
     SpitterEnemy(sf::RenderWindow *fen, PlayerCharacter *pc);
 
     void init() override;
+
+    void update(float deltatime) override;
 };
 
 
