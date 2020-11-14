@@ -8,6 +8,7 @@
 #include "PlayerCharacter.h"
 #include "EnemyCharacter.h"
 #include "Inventory.hpp"
+#include "ItemDrawer.hpp"
 
 class MainGame
 {
@@ -45,7 +46,10 @@ private:
     EnemyCharacter m_enemy;
     EnemyCharacter m_enemy2;
 
+
     Inventory m_inventory;
+    ItemManager m_itemManager;
+    ItemDrawer m_itemDrawer;
 
     
 };

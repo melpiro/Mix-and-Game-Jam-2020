@@ -53,6 +53,11 @@ const sf::Vector2f &Character::getPos() const {
     return pos;
 }
 
+sf::FloatRect Character::getRect() const
+{
+    return sprite.getGlobalBounds();
+}
+
 void Character::update(float deltatime) {
 
     // Ici pour jouer la bonne anim en fonction de la direction de la velocité

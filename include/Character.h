@@ -60,6 +60,7 @@ public:
     void setPlayAnim(bool playAnim);
 
     const sf::Vector2f &getPos() const;
+    sf::FloatRect getRect() const;
 };
 
 
