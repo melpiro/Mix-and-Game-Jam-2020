@@ -154,7 +154,7 @@ void MainGame::update(float dt)
 void MainGame::render()
 {
     m_map.draw();
-    m_peuzeul.render();
+    //m_peuzeul.render();
     m_itemDrawer.render();
 
     m_character.draw();

@@ -6,9 +6,6 @@
 #include "Character.h"
 
 Character::Character(sf::RenderWindow* fen) : fen(fen) {
-    m_rect.setFillColor(sf::Color::Transparent);
-    m_rect.setOutlineColor(sf::Color::Black);
-    m_rect.setOutlineThickness(3);
 }
 
 void Character::init() {
@@ -20,7 +17,6 @@ void Character::draw() {
     setAnim();
     fen->draw(sprite);
 
-    fen->draw(m_rect);
 
 }
 
@@ -117,8 +113,6 @@ void Character::update(float deltatime) {
             vel.y = 0;
         }
 
-        m_rect.setPosition(bound.left, bound.top);
-        m_rect.setSize(sf::Vector2f(bound.width, bound.height));
         
         pos += vel * deltatime;
     }

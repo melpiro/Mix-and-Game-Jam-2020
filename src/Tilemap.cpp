@@ -33,24 +33,24 @@ void Tilemap::draw() {
         }
     }
 
-    sf::RectangleShape rec = sf::RectangleShape({0,0});
-    rec.setFillColor(sf::Color(255,0,0,100));
-    rec.setOutlineColor(sf::Color::Black);
-    rec.setOutlineThickness(4);
-    for(int i = 0; i<m_rects.size();i++){
-        rec.setSize({m_rects[i].width,m_rects[i].height});
-        rec.setPosition({m_rects[i].left,m_rects[i].top});
+    // sf::RectangleShape rec = sf::RectangleShape({0,0});
+    // rec.setFillColor(sf::Color(255,0,0,100));
+    // rec.setOutlineColor(sf::Color::Black);
+    // rec.setOutlineThickness(4);
+    // for(int i = 0; i<m_rects.size();i++){
+    //     rec.setSize({m_rects[i].width,m_rects[i].height});
+    //     rec.setPosition({m_rects[i].left,m_rects[i].top});
 
-        if (idCollid == i)
-        {
-            rec.setFillColor(sf::Color(0,0,255, 100));
-        }
-        else
-        {
-            rec.setFillColor(sf::Color(255,0,0, 100));
-        }
-        m_fen->draw(rec);
-    }
+    //     if (idCollid == i)
+    //     {
+    //         rec.setFillColor(sf::Color(0,0,255, 100));
+    //     }
+    //     else
+    //     {
+    //         rec.setFillColor(sf::Color(255,0,0, 100));
+    //     }
+    //     m_fen->draw(rec);
+    // }
 
 
 }
