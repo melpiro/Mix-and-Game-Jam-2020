@@ -60,7 +60,7 @@ void EnemyCharacter::update(float deltatime) {
         if(miniTetris.defeat() || miniTetris.getScore() >= life) {
             player->removeEnemyAgro(this);
             isAttacking = false;
-            //EnemyManager::killEnemy(id);
+            EnemyManager::killEnemy(id);
         }
 
     }
