@@ -46,6 +46,9 @@ public:
 
     static void setTileMap(Tilemap *tilemap);
 
+    static void reset();
+
+    static Tilemap *tilemap;
 };
 
 

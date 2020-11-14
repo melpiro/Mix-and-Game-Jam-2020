@@ -31,6 +31,8 @@ public:
     void updateOnResize();
 
 
+    void reset();
+
 private:
 
     sf::RenderWindow* m_fen;
@@ -42,8 +44,8 @@ private:
     float m_timeForTetrisAnimeTest;
 
 
-    const float cam_speed= 5.f;
-    const float cam_zoom_factor= 1.5f;
+    float cam_speed= 5.f;
+    float cam_zoom_factor= 1.5f;
 
     PlayerCharacter m_character;
 

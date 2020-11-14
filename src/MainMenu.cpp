@@ -34,6 +34,7 @@ Step MainMenu::event(sf::Event e)
     m_bouttonJouer.event(e);
 
     if(m_bouttonJouer.clicked(e)){
+
         return GAME;
     }
 
