@@ -33,7 +33,6 @@ void Tilemap::draw() {
         }
     }
 
-
 }
 
 void Tilemap::update() {

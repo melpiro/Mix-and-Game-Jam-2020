@@ -72,6 +72,8 @@ public:
 
     const sf::Vector2f &getPos() const;
     sf::FloatRect getRect() const;
+
+    sf::RectangleShape m_rect;
 };
 
 

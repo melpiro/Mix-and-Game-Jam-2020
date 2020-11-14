@@ -5,7 +5,11 @@
 #include <Omega/Graphics/RessourceManager.h>
 #include "Character.h"
 
-Character::Character(sf::RenderWindow* fen) : fen(fen) {}
+Character::Character(sf::RenderWindow* fen) : fen(fen) {
+    m_rect.setFillColor(sf::Color::Transparent);
+    m_rect.setOutlineColor(sf::Color::Black);
+    m_rect.setOutlineThickness(3);
+}
 
 void Character::init() {
 
@@ -15,6 +19,8 @@ void Character::draw() {
 
     setAnim();
     fen->draw(sprite);
+
+    fen->draw(m_rect);
 
 }
 
@@ -94,17 +100,26 @@ void Character::update(float deltatime) {
 
         auto bound = sprite.getGlobalBounds();
         bound.height /= 2.0;
+        bound.left -= 50;
         bound.top +=bound.height;
-
+        bound.width /= 2.0;
+        
         auto nextBoundX = bound;
-        nextBoundX.left = nextpos.x;
+        nextBoundX.left = nextpos.x - bound.width/2.0;
+
+        m_rect.setPosition(nextBoundX.left, nextBoundX.top);
+        m_rect.setSize(sf::Vector2f(nextBoundX.width, nextBoundX.height));
+
         if (m_map->intersectSolidArea(nextBoundX)) {
+            std::cout << "intersectX" <<std::endl;
+            //pos-= vel*deltatime;
             vel.x = 0;
         }
         
         auto nextBoundY = bound;
         nextBoundY.top = nextpos.y;
         if (m_map->intersectSolidArea(nextBoundY)) {
+            std::cout << "intersectY" <<std::endl;
             vel.y = 0;
         }
         
