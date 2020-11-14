@@ -15,10 +15,7 @@ class PlayerCharacter;
 
 class EnemyCharacter : public Character {
 
-    static int nextID;
-
 protected:
-    int id;
 
     PlayerCharacter* player;
     bool isAttacking = false;
@@ -41,9 +38,9 @@ public:
 
     MiniTetris* getMiniTetris();
 
-    int getId() const;
 
     int operator==(const EnemyCharacter& other) const;
+    int operator!=(const EnemyCharacter& other) const;
 
 
 };

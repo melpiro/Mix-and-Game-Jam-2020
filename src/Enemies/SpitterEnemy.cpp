@@ -48,3 +48,7 @@ void SpitterEnemy::update(float deltatime) {
     }
 
 }
+
+inline Character::Type SpitterEnemy::getType() {
+    return Spitter;
+}

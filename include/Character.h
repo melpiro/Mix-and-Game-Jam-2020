@@ -13,7 +13,14 @@
 //TODO Bouger la barre de vie dans cette classe (etienne saura)
 class Character {
 
+    static int nextID;
+
 protected:
+
+    static Character* player;
+
+
+    int id;
 
     enum Direction {
         Left = 4,
@@ -65,6 +72,7 @@ public:
     virtual void draw();
     virtual void update(float deltatime);
     virtual void event(sf::Event &e);
+    virtual void onCollide(Character* other);
 
     void setAnim();
     void setPos(const sf::Vector2f &pos);
@@ -78,16 +86,25 @@ public:
 
     const sf::Vector2f &getPos() const;
     sf::FloatRect getRect() const;
+    sf::FloatRect getHitbox() const;
 
-    void applyDamage(float dmg);
+    virtual void applyDamage(float dmg);
     void kill();
 
     bool isDead() const;
+    int getId() const;
 
 
+    enum Type {
+        Player,
+        NoType,
+        Spitter,
+        Blob
+    };
 
-    ///sf::RectangleShape m_rect;
-    sf::FloatRect getHitbox();
+    virtual Type getType() {
+        return NoType;
+    }
 
 };
 

@@ -6,6 +6,10 @@
 #include "EnemyManager.h"
 #include "PlayerCharacter.h"
 
+PlayerCharacter::PlayerCharacter(sf::RenderWindow *fen) : Character(fen) {
+    Character::player = this;
+}
+
 void PlayerCharacter::init() {
     sprite = sf::Sprite(O::graphics::ressourceManager.getTexture("et_tilemap"));
     sprite.setScale(4, 4);
@@ -54,6 +58,7 @@ void PlayerCharacter::update(float deltatime) {
         }
     }
 
+    currentInvincibilityTime += deltatime;
 }
 
 void PlayerCharacter::event(sf::Event &e) {
@@ -86,8 +91,6 @@ void PlayerCharacter::event(sf::Event &e) {
         enemiesAgro[targetedEnemy]->getMiniTetris()->event(e);
 }
 
-PlayerCharacter::PlayerCharacter(sf::RenderWindow *fen) : Character(fen) {}
-
 void PlayerCharacter::addEnemyAgro(EnemyCharacter *enemy) {
     PlayerCharacter::enemiesAgro.push_back(enemy);
 }
@@ -118,4 +121,23 @@ sf::Vector2f PlayerCharacter::getCameraPos() {
         return {(pos.x + enemiesAgro[targetedEnemy]->getPos().x)*0.5f, (pos.y + enemiesAgro[targetedEnemy]->getPos().y)*0.5f};
     }
     return pos;
+}
+
+inline Character::Type PlayerCharacter::getType() {
+    return Player;
+}
+
+void PlayerCharacter::applyDamage(float dmg) {
+    if(!invincible()) {
+        currentInvincibilityTime = 0;
+        life -= dmg;
+        m_healthBar.setChargingValue(life);
+        if(life <= 0)
+            kill();
+    }
+
+}
+
+bool PlayerCharacter::invincible() const {
+    return currentInvincibilityTime < invincibilityTime;
 }

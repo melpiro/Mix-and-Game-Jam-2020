@@ -26,3 +26,16 @@ void BlobEnemy::init() {
 
     initHealthBar();
 }
+
+
+void BlobEnemy::onCollide(Character *other) {
+    Character::onCollide(other);
+
+    if(other->getType() == Player) {
+        other->applyDamage(1);
+    }
+}
+
+inline Character::Type BlobEnemy::getType() {
+    return Blob;
+}

@@ -7,7 +7,6 @@
 #include "EnemyCharacter.h"
 #include "PlayerCharacter.h"
 
-int EnemyCharacter::nextID = 0;
 
 EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Character(fen), miniTetris(fen) {
     player = pc;
@@ -15,8 +14,6 @@ EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Cha
     miniTetris.setPosition(pos.x, pos.y);
     miniTetris.setWindowSize(60*1.5f,140*1.5f);
     miniTetris.setTileSize(5,13);
-
-    id = nextID++;
 }
 
 void EnemyCharacter::init() {
@@ -99,6 +96,6 @@ int EnemyCharacter::operator==(const EnemyCharacter &other) const {
     return id == other.id;
 }
 
-int EnemyCharacter::getId() const {
-    return id;
+int EnemyCharacter::operator!=(const EnemyCharacter &other) const {
+    return id != other.id;
 }

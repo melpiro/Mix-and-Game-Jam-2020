@@ -14,6 +14,10 @@ public:
     BlobEnemy(sf::RenderWindow *fen, PlayerCharacter *pc);
 
     void init() override;
+
+    void onCollide(Character *other) override;
+
+    Type getType() override;
 };
 
 
