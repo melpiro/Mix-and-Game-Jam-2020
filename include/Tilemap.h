@@ -40,7 +40,7 @@ public:
 
     bool intersectSolidArea(sf::Vector2f point);
     bool intersectSolidArea(sf::FloatRect rect);
-    std::vector<sf::Vector2f> crossSolidArea(sf::FloatRect rect);
+    std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> crossSolidArea(sf::FloatRect rect);
 
 private:
 
