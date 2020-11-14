@@ -275,7 +275,7 @@ bool JsonData::isNumber(sf::String& strJson, JsonData& value)
 
 
             strJson = strJsonCpy;
-            *(double*)value.m_value = O::str::to_double(integerPart + "." + fractionPart);
+            *(double*)value.m_value = O::str::to_double((isNegavtive ? "-": "") + integerPart + "." + fractionPart);
             return true;
         }
         if (strJsonCpy[0] == 'e' || strJsonCpy[0] == 'E'  )
@@ -309,7 +309,7 @@ bool JsonData::isNumber(sf::String& strJson, JsonData& value)
         if (exponentPartIsNegavtive) expoVal *= -1.0;
 
         strJson = strJsonCpy;
-        *(double*)value.m_value = O::str::to_double(integerPart + "." + fractionPart) * std::pow(10, expoVal);
+        *(double*)value.m_value = O::str::to_double((isNegavtive ? "-": "") + integerPart + "." + fractionPart) * std::pow(10, expoVal);
 
         return true;
     }

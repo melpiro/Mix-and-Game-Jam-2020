@@ -37,22 +37,46 @@ void Inventory::event(sf::Event e)
     
     if (e.type == sf::Event::MouseButtonPressed)
     {
-        if (indexItemSelected == -1)
+        if (e.mouseButton.button == sf::Mouse::Left)
         {
-            for (size_t i = 0; i < m_items.size() && indexItemSelected == -1; i++)
+            if (indexItemSelected == -1)
             {
-                for (size_t j = 0; j < m_items[i].size() && indexItemSelected == -1; j++)
+                for (size_t i = 0; i < m_items.size() && indexItemSelected == -1; i++)
                 {
-                    if (m_items[i][j].clicked(e))
+                    for (size_t j = 0; j < m_items[i].size() && indexItemSelected == -1; j++)
                     {
-                        indexItemSelected = i;
+                        if (m_items[i][j].clicked(e))
+                        {
+                            indexItemSelected = i;
+                        }
                     }
                 }
             }
+            else
+            {
+                indexItemSelected = -1;
+            }
         }
-        else
+        else if (e.mouseButton.button == sf::Mouse::Right)
         {
-            indexItemSelected = -1;
+            if (indexItemSelected == -1)
+            {
+                for (size_t i = 0; i < m_items.size() && indexItemSelected == -1; i++)
+                {
+                    for (size_t j = 0; j < m_items[i].size() && indexItemSelected == -1; j++)
+                    {
+                        if (m_items[i][j].hover())
+                        {
+                            m_itemManager->removeInventoryItem(i);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                m_itemManager->removeInventoryItem(indexItemSelected);
+                indexItemSelected = -1;
+            }
         }
         
     }

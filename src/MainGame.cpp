@@ -58,21 +58,25 @@ void MainGame::init()
 
     m_itemManager.init();
 
-    m_peuzeul.setPositon(sf::Vector2i(22,12));
-    m_peuzeul.polygon(std::vector<sf::Vector2i> {
-        sf::Vector2i(0,0),
-        sf::Vector2i(6,0),
-        sf::Vector2i(6,1),
-        sf::Vector2i(7,1),
-        sf::Vector2i(7,2),
-        sf::Vector2i(8,2),
-        sf::Vector2i(8,3),
-        sf::Vector2i(7,3),
-        sf::Vector2i(7,4),
-        sf::Vector2i(1,4),
-        sf::Vector2i(1,3),
-        sf::Vector2i(0,3)
-    });
+    m_peuzeul.init("resources/data/peuzeul1.json");
+    // m_peuzeul.setPositon(sf::Vector2i(22,12));
+    // m_peuzeul.polygon(std::vector<sf::Vector2i> {
+    //     sf::Vector2i(0,0),
+    //     sf::Vector2i(6,0),
+    //     sf::Vector2i(6,1),
+    //     sf::Vector2i(7,1),
+    //     sf::Vector2i(7,2),
+    //     sf::Vector2i(8,2),
+    //     sf::Vector2i(8,3),
+    //     sf::Vector2i(7,3),
+    //     sf::Vector2i(7,4),
+    //     sf::Vector2i(1,4),
+    //     sf::Vector2i(1,3),
+    //     sf::Vector2i(0,3),
+    //     sf::Vector2i(0,1),
+    //     sf::Vector2i(-1,1),
+    //     sf::Vector2i(-1,0)
+    // });
 
 
     m_healthBar = O::graphics::ChargingBar(m_fen, 0, 0, m_character.getRect().width*0.7f, m_character.getRect().height*0.1f);
@@ -120,11 +124,15 @@ void MainGame::event(sf::Event e)
 
     m_character.event(e);
 
+    ///////////////////////////////////////////////////////////////
+    // ALERTE DANGER DE MORT :
+    // m_peuzeul.event(e);  doit etre fait avant  
+    // m_inventory.event(e);
+    m_peuzeul.event(e); 
     m_inventory.event(e);
     m_itemDrawer.event(e);
 
     EnemyManager::event(e);
-    m_peuzeul.event(e);
 }
 Step MainGame::update(float dt)
 {
@@ -160,6 +168,10 @@ Step MainGame::update(float dt)
     m_peuzeul.setSelectedItemIndex(m_inventory.getSelectedItemIndex());
 
 
+    if (m_peuzeul.isWin())
+    {
+        return WIN_MENU;
+    }
 
     return GAME;
 }

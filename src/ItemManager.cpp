@@ -106,5 +106,18 @@ bool ItemManager::haveChanged()
     return m_haveChanged;
 }
 
+void ItemManager::removeInventoryItem(int index)
+{
+    m_inventory.erase(m_inventory.begin() + index);
+    m_haveChanged = true;
+}
+
+
+void ItemManager::addItemInInventory(Item item)
+{
+    m_inventory.push_back(item);
+    m_haveChanged = true;
+}
+
 const float ItemManager::ITEM_SPACING = 50;
 const float ItemManager::ITEM_SIZE = 50;
