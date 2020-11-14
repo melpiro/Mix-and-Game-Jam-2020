@@ -17,6 +17,9 @@ public:
     void update();
     void render();
 
+    int getSelectedItemIndex();
+    bool haveSelectedItem();
+
 private:
 
     void updateOnResize();
@@ -44,6 +47,10 @@ private:
 
     ItemManager* m_itemManager;
     
+    int indexItemSelected = -1;
+    //Item selectedItem;
+    //sf::Vector2f mousePos;
+    //sf::Vector2i indexPos;
 
     std::vector<std::vector<O::graphics::Sprite>> m_items;
     std::vector<std::vector<sf::Vector2f>> relativItemPos;

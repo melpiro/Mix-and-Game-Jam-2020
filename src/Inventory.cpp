@@ -34,6 +34,31 @@ void Inventory::event(sf::Event e)
         if (m_isOpen) m_openAnimate = true, m_closeAnimate = false;
         else m_openAnimate = false, m_closeAnimate = true;
     }
+    
+    if (e.type == sf::Event::MouseButtonPressed)
+    {
+        if (indexItemSelected == -1)
+        {
+            for (size_t i = 0; i < m_items.size() && indexItemSelected == -1; i++)
+            {
+                for (size_t j = 0; j < m_items[i].size() && indexItemSelected == -1; j++)
+                {
+                    if (m_items[i][j].clicked(e))
+                    {
+                        indexItemSelected = i;
+                    }
+                }
+            }
+        }
+        else
+        {
+            indexItemSelected = -1;
+        }
+        
+    }
+
+  
+    
 }
 
 void Inventory::update()
@@ -55,8 +80,11 @@ void Inventory::update()
         for (size_t j = 0; j < m_items[i].size(); j++)
         {
             sf::Vector2f itemPos = relativItemPos[i][j] * (*m_viewZoom) + pos + sf::Vector2f(225, 80) * (*m_viewZoom);
-            m_items[i][j].setPosition(itemPos.x, itemPos.y);
+
             m_items[i][j].setScale(m_itemscale[i] * (*m_viewZoom), m_itemscale[i] * (*m_viewZoom) );
+            m_items[i][j].setPosition(itemPos.x, itemPos.y);
+            
+            
         }
         
     }
@@ -79,11 +107,13 @@ void Inventory::render()
 
     for (size_t i = 0; i < m_items.size(); i++)
     {
-        for (size_t j = 0; j < m_items[i].size(); j++)
+        if (i != indexItemSelected)
         {
-            m_items[i][j].draw();
+            for (size_t j = 0; j < m_items[i].size(); j++)
+            {
+                m_items[i][j].draw();
+            }
         }
-        
     }
 }
 
@@ -171,4 +201,15 @@ void Inventory::closeAnime()
             m_closeAnimate = false;
         }
     }
+}
+
+int Inventory::getSelectedItemIndex()
+{
+    return indexItemSelected;
+}
+
+
+bool Inventory::haveSelectedItem()
+{
+    return (indexItemSelected != -1);
 }

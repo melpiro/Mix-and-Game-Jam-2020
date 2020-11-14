@@ -7,7 +7,7 @@ MainGame::MainGame(sf::RenderWindow* fen) :
     m_inventory(fen, &m_viewZoom, &m_itemManager),
     m_itemManager(sf::FloatRect(0, 0, 50 * 16 * 4,50 * 16 * 4), 30),
     m_itemDrawer(fen, &m_itemManager),
-    m_peuzeul(fen)
+    m_peuzeul(fen, &m_itemManager)
 {
     m_fen=fen;
 
@@ -57,32 +57,23 @@ void MainGame::init()
 
     m_itemManager.init();
 
-    m_peuzeul.init();
     m_peuzeul.setPositon(sf::Vector2i(22,12));
     m_peuzeul.polygon(std::vector<sf::Vector2i> {
         sf::Vector2i(0,0),
-        sf::Vector2i(2,0),
-        sf::Vector2i(2,3),
-        sf::Vector2i(6,3),
-        sf::Vector2i(6,5),
-        sf::Vector2i(3,5),
-        sf::Vector2i(3,6),
-        sf::Vector2i(10,6),
-        sf::Vector2i(10,7),
-        sf::Vector2i(5,7),
-        sf::Vector2i(5,10),
-        sf::Vector2i(5,15),
-        sf::Vector2i(3,15),
-        sf::Vector2i(-5,15),
-        sf::Vector2i(-5,14),
-        sf::Vector2i(-5,0),
-        sf::Vector2i(-4,0),
-        sf::Vector2i(-4,14),
-        sf::Vector2i(3,14),
-        sf::Vector2i(3,10),
-        sf::Vector2i(0,10),
-
+        sf::Vector2i(6,0),
+        sf::Vector2i(6,1),
+        sf::Vector2i(7,1),
+        sf::Vector2i(7,2),
+        sf::Vector2i(8,2),
+        sf::Vector2i(8,3),
+        sf::Vector2i(7,3),
+        sf::Vector2i(7,4),
+        sf::Vector2i(1,4),
+        sf::Vector2i(1,3),
+        sf::Vector2i(0,3)
     });
+
+    m_peuzeul.init();
 
     m_vie = O::graphics::ChargingBar(m_fen,5,5,150,30);
     m_vie.setMaxChargingValue(5);
@@ -150,11 +141,13 @@ void MainGame::update(float dt)
 
     m_vie.update();
 
+    m_peuzeul.setSelectedItemIndex(m_inventory.getSelectedItemIndex());
+
 }
 void MainGame::render()
 {
     m_map.draw();
-    //m_peuzeul.render();
+    m_peuzeul.render();
     m_itemDrawer.render();
 
     m_character.draw();

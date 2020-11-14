@@ -63,8 +63,8 @@ namespace geo2d {
     bool intersect_point_polygon(const sf::Vector2f& point, const std::vector<sf::Vector2f>&  poly)
     {
         sf::Vector2f I;
-        I.x = std::cos(O::math::rdm::randFloat(0, 10)) * 100000.0; 
-        I.y = std::sin(O::math::rdm::randFloat(0, 10)) * 100000.0; 
+        I.x = 100000.0; 
+        I.y = 110000.0; 
         
         int nbintersections = 0;
         for(size_t i=0;i<poly.size();i++)
@@ -76,9 +76,12 @@ namespace geo2d {
             else           // sinon on relie au suivant.
                 B = poly[i+1];
 
+            
+
             int iseg = intersect_segment_segment(A,B,I,point);
             if (iseg == -1)
                 return intersect_point_polygon(point,poly);  // cas limite, on relance la fonction.
+
             
             nbintersections+=iseg;
 
