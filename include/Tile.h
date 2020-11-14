@@ -27,6 +27,7 @@ public:
     int getTextureSize();
 
     void setSolid(bool state);
+    bool isSolid();
 
 private:
 

@@ -10,8 +10,8 @@
 #include "Tile.h"
 
 struct line{
-    int x;
     int y;
+    int x;
     int size;
 };
 
@@ -43,6 +43,11 @@ private:
     line* getLineUnder(line* ligne, std::vector<line*>* lignes,std::vector<line*>* excluded);
     std::vector<line*>* getLinesUnder(line* ligne, std::vector<line*>* lignes,std::vector<line*>* excluded);
     sf::FloatRect* getRect(line* ligne, std::vector<line*>* lignes,std::vector<line*>* excluded);
+    std::vector<line*> cutLines(std::vector<std::vector<int>> map);
+
+    //pour le test
+    std::vector<sf::FloatRect> m_rects;
+    //fin
 
     sf::Vector2i m_dimensions;
 

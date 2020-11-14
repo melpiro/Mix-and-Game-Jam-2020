@@ -75,3 +75,7 @@ int Tile::getTextureSize() {
 void Tile::setSolid(bool state) {
     m_isSolid = state;
 }
+
+bool Tile::isSolid() {
+    return m_isSolid;
+}

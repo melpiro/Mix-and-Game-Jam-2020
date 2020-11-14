@@ -20,6 +20,7 @@ void MainGame::init()
     v.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),5);
     v.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),5);
 
+    v[1].setSolid(true);
     std::vector<std::vector<int>> tmpMap = {
             {3,3,3,3,3},
             {3,0,0,0,3},
