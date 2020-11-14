@@ -183,13 +183,34 @@ bool Tilemap::intersectSolidArea(sf::FloatRect rect) {
     return false;
 }
 
-std::vector<sf::Vector2f> Tilemap::crossSolidArea(sf::FloatRect rect) {
+std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> Tilemap::crossSolidArea(sf::FloatRect rect) {
 
-    std::vector<sf::Vector2f> pointsCol;
+    std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> pointsCol;
 
     for(auto r : m_rects){
         std::vector<sf::Vector2f> points =  O::math::geo2d::cross_AABB_AABB({rect.left,rect.top},{rect.width,rect.height},{r.left,r.top},{r.width,r.height});
-        for(auto p : points){ pointsCol.push_back(p);}
+        std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>> pair;
+
+        if(!points.empty()){ // si y'a une collision
+            pair.first = points[0];
+            //TODO : check la position du joueur pour voir quel
+
+            if(sf::FloatRect(r.left,r.top - 10,r.width,10).intersects(rect)){ //HAUT
+                pair.second.first = {r.left,r.top};
+                pair.second.second = {r.left+r.width,r.top};
+            }else if(sf::FloatRect(r.left - 10,r.top,10,r.height).intersects(rect)){ //GAUCHE
+                pair.second.first = {r.left,r.top};
+                pair.second.second = {r.left,r.top + r.height};
+            }else if(sf::FloatRect(r.left,r.top + r.height,r.width,10).intersects(rect)){ // BAS
+                pair.second.first = {r.left,r.top+r.height};
+                pair.second.second = {r.left+r.width,r.top + r.height};
+            }else if(sf::FloatRect(r.left + r.width,r.top,10,r.height).intersects(rect)){ // DROITE
+                pair.second.first = {r.left + r.width,r.top};
+                pair.second.second = {r.left+r.width,r.top + r.height};
+            }
+        }
+
+        pointsCol.push_back(pair);
     }
 
     return pointsCol;
