@@ -31,7 +31,7 @@ public:
     void updateOnResize();
 
 
-    void reset();
+    void reset(const std::string& path = "");
 
 private:
 
