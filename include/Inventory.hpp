@@ -4,6 +4,9 @@
 #include "ItemManager.hpp"
 #include "Graphics/Text.h"
 
+
+
+//TODO : Gérer le fait de pouvoir équiper des pièces
 class Inventory
 {
 
