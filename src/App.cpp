@@ -4,7 +4,8 @@ App::App() :
     m_fen(sf::VideoMode(1200,1000),"App"),
     m_loadingMenu(&m_fen),
     m_mainMenu(&m_fen),
-    m_mainGame(&m_fen)
+    m_mainGame(&m_fen),
+    m_winMenu(&m_fen)
 {
     m_fen.setFramerateLimit(60);
     m_th_load_ressources = std::async(std::launch::async, &App::loadRessources, this);
@@ -22,6 +23,7 @@ void App::loadRessources()
     m_loadingMenu.init();
     m_mainMenu.init();
     m_mainGame.init();
+    m_winMenu.init();
 
     m_step = GAME;
     m_mainGame.updateOnResize();
@@ -78,6 +80,10 @@ void App::event()
         {
             m_mainGame.event(e);
         }
+        else if (m_step == WIN_MENU)
+        {
+            m_winMenu.event(e);
+        }
     }
 }
 
@@ -94,6 +100,17 @@ void App::update(float dt)
     else if (m_step == GAME)
     {
         m_step = m_mainGame.update(dt);
+    }
+    else if (m_step == WIN_MENU)
+    {
+        m_winMenu.update();
+    }
+
+
+    if (m_lastStep != m_step)
+    {
+        m_lastStep = m_step;
+        m_fen.setSize(m_fen.getSize());
     }
 }
 
@@ -112,6 +129,10 @@ void App::render()
     else if (m_step == GAME)
     {
         m_mainGame.render();
+    }
+    else if (m_step == WIN_MENU)
+    {
+        m_winMenu.render();
     }
 
     m_fen.display();

@@ -33,6 +33,9 @@ public:
     static const float ITEM_SIZE;
 
     bool haveChanged();
+
+    void removeInventoryItem(int index);
+    void addItemInInventory(Item item);
 private:
 
     void addItemRdm();

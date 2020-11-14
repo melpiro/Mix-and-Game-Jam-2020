@@ -7,6 +7,7 @@
 #include <future>
 #include "MainMenu.hpp"
 #include "MainGame.hpp"
+#include "WinMenu.hpp"
 
 
 class App {
@@ -27,11 +28,13 @@ private:
 
     sf::RenderWindow m_fen;
     Step m_step = LOADING_MENU;
+    Step m_lastStep = LOADING_MENU;
 
     LoadingMenu m_loadingMenu;
     MainMenu m_mainMenu;
     MainGame m_mainGame;
 
+    WinMenu m_winMenu;
 
 
     std::future<void> m_th_load_ressources;
