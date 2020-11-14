@@ -78,7 +78,6 @@ private:
 
     int m_score = 0;
 
-
     const std::vector<sf::Color> COLORS = {
         sf::Color(26, 188, 156),
         sf::Color(46, 204, 113),

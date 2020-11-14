@@ -29,7 +29,7 @@ void MiniTetris::start()
        {
             m_allcase[i][j].setPosition(minX + i * sizeX, minY + (j - 3) * sizeY);
             m_allcase[i][j].setColor(NULL_COLOR);
-            m_allcase[i][j].setScale(sizeX/200.f,sizeY/200.f);
+            m_allcase[i][j].setScale(sizeX/16.f,sizeY/16.f);
             m_allcase[i][j].loadTexture();
        }
    }
@@ -451,4 +451,8 @@ void MiniTetris::checkLines()
             checkLines();
         }
     }
+}
+
+int MiniTetris::getScore() {
+    return m_score;
 }

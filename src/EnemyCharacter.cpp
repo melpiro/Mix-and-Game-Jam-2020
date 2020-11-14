@@ -21,6 +21,7 @@ void EnemyCharacter::init() {
     playAnim = false;
 
     speed = 100;
+
 }
 
 void EnemyCharacter::update(float deltatime) {
@@ -41,7 +42,7 @@ void EnemyCharacter::update(float deltatime) {
 
         vel = O::math::normalise(player->getPos() - pos) * speed;
 
-        if(miniTetris.defeat()) {
+        if(miniTetris.defeat() || miniTetris.getScore() >= life) {
             player->removeEnemyAgro(this);
             isAttacking = false;
         }

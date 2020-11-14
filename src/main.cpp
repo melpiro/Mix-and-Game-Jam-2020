@@ -22,6 +22,9 @@ void init_texture_manager()
 
     // Tilemap
     O::graphics::ressourceManager.addTexture("Tilemap/tilemap_packed.png", "et_tilemap");
+
+    // Enemies
+    O::graphics::ressourceManager.addTexture("Enemies/blob.png", "blob_enemy");
 }
 
 int main()
