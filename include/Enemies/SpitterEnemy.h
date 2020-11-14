@@ -11,6 +11,11 @@
 
 class SpitterEnemy : public EnemyCharacter {
 
+    float shootDistance = 300;
+
+    float fireRate = 0.2f;
+    float fireRateTime = 0;
+
 public:
     SpitterEnemy(sf::RenderWindow *fen, PlayerCharacter *pc);
 
