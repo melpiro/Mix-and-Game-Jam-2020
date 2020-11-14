@@ -17,6 +17,9 @@ public:
     void update();
     void render();
 
+    void openClose();
+
+
 private:
 
     void updateOnResize();

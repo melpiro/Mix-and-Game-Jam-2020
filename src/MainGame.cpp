@@ -112,7 +112,16 @@ void MainGame::event(sf::Event e)
             m_viewZoom *= cam_zoom_factor;
             m_view.zoom(cam_zoom_factor);
         }
-        
+
+    }
+    else if (e.type == sf::Event::KeyPressed) {
+
+        switch (e.key.code) {
+            case sf::Keyboard::Tab:
+                m_inventory.openClose();
+                break;
+        }
+
     }
 
 
