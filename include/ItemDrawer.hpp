@@ -30,6 +30,5 @@ private:
 
     std::vector<std::vector<O::graphics::Sprite>> m_items;
 
-    const float CELL_SIZE = 10;
     
 };

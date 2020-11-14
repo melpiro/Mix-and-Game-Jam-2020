@@ -5,11 +5,15 @@ ItemManager::ItemManager(sf::FloatRect rect, int nbMaxItem)
     m_rect = rect;
     this->nbMaxItem = nbMaxItem;
 
+    
+}
+
+void ItemManager::init()
+{
     for (size_t i = 0; i < nbMaxItem; i++)
     {
         addItemRdm();
     }
-    
 }
 
 void ItemManager::pickItem(sf::FloatRect playerRect)
@@ -24,7 +28,7 @@ void ItemManager::pickItem(sf::FloatRect playerRect)
         for (size_t i = 0; i < m_allItems.size(); i++)
         {
             sf::Vector2f itemPos(m_allItems[i].x, m_allItems[i].y);
-            if (O::math::geo2d::intersect_AABB_cercle(playerRectPos, playerRectSize, itemPos, ITEM_SIZE))
+            if (O::math::geo2d::intersect_AABB_AABB(playerRectPos, playerRectSize, sf::Vector2f(itemPos.x, itemPos.y), sf::Vector2f(ITEM_SIZE, ITEM_SIZE)))
             {
                 pickedItems.push_back(m_allItems[i]);
                 m_allItems.erase(m_allItems.begin() + i);
@@ -70,18 +74,28 @@ void ItemManager::addItemRdm()
     m_haveChanged = true;
 }
 
+void ItemManager::setTileMap(Tilemap* map)
+{
+    m_map = map;
+}
+
 
 bool ItemManager::canAdd(Item it)
 {
+    if (m_map->intersectSolidArea(sf::FloatRect(it.x, it.y, ITEM_SIZE, ITEM_SIZE)))
+    {
+        return false;
+    }
+
     if (O::math::geo2d::intersect_AABB_cercle(
         sf::Vector2f(playerRectCpy.left, playerRectCpy.top),
-        sf::Vector2f(playerRectCpy.width, playerRectCpy.height), sf::Vector2f(it.x, it.y), ITEM_SIZE)) return false;
+        sf::Vector2f(playerRectCpy.width, playerRectCpy.height), sf::Vector2f(it.x, it.y), ITEM_SPACING)) return false;
 
     for (size_t i = 0; i < m_allItems.size(); i++)
     {
         if (O::math::geo2d::intersect_cercle_cercle(
-            sf::Vector2f(m_allItems[i].x, m_allItems[i].y), ITEM_SIZE,
-            sf::Vector2f(it.x, it.y), ITEM_SIZE)) 
+            sf::Vector2f(m_allItems[i].x, m_allItems[i].y), ITEM_SPACING,
+            sf::Vector2f(it.x, it.y), ITEM_SPACING)) 
                 return false;
     }
     return true;
@@ -92,4 +106,5 @@ bool ItemManager::haveChanged()
     return m_haveChanged;
 }
 
+const float ItemManager::ITEM_SPACING = 50;
 const float ItemManager::ITEM_SIZE = 50;

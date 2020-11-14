@@ -4,11 +4,10 @@
 MainGame::MainGame(sf::RenderWindow* fen) :
     m_character(fen),
     m_inventory(fen, &m_viewZoom, &m_itemManager),
-    m_itemManager(sf::FloatRect(-1000,-1000,2000,2000), 30),
+    m_itemManager(sf::FloatRect(0, 0, 50 * 16 * 4,50 * 16 * 4), 30),
     m_itemDrawer(fen, &m_itemManager)
 {
     m_fen=fen;
-
 
 }
 
@@ -43,6 +42,10 @@ void MainGame::init()
     m_map = Tilemap(tileSet,*m_fen,"resources/data/map1.json");
 
     m_character.setPos({16*16*4,12*16*4});
+    m_character.setTileMap(&m_map);
+
+    m_itemManager.setTileMap(&m_map);
+    m_itemManager.init();
 
 }
 

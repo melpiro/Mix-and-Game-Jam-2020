@@ -96,3 +96,4 @@ void PlayerCharacter::draw() {
     if(isAttacked())
         enemiesAgro[targetedEnemy]->getMiniTetris()->render();
 }
+

@@ -6,6 +6,7 @@
 #define MIXGAMEJAM2020_CHARACTER_H
 
 #include <SFML/Graphics.hpp>
+#include "Tilemap.h"
 
 class Character {
 
@@ -46,7 +47,12 @@ protected:
 
     explicit Character(sf::RenderWindow* fen);
 
+
+    Tilemap* m_map = NULL;
+
 public:
+
+    void setTileMap(Tilemap* map);
 
     virtual void init();
     virtual void draw();

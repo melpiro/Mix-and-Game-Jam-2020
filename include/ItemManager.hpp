@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Omega/Math/GeometricFunctions.h"
 #include "Operators/PrintFunctions.h"
+#include "Tilemap.h"
 #include "Piece.hpp"
 
 struct Item
@@ -21,9 +22,14 @@ class ItemManager
 public:
     ItemManager(sf::FloatRect rect, int nbMaxItem);
 
+    void setTileMap(Tilemap* map);
+    void init();
+    
+
     void pickItem(sf::FloatRect playerRect);
     std::vector<Item>& getItems();
     std::vector<Item>& getMyItems();
+    static const float ITEM_SPACING;
     static const float ITEM_SIZE;
 
     bool haveChanged();
@@ -34,6 +40,7 @@ private:
 
     std::vector<Item> m_allItems;
     sf::FloatRect playerRectCpy;
+    Tilemap* m_map;
 
     sf::FloatRect m_rect;
     int nbItem;

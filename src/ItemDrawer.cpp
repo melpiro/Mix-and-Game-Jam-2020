@@ -46,6 +46,15 @@ void ItemDrawer::updateRender()
     m_items.clear();
     for (size_t i = 0; i < m_manager->getItems().size(); i++)
     {
+
+        float nbCellX = allPiece[(int)m_manager->getItems()[i].type][m_manager->getItems()[i].rotation].back().size();
+        float nbCellY = allPiece[(int)m_manager->getItems()[i].type][m_manager->getItems()[i].rotation].size();
+        float cell_size;
+        float deltaXForCenter = 0;
+        float deltaYForCenter = 0;
+
+        cell_size = std::min(ItemManager::ITEM_SIZE / nbCellX, ItemManager::ITEM_SIZE / nbCellY);
+
         std::vector<O::graphics::Sprite> item;
         for (size_t y = 0; y < allPiece[(int)m_manager->getItems()[i].type][m_manager->getItems()[i].rotation].size(); y++)
         {
@@ -55,8 +64,8 @@ void ItemDrawer::updateRender()
                 {
                     item.push_back(O::graphics::Sprite(m_fen, "tetrisCell", 0,0));
                     item.back().loadTexture();
-                    item.back().setPosition(m_manager->getItems()[i].x + x * CELL_SIZE, m_manager->getItems()[i].y + y * CELL_SIZE);;
-                    item.back().setScale(CELL_SIZE / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().x, CELL_SIZE / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().y);
+                    item.back().setPosition(m_manager->getItems()[i].x + x *cell_size, m_manager->getItems()[i].y + y * cell_size);
+                    item.back().setScale(cell_size / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().x, cell_size / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().y);
                     item.back().setColor(m_manager->getItems()[i].coul);
                 }
                 

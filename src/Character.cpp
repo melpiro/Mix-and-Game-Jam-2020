@@ -86,7 +86,30 @@ void Character::update(float deltatime) {
         }
     }
 
-    pos += vel * deltatime;
+    if (m_map == NULL)
+        pos += vel * deltatime;
+    else
+    {
+        auto nextposX = pos + sf::Vector2f(vel.x, 0) * deltatime;
+
+        std::cout << vel.x<<" "<<vel.y <<std::endl;
+        auto bound = sprite.getGlobalBounds();
+        bound.height /= 2.0;
+        bound.top +=bound.height;
+        if (m_map->intersectSolidArea(bound))
+        {
+            vel.x = (-vel.x) * 1.f;
+        }
+        
+        auto nextposY = pos + sf::Vector2f(0, vel.y) * deltatime;
+        if (m_map->intersectSolidArea(bound))
+        {
+            vel.y = (-vel.y) * 1.f;
+        }
+        
+        pos += vel * deltatime;
+    }
+    
     sprite.setPosition(pos);
 
 
@@ -100,4 +123,9 @@ void Character::update(float deltatime) {
 
 void Character::event(sf::Event &e) {
 
+}
+
+void Character::setTileMap(Tilemap* map)
+{
+    m_map = map;
 }
