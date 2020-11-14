@@ -401,6 +401,8 @@ JsonData JsonData::operator[](int index)
         return ((std::vector<JsonData>*)m_value)->at(index);
     }
     else std::cout << "Error not an array" <<std::endl;
+
+    return JsonData();
 }
 JsonData JsonData::operator[](sf::String key)
 {
@@ -409,6 +411,8 @@ JsonData JsonData::operator[](sf::String key)
         return ((std::map<sf::String,JsonData>*)m_value)->at(key);
     }
     else std::cout << "Error not an object" <<std::endl;
+
+    return JsonData();
 }
 
 void JsonData::desaloc()

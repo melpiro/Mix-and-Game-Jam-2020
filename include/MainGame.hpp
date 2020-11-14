@@ -46,6 +46,8 @@ private:
     EnemyCharacter m_enemy2;
 
     Inventory m_inventory;
+
+    
 };
 
 
