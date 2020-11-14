@@ -37,7 +37,7 @@ namespace geo2d {
     bool intersect_segment_point(const sf::Vector2f& A, const sf::Vector2f& B, const sf::Vector2f& point);
     bool intersect_segment_cercle(const sf::Vector2f& A, const sf::Vector2f& B, const sf::Vector2f& cercle_center, const float& radius);
     bool intersect_segment_ligne(const sf::Vector2f& A1, const sf::Vector2f& B1, const sf::Vector2f& A2, const sf::Vector2f& B2);
-    bool intersect_segment_segment(const sf::Vector2f& A1, const sf::Vector2f& B1, const sf::Vector2f& A2, const sf::Vector2f& B2);
+    int intersect_segment_segment(const sf::Vector2f& A1, const sf::Vector2f& B1, const sf::Vector2f& A2, const sf::Vector2f& B2);
     bool intersect_segment_AABB(const sf::Vector2f& A, const sf::Vector2f& B, const sf::Vector2f& O, const sf::Vector2f& size);
     bool intersect_segment_convexPolygon(const sf::Vector2f& A, const sf::Vector2f& B, const std::vector<sf::Vector2f>& poly);
     bool intersect_segment_polygon(const sf::Vector2f& A, const sf::Vector2f& B, const std::vector<sf::Vector2f>& poly);

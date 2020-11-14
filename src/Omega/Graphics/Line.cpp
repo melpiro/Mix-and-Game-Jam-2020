@@ -9,14 +9,10 @@ namespace graphics {
 
 	}
 
-	Line::Line(sf::RenderWindow* window, sf::Vector2f p1, sf::Vector2f p2, float width, float posRx, float posRy)
+	Line::Line(sf::RenderWindow* window, sf::Vector2f p1, sf::Vector2f p2, float width, float posRx, float posRy) :
+		m_posRx(posRx), m_posRy(posRy)
 	{
 		m_fen = window;
-
-		if (posRx == -1) m_posRx = p1.x;
-		else m_posRx = posRx;
-		if (posRy == -1) m_posRy = p1.y;
-		else m_posRy = posRy;
 
 		m_width = width;
 		m_rectangle.setOrigin(0, width / 2.0);
@@ -24,14 +20,11 @@ namespace graphics {
 		setPoints(p1, p2);
 	}
 
-	Line::Line(sf::RenderWindow* window, sf::Vector2f p, float angle, float length, float width, float posRx, float posRy)
+	Line::Line(sf::RenderWindow* window, sf::Vector2f p, float angle, float length, float width, float posRx, float posRy) :
+		m_posRx(posRx), m_posRy(posRy)
 	{
 		m_fen = window;
 
-		if (posRx == -1) m_posRx = p.x;
-		else m_posRx = posRx;
-		if (posRy == -1) m_posRy = p.y;
-		else m_posRy = posRy;
 
 		m_width = width;
 		m_rectangle.setOrigin(0, width / 2.0);
@@ -56,7 +49,6 @@ namespace graphics {
 		float factorY = (float)m_fen->getSize().y / STATIC::SYS::HIGHT;
 
 		m_rectangle.setPosition(m_p1.x + (factorX - 1) * m_posRx, m_p1.y + (factorY - 1) * m_posRy);
-
 	}
 
 
@@ -117,6 +109,7 @@ namespace graphics {
 		m_rectangle.setSize(sf::Vector2f(m_length, m_width));
 		m_rectangle.setRotation(math::getAngleDeg((sf::Vector2f) p1, (sf::Vector2f)p2));
 
+
 		update();
 	}
 
@@ -176,7 +169,6 @@ namespace graphics {
 		p2.x *= scale.x;
 		p2.y *= scale.y;
 
-		//std::cout << p1.x << " " << p1.y << " - " << p2.x << " " << p2.y << std::endl;
 
 		m_rectangle.setPosition(p1);
 		m_rectangle.setSize(sf::Vector2f(math::getDistance((sf::Vector2f) p1, (sf::Vector2f)p2) , m_width));

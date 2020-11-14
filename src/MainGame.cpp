@@ -6,7 +6,8 @@ MainGame::MainGame(sf::RenderWindow* fen) :
     m_character(fen),
     m_inventory(fen, &m_viewZoom, &m_itemManager),
     m_itemManager(sf::FloatRect(0, 0, 50 * 16 * 4,50 * 16 * 4), 30),
-    m_itemDrawer(fen, &m_itemManager)
+    m_itemDrawer(fen, &m_itemManager),
+    m_peuzeul(fen)
 {
     m_fen=fen;
 
@@ -65,7 +66,32 @@ void MainGame::init()
 
     m_itemManager.init();
 
+    m_peuzeul.init();
+    m_peuzeul.setPositon(sf::Vector2i(22,12));
+    m_peuzeul.polygon(std::vector<sf::Vector2i> {
+        sf::Vector2i(0,0),
+        sf::Vector2i(2,0),
+        sf::Vector2i(2,3),
+        sf::Vector2i(6,3),
+        sf::Vector2i(6,5),
+        sf::Vector2i(3,5),
+        sf::Vector2i(3,6),
+        sf::Vector2i(10,6),
+        sf::Vector2i(10,7),
+        sf::Vector2i(5,7),
+        sf::Vector2i(5,10),
+        sf::Vector2i(5,15),
+        sf::Vector2i(3,15),
+        sf::Vector2i(-5,15),
+        sf::Vector2i(-5,14),
+        sf::Vector2i(-5,0),
+        sf::Vector2i(-4,0),
+        sf::Vector2i(-4,14),
+        sf::Vector2i(3,14),
+        sf::Vector2i(3,10),
+        sf::Vector2i(0,10),
 
+    });
 
 }
 
@@ -97,6 +123,7 @@ void MainGame::event(sf::Event e)
     m_itemDrawer.event(e);
 
     EnemyManager::event(e);
+    m_peuzeul.event(e);
 }
 void MainGame::update(float dt)
 {
@@ -117,12 +144,13 @@ void MainGame::update(float dt)
 
     m_map.update();
 
-
+    m_peuzeul.update();
 
 }
 void MainGame::render()
 {
     m_map.draw();
+    m_peuzeul.render();
     m_itemDrawer.render();
 
     m_character.draw();

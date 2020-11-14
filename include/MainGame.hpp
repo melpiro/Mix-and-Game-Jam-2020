@@ -11,6 +11,7 @@
 #include "ItemDrawer.hpp"
 #include "Enemies/BlobEnemy.h"
 #include "Tilemap.h"
+#include "Peuzeul.hpp"
 
 class MainGame
 {
@@ -51,6 +52,8 @@ private:
     Inventory m_inventory;
     ItemManager m_itemManager;
     ItemDrawer m_itemDrawer;
+
+    Peuzeul m_peuzeul;
 
 };
 
