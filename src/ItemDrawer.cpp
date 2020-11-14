@@ -56,7 +56,7 @@ void ItemDrawer::updateRender()
                     item.push_back(O::graphics::Sprite(m_fen, "tetrisCell", 0,0));
                     item.back().loadTexture();
                     item.back().setPosition(m_manager->getItems()[i].x + x * CELL_SIZE, m_manager->getItems()[i].y + y * CELL_SIZE);;
-                    item.back().setScale(CELL_SIZE / 200.f, CELL_SIZE / 200.f);
+                    item.back().setScale(CELL_SIZE / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().x, CELL_SIZE / (float)O::graphics::ressourceManager.getTexture("tetrisCell").getSize().y);
                     item.back().setColor(sf::Color::Cyan);
                 }
                 

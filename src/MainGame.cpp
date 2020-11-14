@@ -10,12 +10,6 @@ MainGame::MainGame(sf::RenderWindow* fen) :
 {
     m_fen=fen;
 
-    m_object.setSize(sf::Vector2f(100,100));
-    m_object.setFillColor(sf::Color::Red);
-    m_object.setOrigin(50,50); // center
-    m_object.setPosition(500,500);
-
-
     m_enemy.setPos({500, 500});
     m_enemy2.setPos({800, 500});
 }
@@ -76,13 +70,10 @@ void MainGame::update(float dt)
 }
 void MainGame::render()
 {
-    m_fen->draw(m_object);
-
     m_enemy.draw();
     m_enemy2.draw();
     m_character.draw();
     m_inventory.render();
-    m_itemDrawer.render();
 }
 
 void MainGame::updateOnResize()
