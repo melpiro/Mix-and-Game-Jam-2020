@@ -13,9 +13,9 @@ void Peuzeul::init(std::string path)
     j.readFile(path);
 
 
-    setPositon(sf::Vector2i((int)*(double*)j["pos"]["x"].getValue(),(int)*(double*)j["pos"]["y"].getValue()));
+    setPositon(sf::Vector2i((int)*(double*)j["peuzeul"]["pos"]["x"].getValue(),(int)*(double*)j["peuzeul"]["pos"]["y"].getValue()));
     std::vector<sf::Vector2i> poly;
-    std::vector<JsonData> polyDAta = *(std::vector<JsonData>*) j["poly"].getValue();
+    std::vector<JsonData> polyDAta = *(std::vector<JsonData>*) j["peuzeul"]["poly"].getValue();
     for (size_t i = 0; i < polyDAta.size(); i++)
     {
         poly.push_back(

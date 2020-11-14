@@ -58,7 +58,8 @@ void MainGame::init()
 
     m_itemManager.init();
 
-    m_peuzeul.init("resources/data/peuzeul1.json");
+    m_peuzeul.init("resources/data/map1.json");
+
     // m_peuzeul.setPositon(sf::Vector2i(22,12));
     // m_peuzeul.polygon(std::vector<sf::Vector2i> {
     //     sf::Vector2i(0,0),
