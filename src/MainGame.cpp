@@ -21,7 +21,7 @@ void MainGame::init()
     m_itemDrawer.init();
 
 
-    EnemyManager::loadEnemiesFromFiles("resources/data/enemies1.json", m_fen, &m_character);
+    EnemyManager::loadEnemiesFromFiles("resources/data/map1.json", m_fen, &m_character);
     
 
     //Initialisation de la tilemap
