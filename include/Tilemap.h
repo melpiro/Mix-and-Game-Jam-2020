@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <stdio.h>
 #include "Tile.h"
+#include "Omega/Math/GeometricFunctions.h"
 
 struct line{
     int y;
@@ -39,6 +40,7 @@ public:
 
     bool intersectSolidArea(sf::Vector2f point);
     bool intersectSolidArea(sf::FloatRect rect);
+    std::vector<sf::Vector2f> crossSolidArea(sf::FloatRect rect);
 
 private:
 
