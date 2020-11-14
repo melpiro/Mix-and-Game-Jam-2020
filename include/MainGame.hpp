@@ -7,6 +7,7 @@
 #include "Omega/Graphics/RessourceManager.h"
 #include "PlayerCharacter.h"
 #include "EnemyCharacter.h"
+#include "Inventory.hpp"
 
 class MainGame
 {
@@ -43,6 +44,8 @@ private:
     PlayerCharacter m_character;
     EnemyCharacter m_enemy;
     EnemyCharacter m_enemy2;
+
+    Inventory m_inventory;
 };
 
 

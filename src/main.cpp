@@ -1,5 +1,6 @@
 #include "App.hpp"
 
+#include "JsonData.hpp"
 
 void init_texture_manager()
 {
@@ -13,6 +14,8 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("LoadingMenu/background.jpg", "loadingMenuBackground");
     O::graphics::ressourceManager.addTexture("MainMenu/boutonTexture.png", "boutonTexture");
     O::graphics::ressourceManager.addTexture("Tetris/cell.png", "tetrisCell");
+    O::graphics::ressourceManager.addTexture("Inventory/background.png", "inventoryBackground");
+    O::graphics::ressourceManager.addTexture("Inventory/box.png", "boxIcon");
     
     
     O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");

@@ -3,7 +3,8 @@
 MainGame::MainGame(sf::RenderWindow* fen) :
     m_character(fen),
     m_enemy(fen, &m_character),
-    m_enemy2(fen, &m_character)
+    m_enemy2(fen, &m_character),
+    m_inventory(fen, &m_viewZoom)
 {
     m_fen=fen;
 
@@ -22,6 +23,7 @@ void MainGame::init()
     m_character.init();
     m_enemy.init();
     m_enemy2.init();
+    m_inventory.init();
 
 }
 
@@ -50,6 +52,7 @@ void MainGame::event(sf::Event e)
     m_character.event(e);
     m_enemy.event(e);
     m_enemy2.event(e);
+    m_inventory.event(e);
 }
 void MainGame::update(float dt)
 {
@@ -61,6 +64,8 @@ void MainGame::update(float dt)
     m_enemy.update(dt);
     m_enemy2.update(dt);
 
+    m_inventory.update();
+
 }
 void MainGame::render()
 {
@@ -69,6 +74,7 @@ void MainGame::render()
     m_enemy.draw();
     m_enemy2.draw();
     m_character.draw();
+    m_inventory.render();
 }
 
 void MainGame::updateOnResize()
