@@ -25,7 +25,7 @@ public:
     void init();
 
 
-    Steps event(sf::Event e);
+    Step event(sf::Event e);
     void update(float dt);
     void render();
 
