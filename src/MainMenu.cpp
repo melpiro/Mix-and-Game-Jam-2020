@@ -104,6 +104,10 @@ void MainMenu::update(float dt)
     m_logoJam.update();
     m_credits.update();
 
+    m_buttonGame0.update();
+    m_buttonGame1.update();
+    m_buttonGame2.update();
+
     auto pos = m_titre.getPosition();
     m_titre.setPosition(pos.x,pos.y + m_pxDir*dt);
 
