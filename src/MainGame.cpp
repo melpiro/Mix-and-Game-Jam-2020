@@ -40,22 +40,7 @@ void MainGame::event(sf::Event e)
     if (e.type == sf::Event::Resized)
     {
         updateOnResize();
-    }
-    else if (e.type == sf::Event::MouseWheelMoved)
-    {
-        if (e.mouseWheel.delta > 0)
-        {
-             m_viewZoom /= cam_zoom_factor;
-             m_view.zoom(1.f/cam_zoom_factor);
-        }
-        else if (e.mouseWheel.delta < 0)
-        {
-            m_viewZoom *= cam_zoom_factor;
-            m_view.zoom(cam_zoom_factor);
-        }
-
-    }
-    else if (e.type == sf::Event::KeyPressed) {
+    }else if (e.type == sf::Event::KeyPressed) {
 
         switch (e.key.code) {
             case sf::Keyboard::Tab:
@@ -153,7 +138,7 @@ void MainGame::updateOnResize()
 
 void MainGame::reset(const std::string& path) {
 
-    if(path.empty()){reset("resources/data/map2.json");return;}
+    if(path.empty()){reset("resources/data/map0.json");return;}
 
     m_endReset = false;
 
