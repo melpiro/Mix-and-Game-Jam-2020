@@ -49,7 +49,8 @@ void PlayerCharacter::update(float deltatime) {
         enemiesAgro[targetedEnemy]->getMiniTetris()->update();
 
     // Check des projectiles
-    for(auto& proj : EnemyManager::getProjectiles()) {
+    auto pro2 = EnemyManager::getProjectiles();
+    for(auto& proj : pro2) {
         if(getHitbox().contains(proj.pos)) {
             applyDamage(proj.dmg);
             // Knockback

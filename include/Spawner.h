@@ -5,6 +5,7 @@
 #ifndef MIXGAMEJAM2020_SPAWNER_H
 #define MIXGAMEJAM2020_SPAWNER_H
 
+// TODO Eviter de faire spawner un enemi dans un autre sinon ils se bloquent
 
 #include "Object.h"
 #include "Tilemap.h"

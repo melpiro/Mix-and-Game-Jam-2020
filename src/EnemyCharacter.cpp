@@ -223,7 +223,7 @@ void EnemyCharacter::computPath()
         
     }
 
-    if (m_path.size()> 0) 
+    if (!m_path.empty()) 
     {
         
     
@@ -244,8 +244,8 @@ void EnemyCharacter::computPath()
         ));
         m_debugPath.back().setFillColor(sf::Color::Green);
     
-    }
 
+    }
 
 }
 
