@@ -52,6 +52,8 @@ public:
     std::vector<O::graphics::Line> m_edgeDebug;
     std::vector<sf::CircleShape> m_nodesDebug;
 
+    sf::Vector2f getSize();
+
 
 
 private:

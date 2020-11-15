@@ -32,13 +32,13 @@ void PlayerCharacter::init() {
 void PlayerCharacter::update(float deltatime) {
     Character::update(deltatime);
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z) || sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
         vel.y = std::min(-speed, vel.y);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
         vel.y = std::max(speed, vel.y);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q) || sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         vel.x = std::min(-speed, vel.x);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {

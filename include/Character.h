@@ -88,7 +88,7 @@ public:
 
     float getLife() const;
 
-    const sf::Vector2f &getPos() const;
+    sf::Vector2f &getPos();
     sf::FloatRect getRect() const;
     sf::FloatRect getHitbox() const;
 
@@ -103,7 +103,8 @@ public:
         Player,
         NoType,
         Spitter,
-        Blob
+        Blob,
+        Clone
     };
 
     virtual Type getType() {

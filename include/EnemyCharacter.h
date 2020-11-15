@@ -22,7 +22,7 @@ protected:
 
     MiniTetris miniTetris;
 
-    float agroDist = 800;
+    float agroDist = 600;
     float loseAgroDist = 1000;
 
     // -- graph
@@ -37,7 +37,7 @@ protected:
     sf::Time m_pathUpdateDelay = sf::seconds(1);
     sf::Vector2f pathTarget;
 
-    
+    sf::Vector2f* targetPoint;
 
 public:
 

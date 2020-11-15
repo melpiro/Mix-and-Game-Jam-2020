@@ -60,6 +60,8 @@ void ItemManager::addItemRdm()
     Item it;
     do
     {
+        
+
         sf::Vector2f pos;
         it.x = O::math::rdm::randFloat(m_rect.left, m_rect.left + m_rect.width);
         it.y = O::math::rdm::randFloat(m_rect.top, m_rect.top + m_rect.height);
@@ -78,6 +80,9 @@ void ItemManager::addItemRdm()
 void ItemManager::setTileMap(Tilemap* map)
 {
     m_map = map;
+
+    m_rect.width  = m_map->getSize().x;
+    m_rect.height  = m_map->getSize().x;
 }
 
 
@@ -88,7 +93,6 @@ bool ItemManager::canAdd(Item it)
         return false;
     }
   
-    std::cout << playerRectCpy.left<<" "<< playerRectCpy.top<<" "<<PLAYER_SPACING <<std::endl;
     if (O::math::geo2d::intersect_cercle_cercle(
         sf::Vector2f(playerRectCpy.left, playerRectCpy.top),
         playerRectCpy.width, sf::Vector2f(it.x, it.y), PLAYER_SPACING)) return false;

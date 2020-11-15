@@ -64,7 +64,7 @@ void Character::setPlayAnim(bool playAnim) {
     Character::playAnim = playAnim;
 }
 
-const sf::Vector2f &Character::getPos() const {
+sf::Vector2f &Character::getPos() {
     return pos;
 }
 

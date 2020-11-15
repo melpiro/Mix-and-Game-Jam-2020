@@ -8,12 +8,13 @@
 #include "PlayerCharacter.h"
 
 
-EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Character(fen), miniTetris(fen) {
+EnemyCharacter::EnemyCharacter(sf::RenderWindow *fen, PlayerCharacter* pc) : Character(fen), miniTetris(fen), targetPoint(&pc->getPos()) {
     player = pc;
 
     miniTetris.setPosition(pos.x, pos.y);
     miniTetris.setWindowSize(60*1.5f,140*1.5f);
     miniTetris.setTileSize(5,13);
+
 }
 
 void EnemyCharacter::init() {
@@ -56,7 +57,7 @@ void EnemyCharacter::update(float deltatime) {
 
         if (!m_havePath)
         {
-            computPath(player->getPos());
+            computPath(*targetPoint);
 
             m_pathUpdater.restart();
         }
@@ -64,26 +65,26 @@ void EnemyCharacter::update(float deltatime) {
         {
             m_pathUpdater.restart();
             comeFromPoint = m_path.front();
-            computPath(player->getPos());
+            computPath(*targetPoint);
         }
 
         sf::Vector2f pointPathNext;
         if (m_path.size() == 0)
         {
-            pointPathNext = player->getPos();
+            pointPathNext = *targetPoint;
         }
         else
         {
             pointPathNext = (sf::Vector2f)m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f);
             double distToPoint = O::math::getDistance(pointPathNext, pos);
 
-            if (O::math::getDistance(player->getPos(), pos) < distToPoint)
+            if (m_path.size() <= 2 && O::math::getDistance(*targetPoint, pos) < distToPoint)
             {
-                pointPathNext = player->getPos();
+                pointPathNext = *targetPoint;
             }
             else if (distToPoint < 124.f)
             {
-                computPath(player->getPos());
+                computPath(*targetPoint);
             }
         }
         
