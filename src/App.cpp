@@ -2,7 +2,7 @@
 #include "App.hpp"
 
 App::App() :
-    m_fen(sf::VideoMode(1200,800),"App"),
+    m_fen(sf::VideoMode(1200,800),"Tetradventure"),
     m_loadingMenu(&m_fen),
     m_mainMenu(&m_fen),
     m_mainGame(&m_fen),
@@ -10,10 +10,13 @@ App::App() :
     m_tutoMenu(&m_fen)
 {
     m_fen.setFramerateLimit(60);
+
+    if(icon.loadFromFile("resources/Graphics/icon.png")) {
+        m_fen.setIcon(64, 64, icon.getPixelsPtr());
+    }
+
     m_th_load_ressources = std::async(std::launch::async, &App::loadRessources, this);
 
-    //sf::View v(sf::FloatRect(100,100,2000,1000));
-    //m_fen.setView(v);
 }
 
 
@@ -77,6 +80,21 @@ void App::event()
             if(m_step == GAME) {
                 m_mainGame.reset();
                 m_mainGame.updateOnResize();
+            }
+            else if(m_step == GOTOLVL1) {
+                m_mainGame.reset("resources/data/map0.json");
+                m_mainGame.updateOnResize();
+                m_step = GAME;
+            }
+            else if(m_step == GOTOLVL2) {
+                m_mainGame.reset("resources/data/map1.json");
+                m_mainGame.updateOnResize();
+                m_step = GAME;
+            }
+            else if(m_step == GOTOLVL3) {
+                m_mainGame.reset("resources/data/map2.json");
+                m_mainGame.updateOnResize();
+                m_step = GAME;
             }
         }
         else if (m_step == GAME)

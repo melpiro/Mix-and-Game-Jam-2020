@@ -42,14 +42,17 @@ void MainMenu::init()
     m_buttonGame0.setString("LVL 0");
     m_buttonGame0.loadFont();
     m_buttonGame0.setFillColor(sf::Color(133, 130, 130));
+    m_buttonGame0.setTextColor(sf::Color::Black);
 
     m_buttonGame1.setString("LVL 1");
     m_buttonGame1.loadFont();
     m_buttonGame1.setFillColor(sf::Color(133, 130, 130));
+    m_buttonGame1.setTextColor(sf::Color::Black);
 
     m_buttonGame2.setString("LVL 2");
     m_buttonGame2.loadFont();
     m_buttonGame2.setFillColor(sf::Color(133, 130, 130));
+    m_buttonGame2.setTextColor(sf::Color::Black);
 
 }
 
@@ -78,17 +81,17 @@ Step MainMenu::event(sf::Event e)
     m_buttonGame0.event(e);
     if (m_buttonGame0.clicked(e))
     {
-        //
+        return GOTOLVL1;
     }
     m_buttonGame1.event(e);
     if (m_buttonGame1.clicked(e))
     {
-        //
+        return GOTOLVL2;
     }
     m_buttonGame2.event(e);
     if (m_buttonGame2.clicked(e))
     {
-        //
+        return GOTOLVL3;
     }
 
     return MAIN_MENU;

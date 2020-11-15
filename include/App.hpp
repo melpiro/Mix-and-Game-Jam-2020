@@ -40,5 +40,5 @@ private:
 
     std::future<void> m_th_load_ressources;
 
-   
+   sf::Image icon;
 };

@@ -35,6 +35,7 @@ add_executable(mixgamejam2020 ${SRCS} ${SRCS_OMEGA} src/Tilemap.cpp include/Tile
 
 # Windows
 if (WIN32)
+    target_link_options(mixgamejam2020 PRIVATE -mwindows)
     target_link_libraries(mixgamejam2020 sfml-main sfml-graphics sfml-window sfml-system sfml-audio)
 endif(WIN32)
 
