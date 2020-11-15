@@ -36,6 +36,7 @@ private:
 
     WinMenu m_winMenu;
 
-
     std::future<void> m_th_load_ressources;
+
+   
 };

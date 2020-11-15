@@ -13,6 +13,8 @@
 #include "Enemies/BlobEnemy.h"
 #include "Tilemap.h"
 #include "Peuzeul.hpp"
+#include "Omega/Math/Graph.h"
+#include "Step.hpp"
 
 class MainGame
 {
@@ -32,6 +34,8 @@ public:
 
 
     void reset(const std::string& path = "");
+
+    void initGraph(std::string path);
 
 private:
 
@@ -55,12 +59,12 @@ private:
     Inventory m_inventory;
     ItemManager m_itemManager;
     ItemDrawer m_itemDrawer;
-
     Peuzeul m_peuzeul;
+
+  
 
 
 };
-
 
 
 #endif

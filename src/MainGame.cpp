@@ -55,10 +55,15 @@ void MainGame::init()
 
     m_itemManager.setTileMap(&m_map);
 
-
+    ///////////////////////////////////////////////////////////////
+    // ARTOUNG 
+    // m_peuzeul.init("resources/data/map1.json");
+    // avant
+    // m_itemManager.init();
+    m_peuzeul.init("resources/data/map1.json");
     m_itemManager.init();
 
-    m_peuzeul.init("resources/data/map1.json");
+    
 
     // m_peuzeul.setPositon(sf::Vector2i(22,12));
     // m_peuzeul.polygon(std::vector<sf::Vector2i> {
@@ -254,4 +259,8 @@ void MainGame::reset(const std::string& path) {
 
 
 }
+
+// ---------------------------------- GRAPH
+
+
 

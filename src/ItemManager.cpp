@@ -86,10 +86,12 @@ bool ItemManager::canAdd(Item it)
     {
         return false;
     }
+  
 
     if (O::math::geo2d::intersect_AABB_cercle(
         sf::Vector2f(playerRectCpy.left, playerRectCpy.top),
         sf::Vector2f(playerRectCpy.width, playerRectCpy.height), sf::Vector2f(it.x, it.y), ITEM_SPACING)) return false;
+
 
     for (size_t i = 0; i < m_allItems.size(); i++)
     {
@@ -98,6 +100,12 @@ bool ItemManager::canAdd(Item it)
             sf::Vector2f(it.x, it.y), ITEM_SPACING)) 
                 return false;
     }
+
+    if (O::math::geo2d::intersect_cercle_polygon(sf::Vector2f(it.x, it.y), ITEM_SPACING, m_peuzeulpoly))
+    {
+        return false;
+    }
+
     return true;
 }
 
@@ -119,5 +127,9 @@ void ItemManager::addItemInInventory(Item item)
     m_haveChanged = true;
 }
 
+void ItemManager::setPeuzeulPoly(std::vector<sf::Vector2f>& poly)
+{
+    m_peuzeulpoly = poly;
+}
 const float ItemManager::ITEM_SPACING = 50;
 const float ItemManager::ITEM_SIZE = 50;

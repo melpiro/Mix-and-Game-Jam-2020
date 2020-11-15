@@ -8,6 +8,7 @@
 #include <vector>
 #include "Math/GraphNode.h"
 #include "Vector/VectorFunctions.h"
+#include "Operators/PrintFunctions.h"
 
 
 namespace O{

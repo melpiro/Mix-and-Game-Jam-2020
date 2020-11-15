@@ -15,6 +15,7 @@ void Peuzeul::init(std::string path)
 
     setPositon(sf::Vector2i((int)*(double*)j["peuzeul"]["pos"]["x"].getValue(),(int)*(double*)j["peuzeul"]["pos"]["y"].getValue()));
     std::vector<sf::Vector2i> poly;
+    std::vector<sf::Vector2f> polyReal;
     std::vector<JsonData> polyDAta = *(std::vector<JsonData>*) j["peuzeul"]["poly"].getValue();
     for (size_t i = 0; i < polyDAta.size(); i++)
     {
@@ -24,7 +25,13 @@ void Peuzeul::init(std::string path)
                 (int)*(double*)polyDAta[i]["y"].getValue()
             )
         );
+
+        polyReal.push_back(
+            (sf::Vector2f) (poly.back() + m_pos) * 64.f 
+        );
     }
+
+    m_itemManger->setPeuzeulPoly(polyReal);
     
 
     polygon(poly);
@@ -53,9 +60,12 @@ void Peuzeul::event(sf::Event e)
                 remove();
         }
     }
+
+   
 }
 void Peuzeul::update()
 {
+    
     for (size_t i = 0; i < m_shape.size(); i++)
     {
         m_shape[i].setPosition(

@@ -142,6 +142,9 @@ void Character::event(sf::Event &e) {
 void Character::setTileMap(Tilemap* map)
 {
     m_map = map;
+
+    m_graphNodePos = m_map->getGraphNodePos();
+    m_mapGraph = m_map->getGraph();
 }
 
 float Character::getLife() const {

@@ -57,6 +57,11 @@ protected:
 
     void initHealthBar();
 
+    // -- graph
+
+    std::map<int, sf::Vector2i>* m_graphNodePos;
+    O::math::Graph<int>* m_mapGraph;
+
 public:
 
     void setTileMap(Tilemap* map);

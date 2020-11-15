@@ -53,6 +53,18 @@ void Tilemap::draw() {
     // }
 
 
+    // for (size_t i = 0; i < m_edgeDebug.size(); i++)
+    // {
+    //     m_edgeDebug[i].draw();
+    // }
+    // for (size_t i = 0; i < m_nodesDebug.size(); i++)
+    // {
+    //     m_fen->draw(m_nodesDebug[i]);
+    // }
+    
+    
+
+
 }
 
 void Tilemap::update() {
@@ -85,8 +97,13 @@ std::vector<sf::FloatRect> Tilemap::getColliders() {
 }
 
 void Tilemap::loadlevelFromFile(std::string path) {
+    
+
     JsonData j;
     j.readFile(path);
+
+    initGraph(j);
+
     m_dimensions.x = *((double *)j["mapSize"]["x"].getValue());
     m_dimensions.y = *((double *)j["mapSize"]["y"].getValue());
 
@@ -244,3 +261,5 @@ std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> Tilema
 
     return pointsCol;
 }
+
+

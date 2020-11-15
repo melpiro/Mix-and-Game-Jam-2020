@@ -8,7 +8,7 @@
 
 #include "Character.h"
 #include "MiniTetris.hpp"
-
+#include "Omega/Graphics/Line.h"
 class PlayerCharacter;
 
 
@@ -25,8 +25,19 @@ protected:
 
     MiniTetris miniTetris;
 
-    float agroDist = 500;
-    float loseAgroDist = 800;
+    float agroDist = 800;
+    float loseAgroDist = 1000;
+
+    // -- graph
+
+    std::vector<int> m_path;
+    int nodePlusProchePlayer = -1;
+    bool m_havePath = false;
+
+    std::vector<O::graphics::Line> m_debugPath;
+    int comeFromPoint = -1;
+    sf::Clock m_pathUpdater;
+    sf::Time m_pathUpdateDelay = sf::seconds(1);
 
 public:
 
@@ -44,6 +55,8 @@ public:
     int getId() const;
 
     int operator==(const EnemyCharacter& other) const;
+
+    void computPath();
 
 
 };

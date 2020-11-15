@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include "Tile.h"
 #include "Omega/Math/GeometricFunctions.h"
+#include "Omega/Math/Graph.h"
+#include "JsonData.hpp"
+#include "Omega/Graphics/Line.h"
 
 struct line{
     int y;
@@ -42,7 +45,18 @@ public:
     bool intersectSolidArea(sf::FloatRect rect);
     std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> crossSolidArea(sf::FloatRect rect);
 
+    std::map<int, sf::Vector2i>* getGraphNodePos();
+    O::math::Graph<int>* getGraph();
+
+    std::vector<O::graphics::Line> m_edgeDebug;
+    std::vector<sf::CircleShape> m_nodesDebug;
+
+
+
 private:
+
+
+    void initGraph(JsonData& j);
 
 
     line* getLineUnder(line* ligne, std::vector<line*>* lignes,std::vector<line*>* excluded);
@@ -65,6 +79,9 @@ private:
     int m_tileSize{};
 
     int idCollid;
+
+    std::map<int, sf::Vector2i> m_graphNodePos;
+    O::math::Graph<int> m_mapGraph;
 
 };
 

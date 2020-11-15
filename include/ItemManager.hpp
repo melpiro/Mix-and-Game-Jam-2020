@@ -36,6 +36,8 @@ public:
 
     void removeInventoryItem(int index);
     void addItemInInventory(Item item);
+
+    void setPeuzeulPoly(std::vector<sf::Vector2f>& poly);
 private:
 
     void addItemRdm();
@@ -53,6 +55,8 @@ private:
 
     std::vector<Item> m_inventory;
     int MAX_INV_ITEM = 30;
+
+    std::vector<sf::Vector2f> m_peuzeulpoly;
 
 
 };
