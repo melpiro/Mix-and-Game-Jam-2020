@@ -1,6 +1,8 @@
 //
 // Created by etien on 15/11/2020.
 //
+#include <ObjectManager.h>
+#include <LifePack.h>
 #include "PlayerCharacter.h"
 #include "Enemies/CloneEnemy.h"
 
@@ -70,5 +72,13 @@ void CloneEnemy::update(float deltatime) {
                 isAttacking = false;
             }
             break;
+    }
+}
+
+void CloneEnemy::applyDamage(float dmg) {
+    EnemyCharacter::applyDamage(dmg);
+    if(dead) {
+        for(int i = 0; i < 4; i++)
+            ObjectManager::addObject(new LifePack(4, pos + sf::Vector2f{O::math::rdm::randFloat(0, 50), O::math::rdm::randFloat(0, 50)}, fen, player));
     }
 }

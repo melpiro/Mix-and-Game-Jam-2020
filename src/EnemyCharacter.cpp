@@ -4,6 +4,8 @@
 
 #include <Omega/Graphics/RessourceManager.h>
 #include <EnemyManager.h>
+#include <ObjectManager.h>
+#include <LifePack.h>
 #include "EnemyCharacter.h"
 #include "PlayerCharacter.h"
 
@@ -250,5 +252,12 @@ void EnemyCharacter::computPath(sf::Vector2f dest)
 
     }
 
+}
+
+void EnemyCharacter::applyDamage(float dmg) {
+    Character::applyDamage(dmg);
+    if(dead && O::math::rdm::randInt(0, 5) == 0) {
+        ObjectManager::addObject(new LifePack(4, pos, fen, player));
+    }
 }
 

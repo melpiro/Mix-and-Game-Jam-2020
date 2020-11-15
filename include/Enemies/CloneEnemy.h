@@ -27,6 +27,7 @@ public:
 
     void update(float deltatime) override;
 
+    void applyDamage(float dmg) override;
 };
 
 
