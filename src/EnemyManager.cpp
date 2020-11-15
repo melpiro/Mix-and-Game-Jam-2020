@@ -107,6 +107,8 @@ void EnemyManager::reset() {
 }
 
 bool EnemyManager::collide(Character* character, sf::FloatRect hitbox, Character* pc) {
+
+    //std::cout << "EnemyManager::collide : " << &pc <<std::endl;
     for (auto& e : enemies)
         if(e.second != character && hitbox.intersects(e.second->getHitbox())) {
             character->onCollide(e.second);

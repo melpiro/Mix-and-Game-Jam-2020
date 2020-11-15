@@ -156,7 +156,7 @@ namespace graphics {
 	void Text::setOrigineAsCenter()
 	{
 		sf::FloatRect r = m_text.getGlobalBounds();
-		m_text.setOrigin(r.width / 2.0, r.height / 2.0 +(float) m_text.getCharacterSize() /5.0);
+		m_text.setOrigin(r.width / 2.0, r.height / 2.0 +(float) m_text.getCharacterSize() /2.0);
 		m_isOrigineAsCenter = true;
 
 		update();

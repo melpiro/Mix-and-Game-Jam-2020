@@ -8,9 +8,14 @@
 
 PlayerCharacter::PlayerCharacter(sf::RenderWindow *fen) : Character(fen) {
     Character::player = this;
+
+    //std::cout << "PlayerCharacter::PlayerCharacter : "<< &player <<std::endl;
 }
 
 void PlayerCharacter::init() {
+
+    Character::player = this;
+    //std::cout << "PlayerCharacter::init : "<< &player <<std::endl;
     sprite = sf::Sprite(O::graphics::ressourceManager.getTexture("et_tilemap"));
     sprite.setScale(4, 4);
 
@@ -28,6 +33,8 @@ void PlayerCharacter::init() {
     m_maxLife = health;
 
     initHealthBar();
+
+    
 }
 
 void PlayerCharacter::update(float deltatime) {
