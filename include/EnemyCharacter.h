@@ -35,6 +35,9 @@ protected:
     int comeFromPoint = -1;
     sf::Clock m_pathUpdater;
     sf::Time m_pathUpdateDelay = sf::seconds(1);
+    sf::Vector2f pathTarget;
+
+    
 
 public:
 
@@ -53,7 +56,7 @@ public:
     int operator==(const EnemyCharacter& other) const;
     int operator!=(const EnemyCharacter& other) const;
 
-    void computPath();
+    void computPath(sf::Vector2f dest);
 
 
 };

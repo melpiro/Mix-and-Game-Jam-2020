@@ -64,7 +64,10 @@ void MainGame::init()
     // avant
     // m_itemManager.init();
     m_peuzeul.init("resources/data/map1.json");
-    m_itemManager.init();
+    sf::FloatRect box = m_character.getHitbox();
+    box.left = m_character.getPos().x;
+    box.top = m_character.getPos().y;
+    m_itemManager.init(box);
 
     
 
@@ -221,7 +224,7 @@ void MainGame::reset(const std::string& path) {
     m_itemManager.setTileMap(&m_map);
 
 
-    m_itemManager.init();
+    m_itemManager.init(m_character.getHitbox());
 
     m_peuzeul.setPositon(sf::Vector2i(22,12));
     m_peuzeul.polygon(std::vector<sf::Vector2i> {

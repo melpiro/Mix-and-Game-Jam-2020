@@ -56,7 +56,7 @@ void EnemyCharacter::update(float deltatime) {
 
         if (!m_havePath)
         {
-            computPath();
+            computPath(player->getPos());
 
             m_pathUpdater.restart();
         }
@@ -64,10 +64,8 @@ void EnemyCharacter::update(float deltatime) {
         {
             m_pathUpdater.restart();
             comeFromPoint = m_path.front();
-            computPath();
+            computPath(player->getPos());
         }
-
-        
 
         sf::Vector2f pointPathNext;
         if (m_path.size() == 0)
@@ -82,6 +80,10 @@ void EnemyCharacter::update(float deltatime) {
             if (O::math::getDistance(player->getPos(), pos) < distToPoint)
             {
                 pointPathNext = player->getPos();
+            }
+            else if (distToPoint < 124.f)
+            {
+                computPath(player->getPos());
             }
         }
         
@@ -143,15 +145,16 @@ int EnemyCharacter::operator!=(const EnemyCharacter &other) const {
     return id != other.id;
 }
 
-void EnemyCharacter::computPath()
+void EnemyCharacter::computPath(sf::Vector2f dest)
 {
+    pathTarget = dest;
     m_path.clear();
 
     double minDist = 100000000;
     int indexBestForPlayer;
     for (auto node:*m_graphNodePos)
     {
-        double d = O::math::getDistanceCarre((sf::Vector2f)(node.second) * 64.f + sf::Vector2f(32.f, 32.f), player->getPos());
+        double d = O::math::getDistanceCarre((sf::Vector2f)(node.second) * 64.f + sf::Vector2f(32.f, 32.f), dest);
 
         if (d < minDist)
         {
@@ -203,7 +206,7 @@ void EnemyCharacter::computPath()
     {
         if (
             O::math::getDistance(
-                player->getPos(),
+                dest,
                 (sf::Vector2f) m_graphNodePos->at(m_path[m_path.size() - 2]) * 64.f + sf::Vector2f(32.f, 32.f)) 
             <=
             O::math::getDistance(
@@ -240,7 +243,7 @@ void EnemyCharacter::computPath()
         }
 
         m_debugPath.push_back(O::graphics::Line(
-            fen, player->getPos(), (sf::Vector2f) m_graphNodePos->at(m_path.back()) * 64.f + sf::Vector2f(32.f, 32.f), 2
+            fen, dest, (sf::Vector2f) m_graphNodePos->at(m_path.back()) * 64.f + sf::Vector2f(32.f, 32.f), 2
         ));
         m_debugPath.back().setFillColor(sf::Color::Green);
     

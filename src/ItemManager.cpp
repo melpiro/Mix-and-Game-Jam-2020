@@ -8,8 +8,9 @@ ItemManager::ItemManager(sf::FloatRect rect, int nbMaxItem)
     
 }
 
-void ItemManager::init()
+void ItemManager::init(sf::FloatRect playerRect)
 {
+    playerRectCpy = playerRect;
     for (size_t i = 0; i < nbMaxItem; i++)
     {
         addItemRdm();
@@ -87,10 +88,10 @@ bool ItemManager::canAdd(Item it)
         return false;
     }
   
-
-    if (O::math::geo2d::intersect_AABB_cercle(
+    std::cout << playerRectCpy.left<<" "<< playerRectCpy.top<<" "<<PLAYER_SPACING <<std::endl;
+    if (O::math::geo2d::intersect_cercle_cercle(
         sf::Vector2f(playerRectCpy.left, playerRectCpy.top),
-        sf::Vector2f(playerRectCpy.width, playerRectCpy.height), sf::Vector2f(it.x, it.y), PLAYER_SPACING)) return false;
+        playerRectCpy.width, sf::Vector2f(it.x, it.y), PLAYER_SPACING)) return false;
 
 
     for (size_t i = 0; i < m_allItems.size(); i++)
@@ -133,4 +134,4 @@ void ItemManager::setPeuzeulPoly(std::vector<sf::Vector2f>& poly)
 }
 const float ItemManager::ITEM_SPACING = 50;
 const float ItemManager::ITEM_SIZE = 50;
-const float ItemManager::PLAYER_SPACING = 500;
+const float ItemManager::PLAYER_SPACING = 600;

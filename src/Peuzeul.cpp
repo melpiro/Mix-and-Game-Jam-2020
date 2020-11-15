@@ -65,7 +65,7 @@ void Peuzeul::event(sf::Event e)
 }
 void Peuzeul::update()
 {
-    //std::cout << indexMousePos <<std::endl;
+   // std::cout << indexMousePos <<std::endl;
     for (size_t i = 0; i < m_shape.size(); i++)
     {
         m_shape[i].setPosition(

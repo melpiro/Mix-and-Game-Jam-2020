@@ -23,7 +23,7 @@ public:
     ItemManager(sf::FloatRect rect, int nbMaxItem);
 
     void setTileMap(Tilemap* map);
-    void init();
+    void init(sf::FloatRect playerRect);
     
 
     void pickItem(sf::FloatRect playerRect);
