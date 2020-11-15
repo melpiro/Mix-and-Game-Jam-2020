@@ -22,6 +22,8 @@ public:
     void init() override;
 
     void update(float deltatime) override;
+
+    Type getType() override;
 };
 
 

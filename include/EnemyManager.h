@@ -33,6 +33,8 @@ public:
     static void addEnemy(EnemyCharacter* enemy);
     static void killEnemy(int id);
 
+    static const std::map<int, EnemyCharacter *> &getEnemies();
+
     static void addProjectile(Projectile projectile);
     static std::list<Projectile> &getProjectiles();
 
@@ -47,6 +49,8 @@ public:
     static void setTileMap(Tilemap *tilemap);
 
     static void reset();
+
+    static bool collide(Character* character, sf::FloatRect hitbox, Character* pc = nullptr);
 
     static Tilemap *tilemap;
 };

@@ -3,9 +3,14 @@
 //
 
 #include <Omega/Graphics/RessourceManager.h>
+#include "EnemyManager.h"
 #include "Character.h"
 
+int Character::nextID = 0;
+Character* Character::player = nullptr;
+
 Character::Character(sf::RenderWindow* fen) : fen(fen),  m_healthBar(fen, 0, 0, 0, 0){
+    id = nextID++;
 }
 
 void Character::initHealthBar() {
@@ -96,31 +101,29 @@ void Character::update(float deltatime) {
         }
     }
 
-    if (m_map == NULL)
-        pos += vel * deltatime;
-    else
+
+    if(m_map != nullptr)
     {
         auto nextpos = pos + vel * deltatime;
-
         auto bound = getHitbox();
 
         auto nextBoundX = bound;
         nextBoundX.left = nextpos.x - bound.width/2.0;
 
-        if (m_map->intersectSolidArea(nextBoundX)) {
+        if (m_map->intersectSolidArea(nextBoundX) || EnemyManager::collide(this, nextBoundX, player)) {
             vel.x = 0;
         }
         
         auto nextBoundY = bound;
         nextBoundY.top = nextpos.y;
-        if (m_map->intersectSolidArea(nextBoundY)) {
+        if (m_map->intersectSolidArea(nextBoundY) || EnemyManager::collide(this, nextBoundY, player)) {
             vel.y = 0;
         }
 
         
-        pos += vel * deltatime;
     }
-    
+    pos += vel * deltatime;
+
     sprite.setPosition(pos);
 
 
@@ -166,7 +169,7 @@ void Character::applyDamage(float dmg) {
         kill();
 }
 
-sf::FloatRect Character::getHitbox() {
+sf::FloatRect Character::getHitbox() const {
     auto bound = sprite.getGlobalBounds();
     bound.height /= 2.0;
     bound.width /= 2.0;
@@ -175,6 +178,15 @@ sf::FloatRect Character::getHitbox() {
     return bound;
 }
 
+int Character::getId() const {
+    return id;
+}
+
+
 void Character::init() {
+
+}
+
+void Character::onCollide(Character *other) {
 
 }

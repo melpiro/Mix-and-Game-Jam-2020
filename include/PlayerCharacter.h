@@ -14,7 +14,10 @@ class PlayerCharacter : public Character {
     std::vector<EnemyCharacter*> enemiesAgro;
     size_t targetedEnemy = 0;
 
-    
+    float invincibilityTime = 1;
+    float currentInvincibilityTime = 0;
+
+
 public:
 
     explicit PlayerCharacter(sf::RenderWindow *fen);
@@ -31,9 +34,12 @@ public:
 
     void draw() override;
 
-
+    void applyDamage(float dmg) override;
+    bool invincible() const;
 
     sf::Vector2f getCameraPos();
+
+    Type getType() override;
 
 };
 

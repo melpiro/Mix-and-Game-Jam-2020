@@ -88,6 +88,42 @@ std::list<Projectile> &EnemyManager::getProjectiles() {
     return projectiles;
 }
 
+void EnemyManager::killProjectile(int id) {
+    auto it = projectiles.begin();
+    while (it != projectiles.end()) {
+        if(it->id == id)
+            it = projectiles.erase(it);
+        else
+            it++;
+    }
+}
+
+void EnemyManager::reset() {
+    enemies.clear();
+    projectiles.clear();
+}
+
+bool EnemyManager::collide(Character* character, sf::FloatRect hitbox, Character* pc) {
+    for (auto& e : enemies)
+        if(e.second != character && hitbox.intersects(e.second->getHitbox())) {
+            character->onCollide(e.second);
+            e.second->onCollide(character);
+            return true;
+        }
+
+    if(pc != nullptr && pc != character && hitbox.intersects(pc->getHitbox())) {
+        character->onCollide(pc);
+        pc->onCollide(character);
+        return true;
+    }
+
+    return false;
+}
+
+const std::map<int, EnemyCharacter *> &EnemyManager::getEnemies() {
+    return enemies;
+}
+
 // Projectile =================================
 int Projectile::nextID = 0;
 
@@ -106,19 +142,4 @@ void Projectile::draw() const {
     rect.setFillColor(sf::Color::Red);
     rect.setPosition(pos);
     win->draw(rect);
-}
-
-void EnemyManager::killProjectile(int id) {
-    auto it = projectiles.begin();
-    while (it != projectiles.end()) {
-        if(it->id == id)
-            it = projectiles.erase(it);
-        else
-            it++;
-    }
-}
-
-void EnemyManager::reset() {
-    enemies.clear();
-    projectiles.clear();
 }
