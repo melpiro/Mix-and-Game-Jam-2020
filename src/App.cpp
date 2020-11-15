@@ -85,7 +85,6 @@ void App::event()
         }
         else if (m_step == WIN_MENU)
         {
-            m_fen.setView(m_fen.getDefaultView());
             m_step = m_winMenu.event(e);
             if(m_step == GAME) {
                 m_winMenu.currentLvl++;
@@ -116,6 +115,8 @@ void App::update(float dt)
     else if (m_step == GAME)
     {
         m_step = m_mainGame.update(dt);
+        if (m_step != GAME)
+            m_fen.setView(m_fen.getDefaultView());
     }
     else if (m_step == WIN_MENU)
     {
