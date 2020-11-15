@@ -5,6 +5,7 @@
 #include <JsonData.hpp>
 #include <Enemies/BlobEnemy.h>
 #include <Enemies/SpitterEnemy.h>
+#include <Enemies/CloneEnemy.h>
 #include "EnemyManager.h"
 
 std::map<int, EnemyCharacter*> EnemyManager::enemies;
@@ -69,6 +70,8 @@ void EnemyManager::loadEnemiesFromFiles(const std::string &path, sf::RenderWindo
             e = new BlobEnemy(win, character);
         else if(type == "spitter")
             e = new SpitterEnemy(win, character);
+        else if(type == "clone")
+            e = new CloneEnemy(win, character);
         else
             e = new EnemyCharacter(win, character);
 

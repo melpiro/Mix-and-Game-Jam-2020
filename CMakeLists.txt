@@ -31,6 +31,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Omega/String
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Omega/Vector)
 
+set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+
 add_executable(mixgamejam2020 ${SRCS} ${SRCS_OMEGA} src/Tilemap.cpp include/Tilemap.h src/Tile.cpp include/Tile.h src/ObjectManager.cpp include/ObjectManager.h src/Object.cpp include/Object.h src/Spawner.cpp include/Spawner.h)
 
 # Windows

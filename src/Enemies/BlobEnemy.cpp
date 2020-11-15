@@ -24,6 +24,8 @@ void BlobEnemy::init() {
 
     life = 4;
 
+    agroDist = 450;
+
     initHealthBar();
 }
 

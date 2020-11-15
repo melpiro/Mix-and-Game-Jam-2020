@@ -40,6 +40,7 @@ void init_texture_manager()
     // Enemies
     O::graphics::ressourceManager.addTexture("Enemies/blob.png", "blob_enemy");
     O::graphics::ressourceManager.addTexture("Enemies/spitter.png", "spitter_enemy");
+    O::graphics::ressourceManager.addTexture("Enemies/clone.png", "clone_enemy");
 }
 
 int main()
