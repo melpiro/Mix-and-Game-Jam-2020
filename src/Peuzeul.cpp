@@ -10,8 +10,8 @@ void Peuzeul::init(std::string path)
 {
 
     JsonData j;
-    j.readFile(path);
 
+    j.readFile(path);
 
     setPositon(sf::Vector2i((int)*(double*)j["peuzeul"]["pos"]["x"].getValue(),(int)*(double*)j["peuzeul"]["pos"]["y"].getValue()));
     std::vector<sf::Vector2i> poly;

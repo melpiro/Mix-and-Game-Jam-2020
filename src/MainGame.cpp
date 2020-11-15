@@ -18,83 +18,10 @@ MainGame::MainGame(sf::RenderWindow* fen) :
 
 void MainGame::init()
 {
-    m_character.init();
-    m_inventory.init();
-    m_itemDrawer.init();
 
     ObjectManager::init();
 
-    EnemyManager::loadEnemiesFromFiles("resources/data/map1.json", m_fen, &m_character);
 
-
-
-    //Initialisation de la tilemap
-    std::vector<Tile> tileSet;
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,4);
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontGauche"),4);// 7
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontDroite"),4);// 8
-    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("ladder"),4);// 9
-
-
-    //les tiles solides
-    tileSet[0].setSolid(true);
-    tileSet[2].setSolid(true);
-    tileSet[3].setSolid(true);
-    tileSet[6].setSolid(true);
-
-    m_map = Tilemap(tileSet,*m_fen,"resources/data/map1.json");
-
-
-    m_character.setPos({16*16*4,12*16*4});
-
-    m_character.setTileMap(&m_map);
-    EnemyManager::setTileMap(&m_map);
-
-
-    m_itemManager.setTileMap(&m_map);
-
-    ///////////////////////////////////////////////////////////////
-    // ARTOUNG 
-    // m_peuzeul.init("resources/data/map1.json");
-    // avant
-    // m_itemManager.init();
-    m_peuzeul.init("resources/data/map1.json");
-    sf::FloatRect box = m_character.getHitbox();
-    box.left = m_character.getPos().x;
-    box.top = m_character.getPos().y;
-    m_itemManager.init(box);
-
-    
-
-    // m_peuzeul.setPositon(sf::Vector2i(22,12));
-    // m_peuzeul.polygon(std::vector<sf::Vector2i> {
-    //     sf::Vector2i(0,0),
-    //     sf::Vector2i(6,0),
-    //     sf::Vector2i(6,1),
-    //     sf::Vector2i(7,1),
-    //     sf::Vector2i(7,2),
-    //     sf::Vector2i(8,2),
-    //     sf::Vector2i(8,3),
-    //     sf::Vector2i(7,3),
-    //     sf::Vector2i(7,4),
-    //     sf::Vector2i(1,4),
-    //     sf::Vector2i(1,3),
-    //     sf::Vector2i(0,3),
-    //     sf::Vector2i(0,1),
-    //     sf::Vector2i(-1,1),
-    //     sf::Vector2i(-1,0)
-    // });
-
-    ObjectManager::setTileMap(&m_map);
-    ObjectManager::setFen(m_fen);
-    ObjectManager::setHero(&m_character);
-    ObjectManager::loadObjectsFromFile("resources/data/map1.json");
 
 
     MusicManager::init();
@@ -224,6 +151,9 @@ void MainGame::updateOnResize()
 }
 
 void MainGame::reset(const std::string& path) {
+
+    if(path.empty()){reset("resources/data/map0.json");return;}
+
     EnemyManager::reset();
 
     m_character = PlayerCharacter(m_fen);
@@ -232,65 +162,48 @@ void MainGame::reset(const std::string& path) {
     m_itemDrawer = ItemDrawer(m_fen, &m_itemManager);
     m_peuzeul = Peuzeul(m_fen, &m_itemManager);
 
+
+
     m_character.init();
     m_inventory.init();
     m_itemDrawer.init();
 
-    EnemyManager::loadEnemiesFromFiles("resources/data/map1.json", m_fen, &m_character);
+    EnemyManager::loadEnemiesFromFiles(path, m_fen, &m_character);
 
     m_character.setPos({16*16*4,12*16*4});
     m_character.setTileMap(&m_map);
     EnemyManager::setTileMap(&m_map);
 
+
+
+
+    EnemyManager::loadEnemiesFromFiles(path, m_fen, &m_character);
+
+
+    //Initialisation de la tilemap
+    std::vector<Tile> tileSet;
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,4);//0
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);//1
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);//2
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);//3
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontGauche"),4);// 7
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontDroite"),4);// 8
+    tileSet.emplace_back(O::graphics::ressourceManager.getTexture("ladder"),4);// 9
+
+
+    //les tiles solides
+    tileSet[0].setSolid(true);
+    tileSet[2].setSolid(true);
+    tileSet[3].setSolid(true);
+    tileSet[6].setSolid(true);
+
+    m_map = Tilemap(tileSet,*m_fen,path);
+    m_peuzeul.init(path);
     m_itemManager.setTileMap(&m_map);
-
-
     m_itemManager.init(m_character.getHitbox());
-
-    m_peuzeul.setPositon(sf::Vector2i(22,12));
-    m_peuzeul.polygon(std::vector<sf::Vector2i> {
-            sf::Vector2i(0,0),
-            sf::Vector2i(6,0),
-            sf::Vector2i(6,1),
-            sf::Vector2i(7,1),
-            sf::Vector2i(7,2),
-            sf::Vector2i(8,2),
-            sf::Vector2i(8,3),
-            sf::Vector2i(7,3),
-            sf::Vector2i(7,4),
-            sf::Vector2i(1,4),
-            sf::Vector2i(1,3),
-            sf::Vector2i(0,3)
-    });
-
-    if(!path.empty()) {
-
-        EnemyManager::loadEnemiesFromFiles(path, m_fen, &m_character);
-
-
-        //Initialisation de la tilemap
-        std::vector<Tile> tileSet;
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,4);//0
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);//1
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);//2
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);//3
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontGauche"),4);// 7
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontDroite"),4);// 8
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("ladder"),4);// 9
-
-
-        //les tiles solides
-        tileSet[0].setSolid(true);
-        tileSet[2].setSolid(true);
-        tileSet[3].setSolid(true);
-        tileSet[6].setSolid(true);
-
-        m_map = Tilemap(tileSet,*m_fen,path);
-
-    }
 
 
 }
