@@ -152,7 +152,7 @@ void MainGame::updateOnResize()
 
 void MainGame::reset(const std::string& path) {
 
-    if(path.empty()){reset("resources/data/map1.json");return;}
+    if(path.empty()){reset("resources/data/map2.json");return;}
 
     EnemyManager::reset();
 

@@ -78,20 +78,20 @@ void EnemyCharacter::update(float deltatime) {
         else
         {
             pointPathNext = (sf::Vector2f)m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f);
-            double distToPoint = O::math::getDistance(pointPathNext, pos);
+            double distToPoint = O::math::getDistance(pointPathNext, pos + sf::Vector2f(0,getHitbox().height / 2.0));
 
-            if (m_path.size() <= 2 && O::math::getDistance(*targetPoint, pos) < distToPoint)
+            if (m_path.size() <= 2 && O::math::getDistance(*targetPoint, pos + sf::Vector2f(0,getHitbox().height / 2.0)) < distToPoint)
             {
                 pointPathNext = *targetPoint;
             }
-            else if (distToPoint < 124.f)
+            else if (distToPoint < 32.f)
             {
                 computPath(*targetPoint);
             }
         }
         
 
-        vel = O::math::normalise(pointPathNext - pos) * speed;
+        vel = O::math::normalise(pointPathNext - (pos + sf::Vector2f(0,getHitbox().height / 2.0) )) * speed;
 
 
         if(miniTetris.getScore() > 0) {
@@ -188,16 +188,16 @@ void EnemyCharacter::computPath(sf::Vector2f dest)
 
     if (m_path.size() >= 2 &&
         O::math::getDistance(
-            this->pos,
+            this->pos + sf::Vector2f(0,getHitbox().height / 2.0),
             (sf::Vector2f) m_graphNodePos->at(m_path[1]) * 64.f + sf::Vector2f(32.f, 32.f)) 
         <=
         O::math::getDistance(
             (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f),
-            (sf::Vector2f) m_graphNodePos->at(m_path[1]) * 64.f + sf::Vector2f(32.f, 32.f)) + 32.f
+            (sf::Vector2f) m_graphNodePos->at(m_path[1]) * 64.f + sf::Vector2f(32.f, 32.f)) + 16.f
         &&
         O::math::getDistance(
-            this->pos,
-            (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f)) - 32.f
+            this->pos + sf::Vector2f(0,getHitbox().height / 2.0),
+            (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f)) - 16.f
         <=
         O::math::getDistance(
             (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f),
@@ -221,8 +221,8 @@ void EnemyCharacter::computPath(sf::Vector2f dest)
     {
         if (
         O::math::getDistance(
-            pos,
-            (sf::Vector2f) m_graphNodePos->at(m_path[0]) * 64.f + sf::Vector2f(32.f, 32.f)) <= 64.f
+            pos + sf::Vector2f(0,getHitbox().height / 2.0),
+            (sf::Vector2f) m_graphNodePos->at(m_path[0]) * 64.f + sf::Vector2f(32.f, 32.f)) <= 32.f
             ) 
             m_path.clear();
         
@@ -233,7 +233,7 @@ void EnemyCharacter::computPath(sf::Vector2f dest)
         
     
         m_debugPath.push_back(O::graphics::Line(
-            fen, this->pos, (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f), 2
+            fen, this->pos + sf::Vector2f(0,getHitbox().height / 2.0), (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f), 2
         ));
         m_debugPath.back().setFillColor(sf::Color::Green);
         for (int i = 0; i < (int)(m_path.size()) - 1; i++)
