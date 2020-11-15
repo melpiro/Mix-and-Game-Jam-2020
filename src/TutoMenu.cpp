@@ -6,7 +6,7 @@
 
 TutoMenu::TutoMenu(sf::RenderWindow *fen):
 m_tuto(fen,"tuto",STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT,STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT,true),
-m_backButton(fen,"mainFont",STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT,STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT,true),
+m_backButton(fen,"mainFont",STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, 300, 80,STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT,true),
 m_background(fen,"loadingMenuBackground",STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, true)
 {
     m_posYmin = m_tuto.getPosition().y ;
@@ -15,12 +15,12 @@ m_background(fen,"loadingMenuBackground",STATIC::SYS::HALF_WIDTH, STATIC::SYS::H
 
 void TutoMenu::init() {
     m_tuto.loadTexture();
-    m_backButton.loadFont();
     m_background.loadTexture();
-    m_backButton.setSize(300,80);
     m_backButton.setString(O::graphics::ressourceManager.text(6));
     m_backButton.setTextColor(sf::Color::Black);
     m_backButton.setFillColor(sf::Color(133, 130, 130));
+  
+    m_backButton.loadFont();
     reset();
 }
 
@@ -44,6 +44,7 @@ Step TutoMenu::event(sf::Event e) {
 
     }
 
+    m_backButton.event(e);
     if(m_backButton.clicked(e)){
         return Step::MAIN_MENU;
     }
@@ -53,10 +54,11 @@ Step TutoMenu::event(sf::Event e) {
 
 void TutoMenu::update(float dt) {
     m_tuto.update();
+
+    m_backButton.setPosition(STATIC::SYS::HALF_WIDTH,m_tuto.getPosition().y + 1000);
     m_backButton.update();
     m_background.update();
 
-    m_backButton.setPosition(m_tuto.getPosition().x-400,m_tuto.getPosition().y + 1000);
 
 }
 

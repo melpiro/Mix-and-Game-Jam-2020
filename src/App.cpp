@@ -128,8 +128,8 @@ void App::update(float dt)
     if (m_lastStep != m_step)
     {
         m_lastStep = m_step;
-        m_fen.setSize(m_fen.getSize()+sf::Vector2u(1,1));
         m_fen.setSize(m_fen.getSize()-sf::Vector2u(1,1));
+        m_fen.setSize(m_fen.getSize()+sf::Vector2u(1,1));
     }
 
     MusicManager::update(dt);
