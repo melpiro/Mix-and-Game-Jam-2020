@@ -27,7 +27,7 @@ void App::loadRessources()
     m_winMenu.init();
     m_tutoMenu.init();
 
-    m_step = TUTO_MENU;
+    m_step = MAIN_MENU;
     m_mainGame.updateOnResize();
 }
 
