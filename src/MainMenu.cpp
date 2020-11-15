@@ -3,6 +3,7 @@
 MainMenu::MainMenu(sf::RenderWindow* fen) :
     m_background(fen, "loadingMenuBackground", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, true),
     m_bouttonJouer(fen,"mainFont",STATIC::SYS::HALF_WIDTH,500,300,100,STATIC::SYS::HALF_WIDTH,STATIC::SYS::HALF_HEIGHT,true),
+    m_bouttonTuto(fen,"mainFont",STATIC::SYS::HALF_WIDTH,680,300,100,STATIC::SYS::HALF_WIDTH,STATIC::SYS::HALF_HEIGHT,true),
     m_titre(fen,"titreJeu",STATIC::SYS::HALF_WIDTH,200,true)
 {
     m_fen=fen;
@@ -21,6 +22,11 @@ void MainMenu::init()
     m_bouttonJouer.setString(O::graphics::ressourceManager.text(4));
     m_bouttonJouer.setTextColor(sf::Color::Black);
     m_bouttonJouer.setFillColor(sf::Color(133, 130, 130));
+
+    m_bouttonTuto.loadFont();
+    m_bouttonTuto.setString(O::graphics::ressourceManager.text(7));
+    m_bouttonTuto.setTextColor(sf::Color::Black);
+    m_bouttonTuto.setFillColor(sf::Color(133, 130, 130));
 }
 
 Step MainMenu::event(sf::Event e)
@@ -38,12 +44,17 @@ Step MainMenu::event(sf::Event e)
         return GAME;
     }
 
+    if(m_bouttonTuto.clicked(e)){
+        return TUTO_MENU;
+    }
+
     return MAIN_MENU;
 }
 void MainMenu::update(float dt)
 {
     m_titre.update();
     m_bouttonJouer.update();
+    m_bouttonTuto.update();
 
     auto pos = m_titre.getPosition();
     m_titre.setPosition(pos.x,pos.y + m_pxDir*dt);
@@ -60,6 +71,7 @@ void MainMenu::render()
     m_background.draw();
     m_titre.draw();
     m_bouttonJouer.draw();
+    m_bouttonTuto.draw();
 
 }
 

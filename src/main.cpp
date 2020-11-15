@@ -11,7 +11,7 @@ void init_texture_manager()
     O::graphics::ressourceManager.loadLanguage("resources/Language/en");
 
     O::graphics::ressourceManager.addTextureAndLoadIt("LoadingMenu/loadIcon.png", "loadIcon");
-    O::graphics::ressourceManager.addTexture("LoadingMenu/background.jpg", "loadingMenuBackground");
+    O::graphics::ressourceManager.addTexture("MainMenu/menuBack.png", "loadingMenuBackground");
     O::graphics::ressourceManager.addTexture("MainMenu/boutonTexture.png", "boutonTexture");
     O::graphics::ressourceManager.addTexture("Tetris/cell.png", "tetrisCell");
     O::graphics::ressourceManager.addTexture("Inventory/background.png", "inventoryBackground");
@@ -30,9 +30,10 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("TileSet/ladder.png","ladder");
 
     O::graphics::ressourceManager.addTexture("MainMenu/titre.png","titreJeu");
+    O::graphics::ressourceManager.addTexture("MainMenu/gameTuto.png","tuto");
     
-    
-    O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");
+    O::graphics::ressourceManager.addFontAndLoadIt("arcade.ttf", "mainFont");
+    O::graphics::ressourceManager.addFontAndLoadIt("3Dventure.ttf", "titleFont");
 
     // Tilemap
     O::graphics::ressourceManager.addTexture("Tilemap/tilemap_packed.png", "et_tilemap");

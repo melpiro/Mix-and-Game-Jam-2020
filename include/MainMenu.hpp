@@ -43,6 +43,7 @@ private:
 
     O::graphics::Sprite m_background;
     O::graphics::Button m_bouttonJouer;
+    O::graphics::Button m_bouttonTuto;
 };
 
 
