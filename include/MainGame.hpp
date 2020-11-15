@@ -15,6 +15,7 @@
 #include "Peuzeul.hpp"
 #include "Omega/Math/Graph.h"
 #include "Step.hpp"
+#include "Graphics/Text.h"
 
 class MainGame
 {
@@ -62,6 +63,9 @@ private:
     Peuzeul m_peuzeul;
 
     bool m_endReset = true;
+
+    O::graphics::Text m_textExplain;
+    bool m_mapZero = false;
 
   
 

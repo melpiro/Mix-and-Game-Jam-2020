@@ -10,10 +10,14 @@ MainGame::MainGame(sf::RenderWindow* fen) :
     m_inventory(fen, &m_viewZoom, &m_itemManager),
     m_itemManager(sf::FloatRect(0, 0, 50 * 16 * 4,50 * 16 * 4), 30),
     m_itemDrawer(fen, &m_itemManager),
-    m_peuzeul(fen, &m_itemManager)
+    m_peuzeul(fen, &m_itemManager),
+    m_textExplain(fen,"mainFont", 1410,600, true)
 {
     m_fen=fen;
 
+    m_textExplain.setString(O::graphics::ressourceManager.text(9));
+    m_textExplain.gT().setFillColor(sf::Color::White);
+    m_textExplain.setCharacterSize(65); 
 }
 
 void MainGame::init()
@@ -29,6 +33,8 @@ void MainGame::init()
 
     MusicManager::getMusic("explore")->setLoop(true);
     MusicManager::getMusic("fight")->setLoop(true);
+
+    m_textExplain.loadFont();
 
 
     //std::cout << "MainGame::init : " << &m_character <<std::endl;
@@ -132,8 +138,14 @@ Step MainGame::update(float dt)
 void MainGame::render()
 {
     m_map.draw();
+
+    if (m_mapZero)
+        m_textExplain.draw();
+
     m_peuzeul.render();
     m_itemDrawer.render();
+
+    
 
     EnemyManager::draw();
 
@@ -152,7 +164,14 @@ void MainGame::updateOnResize()
 
 void MainGame::reset(const std::string& path) {
 
-    if(path.empty()){reset("resources/data/map0.json");return;}
+    if(path.empty()){
+        m_mapZero = true;
+        reset("resources/data/map0.json");
+        return;
+    }
+    if (path == "resources/data/map0.json")
+        m_mapZero = true;
+    else m_mapZero = false;
 
     m_endReset = false;
 
