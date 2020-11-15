@@ -194,29 +194,30 @@ void EnemyCharacter::computPath()
 
         m_path.erase(m_path.begin());
 
-
-    if (m_path.size()> 0) 
+    if (m_path.size()> 0)
     {
         m_path.pop_back();
+        if(!m_path.empty()) {
 
-        m_debugPath.push_back(O::graphics::Line(
-            fen, this->pos, (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f), 2
-        ));
-        m_debugPath.back().setFillColor(sf::Color::Green);
-        for (int i = 0; i < (int)(m_path.size()) - 1; i++)
-        {
-            m_debugPath.push_back(O::graphics::Line(
-                fen, (sf::Vector2f) m_graphNodePos->at(m_path[i]) * 64.f + sf::Vector2f(32.f, 32.f), (sf::Vector2f) m_graphNodePos->at(m_path[i + 1]) * 64.f + sf::Vector2f(32.f, 32.f), 2
-            ));
+            m_debugPath.emplace_back(
+                    fen, this->pos, (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f), 2
+            );
+            m_debugPath.back().setFillColor(sf::Color::Green);
+            for (int i = 0; i < (int)(m_path.size()) - 1; i++)
+            {
+                m_debugPath.emplace_back(
+                        fen, (sf::Vector2f) m_graphNodePos->at(m_path[i]) * 64.f + sf::Vector2f(32.f, 32.f), (sf::Vector2f) m_graphNodePos->at(m_path[i + 1]) * 64.f + sf::Vector2f(32.f, 32.f), 2
+                );
+                m_debugPath.back().setFillColor(sf::Color::Green);
+            }
+
+            m_debugPath.emplace_back(
+                    fen, player->getPos(), (sf::Vector2f) m_graphNodePos->at(m_path.back()) * 64.f + sf::Vector2f(32.f, 32.f), 2
+            );
             m_debugPath.back().setFillColor(sf::Color::Green);
         }
 
-        m_debugPath.push_back(O::graphics::Line(
-            fen, player->getPos(), (sf::Vector2f) m_graphNodePos->at(m_path.back()) * 64.f + sf::Vector2f(32.f, 32.f), 2
-        ));
-        m_debugPath.back().setFillColor(sf::Color::Green);
     }
-
 
 }
 
