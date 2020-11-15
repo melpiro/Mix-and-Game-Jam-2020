@@ -21,9 +21,6 @@ void MainGame::init()
 
     ObjectManager::init();
 
-
-
-
     MusicManager::init();
     MusicManager::getMusic("explore")->play();
     MusicManager::getMusic("fight")->play();

@@ -130,7 +130,7 @@ void App::update(float dt)
 
 void App::render()
 {
-    m_fen.clear();
+    m_fen.clear(sf::Color(10,83,165));
 
     if (m_step == LOADING_MENU)
     {
