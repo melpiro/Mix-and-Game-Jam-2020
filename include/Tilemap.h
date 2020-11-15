@@ -48,6 +48,7 @@ public:
     std::map<int, sf::Vector2i>* getGraphNodePos();
     O::math::Graph<int>* getGraph();
 
+
     std::vector<O::graphics::Line> m_edgeDebug;
     std::vector<sf::CircleShape> m_nodesDebug;
 

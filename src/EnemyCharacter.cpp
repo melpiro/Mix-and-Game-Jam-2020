@@ -122,10 +122,10 @@ void EnemyCharacter::update(float deltatime) {
 void EnemyCharacter::draw() {
     Character::draw();
 
-    for (size_t i = 0; i < m_debugPath.size(); i++)
+    /*for (size_t i = 0; i < m_debugPath.size(); i++)
     {
         m_debugPath[i].draw();
-    }
+    }*/
     
 }
 

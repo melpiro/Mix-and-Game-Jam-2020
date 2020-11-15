@@ -4,5 +4,6 @@ enum Step{
     LOADING_MENU,
     MAIN_MENU,
     GAME,
-    WIN_MENU
+    WIN_MENU,
+    TUTO_MENU
 };

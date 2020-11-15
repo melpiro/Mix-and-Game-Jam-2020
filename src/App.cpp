@@ -1,11 +1,12 @@
 #include "App.hpp"
 
 App::App() :
-    m_fen(sf::VideoMode(1200,1000),"App"),
+    m_fen(sf::VideoMode(1200,800),"App"),
     m_loadingMenu(&m_fen),
     m_mainMenu(&m_fen),
     m_mainGame(&m_fen),
-    m_winMenu(&m_fen)
+    m_winMenu(&m_fen),
+    m_tutoMenu(&m_fen)
 {
     m_fen.setFramerateLimit(60);
     m_th_load_ressources = std::async(std::launch::async, &App::loadRessources, this);
@@ -24,8 +25,9 @@ void App::loadRessources()
     m_mainMenu.init();
     m_mainGame.init();
     m_winMenu.init();
+    m_tutoMenu.init();
 
-    m_step = GAME;
+    m_step = TUTO_MENU;
     m_mainGame.updateOnResize();
 }
 
@@ -83,6 +85,12 @@ void App::event()
         else if (m_step == WIN_MENU)
         {
             m_winMenu.event(e);
+        }else if(m_step == TUTO_MENU){
+            m_step = m_tutoMenu.event(e);
+            if(m_step == MAIN_MENU) {
+                m_tutoMenu.reset();
+                m_tutoMenu.updateOnResize();
+            }
         }
     }
 }
@@ -104,6 +112,8 @@ void App::update(float dt)
     else if (m_step == WIN_MENU)
     {
         m_winMenu.update();
+    }else if(m_step == TUTO_MENU){
+        m_tutoMenu.update(dt);
     }
 
 
@@ -134,6 +144,8 @@ void App::render()
     else if (m_step == WIN_MENU)
     {
         m_winMenu.render();
+    }else if(m_step == TUTO_MENU){
+        m_tutoMenu.render();
     }
 
     m_fen.display();

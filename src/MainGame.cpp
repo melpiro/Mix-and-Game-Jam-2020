@@ -249,10 +249,10 @@ void MainGame::reset(const std::string& path) {
 
         //Initialisation de la tilemap
         std::vector<Tile> tileSet;
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,4);
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);
-        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("water"),sf::Vector2i(1,2),0,1500,4);//0
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("grass"),4);//1
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("bordGrass"),4);//2
+        tileSet.emplace_back(O::graphics::ressourceManager.getTexture("murGrass"),4);//3
         tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorHaut"),4);// 4
         tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontHorBas"),4);// 5
         tileSet.emplace_back(O::graphics::ressourceManager.getTexture("pontBord"),sf::Vector2i(1,2),0,1500,4); // 6

@@ -30,9 +30,10 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("TileSet/ladder.png","ladder");
 
     O::graphics::ressourceManager.addTexture("MainMenu/titre.png","titreJeu");
+    O::graphics::ressourceManager.addTexture("MainMenu/gameTuto.png","tuto");
     
-    
-    O::graphics::ressourceManager.addFontAndLoadIt("Soft Marshmallow.otf", "mainFont");
+    O::graphics::ressourceManager.addFontAndLoadIt("arcade.ttf", "mainFont");
+    O::graphics::ressourceManager.addFontAndLoadIt("3Dventure.ttf", "titleFont");
 
     // Tilemap
     O::graphics::ressourceManager.addTexture("Tilemap/tilemap_packed.png", "et_tilemap");

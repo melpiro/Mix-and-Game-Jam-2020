@@ -8,6 +8,7 @@
 #include "MainMenu.hpp"
 #include "MainGame.hpp"
 #include "WinMenu.hpp"
+#include "TutoMenu.h"
 
 
 class App {
@@ -33,6 +34,7 @@ private:
     LoadingMenu m_loadingMenu;
     MainMenu m_mainMenu;
     MainGame m_mainGame;
+    TutoMenu m_tutoMenu;
 
     WinMenu m_winMenu;
 
