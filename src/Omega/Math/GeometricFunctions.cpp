@@ -412,7 +412,7 @@ namespace geo2d {
                 size_t j_1 = j + 1;
                 if (j_1 == poly2.size()) j_1 = 0;
 
-                if (intersect_segment_segment(poly1[i],poly1[i_1], poly2[j], poly2[j_1])) return true;
+                if (intersect_segment_segment(poly1[i],poly1[i_1], poly2[j], poly2[j_1]) > 0) return true;
             }
         }
         return false;

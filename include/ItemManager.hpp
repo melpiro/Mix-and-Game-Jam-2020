@@ -31,6 +31,7 @@ public:
     std::vector<Item>& getMyItems();
     static const float ITEM_SPACING;
     static const float ITEM_SIZE;
+    static const float PLAYER_SPACING;
 
     bool haveChanged();
 

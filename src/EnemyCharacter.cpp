@@ -120,10 +120,10 @@ void EnemyCharacter::update(float deltatime) {
 void EnemyCharacter::draw() {
     Character::draw();
 
-    // for (size_t i = 0; i < m_debugPath.size(); i++)
-    // {
-    //     m_debugPath[i].draw();
-    // }
+    for (size_t i = 0; i < m_debugPath.size(); i++)
+    {
+        m_debugPath[i].draw();
+    }
     
 }
 
@@ -179,26 +179,54 @@ void EnemyCharacter::computPath()
 
     m_debugPath.clear();
 
+    //std::cout <<  <<std::endl;
+
     if (m_path.size() >= 2 &&
         O::math::getDistance(
+            this->pos,
+            (sf::Vector2f) m_graphNodePos->at(m_path[1]) * 64.f + sf::Vector2f(32.f, 32.f)) 
+        <=
+        O::math::getDistance(
             (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f),
-            this->pos)
-        +
+            (sf::Vector2f) m_graphNodePos->at(m_path[1]) * 64.f + sf::Vector2f(32.f, 32.f)) + 32.f
+        &&
+        O::math::getDistance(
+            this->pos,
+            (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f)) - 32.f
+        <=
         O::math::getDistance(
             (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f),
             (sf::Vector2f) m_graphNodePos->at(m_path[1]) * 64.f + sf::Vector2f(32.f, 32.f))
-        >
+        ) m_path.erase(m_path.begin());
+
+    if (m_path.size() >= 2)
+    {
+        if (
+            O::math::getDistance(
+                player->getPos(),
+                (sf::Vector2f) m_graphNodePos->at(m_path[m_path.size() - 2]) * 64.f + sf::Vector2f(32.f, 32.f)) 
+            <=
+            O::math::getDistance(
+                (sf::Vector2f) m_graphNodePos->at(m_path.back()) * 64.f + sf::Vector2f(32.f, 32.f),
+                (sf::Vector2f) m_graphNodePos->at(m_path[m_path.size() - 2]) * 64.f + sf::Vector2f(32.f, 32.f))
+        ) m_path.pop_back();
+    } 
+
+    if (m_path.size() == 1)
+    {
+        if (
         O::math::getDistance(
-            this->pos,
-            (sf::Vector2f) m_graphNodePos->at(m_path[1]) * 64.f + sf::Vector2f(32.f, 32.f))) 
-
-        m_path.erase(m_path.begin());
-
+            pos,
+            (sf::Vector2f) m_graphNodePos->at(m_path[0]) * 64.f + sf::Vector2f(32.f, 32.f)) <= 64.f
+            ) 
+            m_path.clear();
+        
+    }
 
     if (m_path.size()> 0) 
     {
-        m_path.pop_back();
-
+        
+    
         m_debugPath.push_back(O::graphics::Line(
             fen, this->pos, (sf::Vector2f) m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f), 2
         ));
@@ -215,6 +243,7 @@ void EnemyCharacter::computPath()
             fen, player->getPos(), (sf::Vector2f) m_graphNodePos->at(m_path.back()) * 64.f + sf::Vector2f(32.f, 32.f), 2
         ));
         m_debugPath.back().setFillColor(sf::Color::Green);
+    
     }
 
 
