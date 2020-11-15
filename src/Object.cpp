@@ -27,3 +27,7 @@ void Object::setPosition(sf::Vector2f pos) {
 void Object::setFen(sf::RenderWindow *f) {
     m_fen = f;
 }
+
+void Object::addId(int id) {
+    m_myId = id;
+}

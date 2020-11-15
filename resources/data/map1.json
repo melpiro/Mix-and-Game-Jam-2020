@@ -431,6 +431,12 @@
       "spawnDelay": 90,
       "x": 2016,
       "y": 1792
+    },
+    {
+      "type": "lifepack",
+      "lifeAmount": 3,
+      "x": 960,
+      "y": 830
     }
   ]
 }

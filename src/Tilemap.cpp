@@ -229,6 +229,23 @@ bool Tilemap::intersectSolidArea(sf::FloatRect rect) {
     return false;
 }
 
+std::pair<bool, sf::FloatRect> Tilemap::intersectSolidAreaGetRect(sf::FloatRect rect) {
+    for(int i = 0; i < m_rects.size();i++){
+        if(O::math::geo2d::intersect_AABB_AABB(
+                sf::Vector2f(rect.left, rect.top), sf::Vector2f(rect.width, rect.height),
+                sf::Vector2f(m_rects[i].left, m_rects[i].top), sf::Vector2f(m_rects[i].width, m_rects[i].height)
+
+        )
+                )
+        {
+            idCollid = i;
+            return std::make_pair(true, m_rects[i]);
+        }
+    }
+    idCollid  = -1;
+    return std::make_pair(false, sf::FloatRect());
+}
+
 std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> Tilemap::crossSolidArea(sf::FloatRect rect) {
 
     std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> pointsCol;

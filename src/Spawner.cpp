@@ -14,10 +14,9 @@ void Spawner::init() {
 
 void Spawner::draw() {
     Object::draw();
-    sf::RectangleShape rec = sf::RectangleShape({50,50});
-    rec.setPosition({m_pos.x,m_pos.y});
-    rec.setFillColor(sf::Color::Black);
-    m_fen->draw(rec);
+    m_spr.setPosition(m_pos);
+    m_fen->draw(m_spr);
+
 }
 
 void Spawner::update(float deltatime) {
@@ -61,5 +60,8 @@ Spawner::Spawner(std::string typeMob, int spawDelay, sf::Vector2f pos,Tilemap* t
     m_hero = hero;
 
     m_collider = {m_pos.x,m_pos.y,10,10};
+
+    m_spr = sf::Sprite(O::graphics::ressourceManager.getTexture("spawner"));
+    m_spr.setScale({3,3});
 
 }

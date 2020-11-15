@@ -17,6 +17,7 @@ protected:
     sf::FloatRect m_collider;
     sf::Texture* m_texture;
     sf::RenderWindow* m_fen;
+    int m_myId;
 
 public:
 
@@ -27,6 +28,7 @@ public:
 
     void setPosition(sf::Vector2f pos);
     void setFen(sf::RenderWindow* f);
+    void addId(int id);
 
 };
 
