@@ -11,7 +11,7 @@ void init_texture_manager()
     O::graphics::ressourceManager.loadLanguage("resources/Language/en");
 
     O::graphics::ressourceManager.addTextureAndLoadIt("LoadingMenu/loadIcon.png", "loadIcon");
-    O::graphics::ressourceManager.addTexture("LoadingMenu/background.jpg", "loadingMenuBackground");
+    O::graphics::ressourceManager.addTexture("MainMenu/menuBack.png", "loadingMenuBackground");
     O::graphics::ressourceManager.addTexture("MainMenu/boutonTexture.png", "boutonTexture");
     O::graphics::ressourceManager.addTexture("Tetris/cell.png", "tetrisCell");
     O::graphics::ressourceManager.addTexture("Inventory/background.png", "inventoryBackground");
