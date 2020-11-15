@@ -63,8 +63,8 @@ namespace geo2d {
     bool intersect_point_polygon(const sf::Vector2f& point, const std::vector<sf::Vector2f>&  poly)
     {
         sf::Vector2f I;
-        I.x = 100000.0; 
-        I.y = 110000.0; 
+        I.x = 100000.0 + rand()%10000; 
+        I.y = 110000.0 + rand()%10000; 
         
         int nbintersections = 0;
         for(size_t i=0;i<poly.size();i++)

@@ -29,6 +29,9 @@ void MainGame::init()
 
     MusicManager::getMusic("explore")->setLoop(true);
     MusicManager::getMusic("fight")->setLoop(true);
+
+
+    //std::cout << "MainGame::init : " << &m_character <<std::endl;
 }
 
 void MainGame::event(sf::Event e)
@@ -205,6 +208,9 @@ void MainGame::reset(const std::string& path) {
     m_peuzeul.init(path);
     m_itemManager.setTileMap(&m_map);
     m_itemManager.init(m_character.getHitbox());
+
+
+    //std::cout << "MainGame::reset : " << &m_character <<std::endl;
 
 
 }
