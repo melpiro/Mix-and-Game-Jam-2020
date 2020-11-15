@@ -50,6 +50,8 @@ public:
 
     void event(sf::Event &e) override;
 
+    void applyDamage(float dmg) override;
+
     MiniTetris* getMiniTetris();
 
 

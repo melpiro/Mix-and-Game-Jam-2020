@@ -20,9 +20,7 @@ void LifePack::update(float deltatime) {
     Object::update(deltatime);
 
     if(m_hero->getHitbox().intersects(m_collider)){
-        std::cout << m_hero->getLife() << " de HELLLLL" << std::endl;
         m_hero->heal(m_healAmount);
-        std::cout << m_hero->getLife() << " de HELLLLL" << std::endl;
         ObjectManager::delObject(m_myId);
     }
 }
