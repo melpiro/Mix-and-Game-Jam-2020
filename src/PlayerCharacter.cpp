@@ -24,7 +24,8 @@ void PlayerCharacter::init() {
     setAnim();
     playAnim = false;
 
-    life = 10;
+    health = 10;
+    m_maxLife = health;
 
     initHealthBar();
 }
@@ -131,9 +132,9 @@ inline Character::Type PlayerCharacter::getType() {
 void PlayerCharacter::applyDamage(float dmg) {
     if(!invincible()) {
         currentInvincibilityTime = 0;
-        life -= dmg;
-        m_healthBar.setChargingValue(life);
-        if(life <= 0)
+        health -= dmg;
+        m_healthBar.setChargingValue(health);
+        if(health <= 0)
             kill();
     }
 
@@ -141,4 +142,9 @@ void PlayerCharacter::applyDamage(float dmg) {
 
 bool PlayerCharacter::invincible() const {
     return currentInvincibilityTime < invincibilityTime;
+}
+
+void PlayerCharacter::heal(float amount) {
+    health = std::min(m_maxLife,health+amount);
+    m_healthBar.setChargingValue(health);
 }

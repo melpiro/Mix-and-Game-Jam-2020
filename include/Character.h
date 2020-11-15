@@ -51,7 +51,7 @@ protected:
     float dashCoolDown = 0.7f; // s
     float currentDashTime = 0;
 
-    float life = 1;
+    float health = 1;
     bool dead = false;
     O::graphics::ChargingBar m_healthBar;
 
