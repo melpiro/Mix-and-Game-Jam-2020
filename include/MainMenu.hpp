@@ -44,6 +44,9 @@ private:
     O::graphics::Sprite m_background;
     O::graphics::Button m_bouttonJouer;
     O::graphics::Button m_bouttonTuto;
+
+    O::graphics::Sprite m_credits;
+    O::graphics::Sprite m_logoJam;
 };
 
 

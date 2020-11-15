@@ -31,6 +31,9 @@ void init_texture_manager()
 
     O::graphics::ressourceManager.addTexture("MainMenu/titre.png","titreJeu");
     O::graphics::ressourceManager.addTexture("MainMenu/gameTuto.png","tuto");
+    O::graphics::ressourceManager.addTexture("MainMenu/credits.png","credits");
+    O::graphics::ressourceManager.addTexture("MainMenu/normal_logo.png","logoJam");
+
     
     O::graphics::ressourceManager.addFontAndLoadIt("arcade.ttf", "mainFont");
     O::graphics::ressourceManager.addFontAndLoadIt("3Dventure.ttf", "titleFont");
