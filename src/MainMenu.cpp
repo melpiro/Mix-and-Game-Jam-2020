@@ -4,7 +4,7 @@ MainMenu::MainMenu(sf::RenderWindow* fen) :
     m_background(fen, "loadingMenuBackground", STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, STATIC::SYS::HALF_WIDTH, STATIC::SYS::HALF_HEIGHT, true),
     m_bouttonJouer(fen,"mainFont",STATIC::SYS::HALF_WIDTH,500,300,100,STATIC::SYS::HALF_WIDTH,STATIC::SYS::HALF_HEIGHT,true),
     m_bouttonTuto(fen,"mainFont",STATIC::SYS::HALF_WIDTH,680,300,100,STATIC::SYS::HALF_WIDTH,STATIC::SYS::HALF_HEIGHT,true),
-    m_logoJam(fen, "logoJam", STATIC::SYS::WIDTH-500, STATIC::SYS::HIGHT-500, STATIC::SYS::WIDTH, STATIC::SYS::HIGHT, true),
+    m_logoJam(fen, "logoJam", STATIC::SYS::WIDTH-80, STATIC::SYS::HIGHT-80, STATIC::SYS::WIDTH, STATIC::SYS::HIGHT, true),
     m_credits(fen, "credits", 170, STATIC::SYS::HIGHT-80, 0, STATIC::SYS::HIGHT, true),
     m_titre(fen,"titreJeu",STATIC::SYS::HALF_WIDTH,200,true)
 {
@@ -32,7 +32,7 @@ void MainMenu::init()
     m_bouttonTuto.setTextColor(sf::Color::Black);
     m_bouttonTuto.setFillColor(sf::Color(133, 130, 130));
 
-    m_logoJam.setScale(0.5,0.5);
+    m_logoJam.setScale(0.1,0.1);
 }
 
 Step MainMenu::event(sf::Event e)

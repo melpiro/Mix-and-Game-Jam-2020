@@ -32,6 +32,8 @@ private:
 
     sf::RenderWindow* m_fen;
 
+    double scrollDleta = 0;
+
 
 
     O::graphics::Sprite m_tuto;

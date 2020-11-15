@@ -27,8 +27,21 @@ void TutoMenu::init() {
 Step TutoMenu::event(sf::Event e) {
 
     if(e.type == sf::Event::MouseWheelMoved){
-        float scroll = e.mouseWheel.delta;
-        m_tuto.setPosition(m_tuto.getPosition().x , m_tuto.getPosition().y + 20*scroll);
+        scrollDleta += 20.0 * e.mouseWheel.delta;
+
+        if (scrollDleta > 0)
+        {
+            scrollDleta = 0;
+        }
+        else if (scrollDleta < -1500)
+        {
+             scrollDleta = -1500;
+        }
+        
+
+        m_tuto.setPosition(m_tuto.getPosition().x , 1100 + scrollDleta);
+
+
     }
 
     if(m_backButton.clicked(e)){
