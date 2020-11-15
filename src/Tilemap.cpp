@@ -53,14 +53,14 @@ void Tilemap::draw() {
     // }
 
 
-    /*for (size_t i = 0; i < m_edgeDebug.size(); i++)
+    for (size_t i = 0; i < m_edgeDebug.size(); i++)
     {
         m_edgeDebug[i].draw();
     }
     for (size_t i = 0; i < m_nodesDebug.size(); i++)
     {
         m_fen->draw(m_nodesDebug[i]);
-    }*/
+    }
     
     
 

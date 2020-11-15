@@ -183,7 +183,6 @@ void EnemyCharacter::computPath(sf::Vector2f dest)
 
     m_debugPath.clear();
 
-    //std::cout <<  <<std::endl;
 
     if (m_path.size() >= 2 &&
         O::math::getDistance(
