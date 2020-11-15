@@ -61,6 +61,8 @@ private:
     ItemDrawer m_itemDrawer;
     Peuzeul m_peuzeul;
 
+    bool m_endReset = true;
+
   
 
 
