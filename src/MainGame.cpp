@@ -47,9 +47,23 @@ void MainGame::event(sf::Event e)
                 m_inventory.openClose();
                 break;
         }
-
     }
 
+    // else if (e.type == sf::Event::MouseWheelMoved)
+    // {
+    //     if (e.mouseWheel.delta > 0)
+    //     {
+    //         m_viewZoom *= cam_zoom_factor;
+    //         m_view.zoom(cam_zoom_factor);
+    //         m_fen->setView(m_view);
+    //     }
+    //     else if (e.mouseWheel.delta < 0)
+    //     {
+    //         m_viewZoom /= cam_zoom_factor;
+    //         m_view.zoom(1.0/cam_zoom_factor);
+    //         m_fen->setView(m_view);
+    //     }
+    // }
 
     m_character.event(e);
 
