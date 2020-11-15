@@ -25,6 +25,7 @@ public:
 
 private:
     std::string m_typeMob;
+    sf::Sprite m_spr;
     PlayerCharacter* m_hero;
     int m_delay;
     Tilemap* m_tilemap;
