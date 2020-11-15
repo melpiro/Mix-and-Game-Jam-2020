@@ -263,3 +263,7 @@ std::vector<std::pair<sf::Vector2f,std::pair<sf::Vector2f,sf::Vector2f>>> Tilema
 }
 
 
+sf::Vector2f Tilemap::getSize()
+{
+    return sf::Vector2f(m_dimensions) * 64.f;
+}
