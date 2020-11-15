@@ -1,6 +1,7 @@
 #include <EnemyManager.h>
 #include <Enemies/SpitterEnemy.h>
 #include <Step.hpp>
+#include <MusicManager.h>
 #include "MainGame.hpp"
 #include "ObjectManager.h"
 
@@ -95,6 +96,14 @@ void MainGame::init()
     ObjectManager::setHero(&m_character);
     ObjectManager::loadObjectsFromFile("resources/data/map1.json");
 
+
+    MusicManager::init();
+    MusicManager::getMusic("explore")->play();
+    MusicManager::getMusic("fight")->play();
+    MusicManager::getMusic("fight")->setVolume(0);
+
+    MusicManager::getMusic("explore")->setLoop(true);
+    MusicManager::getMusic("fight")->setLoop(true);
 }
 
 void MainGame::event(sf::Event e)
@@ -151,11 +160,22 @@ Step MainGame::update(float dt)
 
     m_character.update(dt);
 
-    if(m_character.isDead())
+    if(m_character.isDead()) {
+        MusicManager::fadeTo("explore", 100);
+        MusicManager::fadeTo("fight", 0);
         return MAIN_MENU;
+    }
+
+    if(m_character.isAttacked()) {
+        MusicManager::fadeTo("explore", 0);
+        MusicManager::fadeTo("fight", 100);
+    }
+    else {
+        MusicManager::fadeTo("explore", 100);
+        MusicManager::fadeTo("fight", 0);
+    }
 
     m_inventory.update();
-
 
     m_itemDrawer.update();
 

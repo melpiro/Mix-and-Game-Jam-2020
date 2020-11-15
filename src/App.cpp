@@ -1,3 +1,4 @@
+#include <MusicManager.h>
 #include "App.hpp"
 
 App::App() :
@@ -123,6 +124,8 @@ void App::update(float dt)
         m_fen.setSize(m_fen.getSize()+sf::Vector2u(1,1));
         m_fen.setSize(m_fen.getSize()-sf::Vector2u(1,1));
     }
+
+    MusicManager::update(dt);
 }
 
 void App::render()
