@@ -170,7 +170,11 @@ void MainGame::reset(const std::string& path) {
 
     EnemyManager::loadEnemiesFromFiles(path, m_fen, &m_character);
 
-    m_character.setPos({16*16*4,12*16*4});
+    JsonData j;
+    j.readFile(path);
+    float x = *((double *)j["heroStart"]["x"].getValue());
+    float y = *((double *)j["heroStart"]["y"].getValue());
+    m_character.setPos({ x*16*4,y*16*4});
     m_character.setTileMap(&m_map);
     EnemyManager::setTileMap(&m_map);
 
