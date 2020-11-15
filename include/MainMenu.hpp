@@ -29,9 +29,9 @@ public:
     void update(float dt);
     void render();
 
-private:
-
     void updateOnResize();
+
+private:
 
     sf::RenderWindow* m_fen;
 

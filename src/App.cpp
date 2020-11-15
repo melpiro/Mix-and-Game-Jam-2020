@@ -115,8 +115,12 @@ void App::update(float dt)
     else if (m_step == GAME)
     {
         m_step = m_mainGame.update(dt);
-        if (m_step != GAME)
-            m_fen.setView(m_fen.getDefaultView());
+        if (m_step != GAME) {
+            sf::FloatRect visibleArea(0, 0, m_fen.getSize().x, m_fen.getSize().y);
+            m_fen.setView(sf::View(visibleArea));
+            m_winMenu.updateOnResize();
+            m_mainMenu.updateOnResize();
+        }
     }
     else if (m_step == WIN_MENU)
     {

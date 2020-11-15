@@ -34,7 +34,7 @@ void BlobEnemy::onCollide(Character *other) {
     Character::onCollide(other);
 
     if(other->getType() == Player) {
-        other->applyDamage(1);
+        other->applyDamage(2);
         other->setVel(O::math::normalise(other->getPos() - pos) * 1000.f);
     }
 }

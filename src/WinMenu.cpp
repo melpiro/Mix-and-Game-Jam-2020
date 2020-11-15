@@ -73,5 +73,8 @@ void WinMenu::render()
 
 void WinMenu::updateOnResize()
 {
-    
+    m_title.update();
+    m_background.update();
+    m_bouttonMainMenu.update();
+    m_bouttonNextLevel.update();
 }

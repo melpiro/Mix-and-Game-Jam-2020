@@ -80,7 +80,7 @@ void PlayerCharacter::event(sf::Event &e) {
 
                 case sf::Keyboard::Key::LShift:
                     if(currentDashTime >= dashCoolDown) {
-                        dash = 0.5f;
+                        dash = 0.4f;
                         currentDashTime = 0;
                     }
                     break;
