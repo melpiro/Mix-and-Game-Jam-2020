@@ -55,6 +55,7 @@ public:
     sf::Vector2f getSize();
 
 
+    std::pair<bool, sf::FloatRect> intersectSolidAreaGetRect(sf::FloatRect rect);
 
 private:
 

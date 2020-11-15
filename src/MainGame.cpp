@@ -101,6 +101,7 @@ void MainGame::init()
     MusicManager::getMusic("explore")->play();
     MusicManager::getMusic("fight")->play();
     MusicManager::getMusic("fight")->setVolume(0);
+    MusicManager::getMusic("explore")->setVolume(75);
 
     MusicManager::getMusic("explore")->setLoop(true);
     MusicManager::getMusic("fight")->setLoop(true);
@@ -161,7 +162,7 @@ Step MainGame::update(float dt)
     m_character.update(dt);
 
     if(m_character.isDead()) {
-        MusicManager::fadeTo("explore", 100);
+        MusicManager::fadeTo("explore", 75);
         MusicManager::fadeTo("fight", 0);
         return MAIN_MENU;
     }
@@ -171,7 +172,7 @@ Step MainGame::update(float dt)
         MusicManager::fadeTo("fight", 100);
     }
     else {
-        MusicManager::fadeTo("explore", 100);
+        MusicManager::fadeTo("explore", 75);
         MusicManager::fadeTo("fight", 0);
     }
 

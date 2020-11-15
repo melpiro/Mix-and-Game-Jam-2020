@@ -30,7 +30,6 @@ void ObjectManager::loadObjectsFromFile(std::string path) {
 
     auto data = (std::vector<JsonData>*)json["Objects"].getValue();
     for(auto obj : *data){
-        std::cout << "TEST" << std::endl;
         sf::String type = *((sf::String *)obj["type"].getValue());
         double x = *((double *)obj["x"].getValue());
         double y = *((double *)obj["y"].getValue());
@@ -46,9 +45,7 @@ void ObjectManager::loadObjectsFromFile(std::string path) {
         o->setPosition({static_cast<float>(x), static_cast<float>(y)});
         o->setFen(m_fen);
         addObject(o);
-        std::cout << "TEST" << std::endl;
     }
-    std::cout << "TEST" << std::endl;
 }
 
 void ObjectManager::draw() {

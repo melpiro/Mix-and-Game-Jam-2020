@@ -104,24 +104,33 @@ void Character::update(float deltatime) {
 
     if(m_map != nullptr)
     {
-        auto nextpos = pos + vel * deltatime;
-        auto bound = getHitbox();
+        auto result = m_map->intersectSolidAreaGetRect(getHitbox());
+        if(!result.first) {
 
-        auto nextBoundX = bound;
-        nextBoundX.left = nextpos.x - bound.width/2.0;
+            auto nextpos = pos + vel * deltatime;
+            auto bound = getHitbox();
 
-        if (m_map->intersectSolidArea(nextBoundX) || EnemyManager::collide(this, nextBoundX, player)) {
-            vel.x = 0;
+            auto nextBoundX = bound;
+            nextBoundX.left = nextpos.x - bound.width/2.0;
+
+            if (m_map->intersectSolidArea(nextBoundX) || EnemyManager::collide(this, nextBoundX, player)) {
+                vel.x = 0;
+            }
+
+            auto nextBoundY = bound;
+            nextBoundY.top = nextpos.y;
+            if (m_map->intersectSolidArea(nextBoundY) || EnemyManager::collide(this, nextBoundY, player)) {
+                vel.y = 0;
+            }
         }
-        
-        auto nextBoundY = bound;
-        nextBoundY.top = nextpos.y;
-        if (m_map->intersectSolidArea(nextBoundY) || EnemyManager::collide(this, nextBoundY, player)) {
-            vel.y = 0;
+
+        else {
+            auto otherPos = sf::Vector2f{result.second.left + result.second.width*.05f, result.second.top + result.second.width*.05f};
+            vel = O::math::normalise(pos - otherPos) * 100.f;
         }
 
-        
     }
+
     pos += vel * deltatime;
 
     sprite.setPosition(pos);
