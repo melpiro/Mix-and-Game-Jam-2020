@@ -62,8 +62,13 @@ void CloneEnemy::update(float deltatime) {
             break;
 
         case Flee:
-
-
+            isAttacking = true;
+            if(O::math::getDistanceCarre(pos, *targetPoint) < 50*50) {
+                targetPoint = &player->getPos();
+                speed = 350;
+                phase = Attack;
+                isAttacking = false;
+            }
             break;
     }
 }
