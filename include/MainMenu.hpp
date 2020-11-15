@@ -47,6 +47,10 @@ private:
 
     O::graphics::Sprite m_credits;
     O::graphics::Sprite m_logoJam;
+
+    O::graphics::Button m_buttonGame0;
+    O::graphics::Button m_buttonGame1;
+    O::graphics::Button m_buttonGame2;
 };
 
 
