@@ -41,6 +41,7 @@ private:
     static Tilemap* m_tileMap;
     static PlayerCharacter* m_hero;
     static std::map<int,Object*> m_objets;
+    static std::vector<int> m_objToDel;
     static int m_nextId;
     static sf::RenderWindow* m_fen;
 

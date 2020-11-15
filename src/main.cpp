@@ -44,7 +44,7 @@ void init_texture_manager()
     O::graphics::ressourceManager.addTexture("Enemies/clone.png", "clone_enemy");
 
     //objets
-    O::graphics::ressourceManager.addTexture("Objects/lifepack.png", "lifepack");
+    O::graphics::ressourceManager.addTexture("Objects/lifepack.png", "lifePack");
     O::graphics::ressourceManager.addTexture("Objects/spawner.png", "spawner");
 }
 

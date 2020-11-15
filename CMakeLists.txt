@@ -31,7 +31,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Omega/String
         ${CMAKE_CURRENT_SOURCE_DIR}/include/Omega/Vector)
 
-add_executable(mixgamejam2020 ${SRCS} ${SRCS_OMEGA} src/Tilemap.cpp include/Tilemap.h src/Tile.cpp include/Tile.h src/ObjectManager.cpp include/ObjectManager.h src/Object.cpp include/Object.h src/Spawner.cpp include/Spawner.h src/TutoMenu.cpp include/TutoMenu.h)
+add_executable(mixgamejam2020 ${SRCS} ${SRCS_OMEGA} src/Tilemap.cpp include/Tilemap.h src/Tile.cpp include/Tile.h src/ObjectManager.cpp include/ObjectManager.h src/Object.cpp include/Object.h src/Spawner.cpp include/Spawner.h src/TutoMenu.cpp include/TutoMenu.h src/LifePack.cpp include/LifePack.h)
 
 # Windows
 if (WIN32)

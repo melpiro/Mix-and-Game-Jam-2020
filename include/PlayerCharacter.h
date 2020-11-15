@@ -35,11 +35,15 @@ public:
     void draw() override;
 
     void applyDamage(float dmg) override;
+    void heal(float amount);
     bool invincible() const;
 
     sf::Vector2f getCameraPos();
 
     Type getType() override;
+
+private:
+    float m_maxLife;
 
 };
 

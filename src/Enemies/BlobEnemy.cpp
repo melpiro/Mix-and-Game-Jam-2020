@@ -22,7 +22,7 @@ void BlobEnemy::init() {
 
     speed = 100;
 
-    life = 2;
+    health = 2;
 
     agroDist = 450;
 

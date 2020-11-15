@@ -3,6 +3,7 @@
 //
 
 #include <Spawner.h>
+#include <LifePack.h>
 #include "ObjectManager.h"
 
 Tilemap* ObjectManager::m_tileMap;
@@ -10,18 +11,20 @@ PlayerCharacter* ObjectManager::m_hero;
 std::map<int,Object*> ObjectManager::m_objets;
 int ObjectManager::m_nextId;
 sf::RenderWindow* ObjectManager::m_fen;
+std::vector<int> ObjectManager::m_objToDel;
 
 void ObjectManager::init() {
     m_nextId = 0;
 }
 
 void ObjectManager::addObject(Object *obj) {
-    m_objets.insert(std::pair<int,Object*>(assignId(),obj));
+    int id = assignId();
+    obj->addId(id);
+    m_objets.insert(std::pair<int,Object*>(id,obj));
 }
 
 void ObjectManager::delObject(int id) {
-    delete m_objets[id];
-    m_objets.erase(id);
+    m_objToDel.push_back(id);
 }
 
 void ObjectManager::loadObjectsFromFile(std::string path) {
@@ -39,13 +42,18 @@ void ObjectManager::loadObjectsFromFile(std::string path) {
             sf::String typeMob = *((sf::String *)obj["typeMob"].getValue());
             double delay = *((double *)obj["spawnDelay"].getValue());
             o = new Spawner(O::str::convert_SFML_string_to_UTF8_string(typeMob),delay,sf::Vector2f(x,y),m_tileMap,m_hero,m_fen);
+        }else if(type == "lifepack"){
+            double lifeAmount = *((double *)obj["lifeAmount"].getValue());
+            o = new LifePack(lifeAmount,sf::Vector2f(x,y),m_fen,m_hero);
         }//switch pour les items
 
         o->init();
         o->setPosition({static_cast<float>(x), static_cast<float>(y)});
         o->setFen(m_fen);
         addObject(o);
+
     }
+
 }
 
 void ObjectManager::draw() {
@@ -58,6 +66,11 @@ void ObjectManager::update(float deltatime) {
     for(auto p : m_objets){
         p.second->update(deltatime);
     }
+    for(auto id : m_objToDel){
+        delete m_objets[id];
+        m_objets.erase(id);
+    }
+    m_objToDel.clear();
 }
 
 void ObjectManager::event(sf::Event &e) {
@@ -72,7 +85,7 @@ void ObjectManager::setTileMap(Tilemap *tm) {
 
 int ObjectManager::assignId() {
     for(int i = 0 ; i < m_nextId ; i++){
-        if(m_objets.find(i) != m_objets.end()) return i;
+        if(m_objets.find(i) == m_objets.end()) return i;
     }
     return m_nextId++;
 }

@@ -15,13 +15,13 @@ Character::Character(sf::RenderWindow* fen) : fen(fen),  m_healthBar(fen, 0, 0, 
 
 void Character::initHealthBar() {
     m_healthBar.setSize(getRect().width*0.7f, getRect().height*0.1f);
-    m_healthBar.setMaxChargingValue(life);
+    m_healthBar.setMaxChargingValue(health);
     m_healthBar.setMinChargingValue(0);
     m_healthBar.setOutlineColor(sf::Color::Black);
     m_healthBar.setBackgroundColor(sf::Color::Red);
     m_healthBar.setForgroundColor(sf::Color::Green);
     m_healthBar.setOutlineThickness(5);
-    m_healthBar.setChargingValue(life);
+    m_healthBar.setChargingValue(health);
     m_healthBar.setOrigineAsCenter();
 }
 
@@ -160,7 +160,7 @@ void Character::setTileMap(Tilemap* map)
 }
 
 float Character::getLife() const {
-    return life;
+    return health;
 }
 
 void Character::kill() {
@@ -172,9 +172,9 @@ bool Character::isDead() const {
 }
 
 void Character::applyDamage(float dmg) {
-    life -= dmg;
-    m_healthBar.setChargingValue(life);
-    if(life <= 0)
+    health -= dmg;
+    m_healthBar.setChargingValue(health);
+    if(health <= 0)
         kill();
 }
 

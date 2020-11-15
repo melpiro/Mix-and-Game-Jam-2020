@@ -25,7 +25,7 @@ void CloneEnemy::init() {
 
     speed = 350;
 
-    life = 8;
+    health = 8;
 
     initHealthBar();
 }
