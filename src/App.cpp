@@ -85,8 +85,14 @@ void App::event()
         }
         else if (m_step == WIN_MENU)
         {
-            m_winMenu.event(e);
-        }else if(m_step == TUTO_MENU){
+            m_step = m_winMenu.event(e);
+            if(m_step == GAME) {
+                m_winMenu.currentLvl++;
+                if(m_winMenu.currentLvl < m_winMenu.nbrLvl)
+                    m_mainGame.reset("resources/data/map" + std::to_string(m_winMenu.currentLvl) + ".json");
+            }
+        }
+        else if(m_step == TUTO_MENU){
             m_step = m_tutoMenu.event(e);
             if(m_step == MAIN_MENU) {
                 m_tutoMenu.reset();
