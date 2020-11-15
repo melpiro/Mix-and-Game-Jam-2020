@@ -23,6 +23,7 @@ void ObjectManager::addObject(Object *obj) {
     m_objets.insert(std::pair<int,Object*>(id,obj));
 }
 
+
 void ObjectManager::delObject(int id) {
     m_objToDel.push_back(id);
 }
@@ -94,4 +95,10 @@ void ObjectManager::setFen(sf::RenderWindow *f) {
 
 void ObjectManager::setHero(PlayerCharacter *p) {
     m_hero = p;
+}
+
+void ObjectManager::reset() {
+    m_objets.clear();
+    m_nextId = 0;
+    m_objToDel.clear();
 }

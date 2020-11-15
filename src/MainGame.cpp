@@ -80,6 +80,7 @@ void MainGame::event(sf::Event e)
 }
 Step MainGame::update(float dt)
 {
+    if(!m_endReset)return GAME;
 
     auto cameraDir = m_character.getCameraPos() - m_view.getCenter();
     auto cameraNextStep = m_view.getCenter() + cameraDir * cameraSpeed;
@@ -154,7 +155,11 @@ void MainGame::reset(const std::string& path) {
 
     if(path.empty()){reset("resources/data/map2.json");return;}
 
+    m_endReset = false;
+
     EnemyManager::reset();
+    ObjectManager::reset();
+
 
     m_character = PlayerCharacter(m_fen);
     m_inventory = Inventory(m_fen, &m_viewZoom, &m_itemManager);
@@ -168,7 +173,7 @@ void MainGame::reset(const std::string& path) {
     m_inventory.init();
     m_itemDrawer.init();
 
-    EnemyManager::loadEnemiesFromFiles(path, m_fen, &m_character);
+
 
     JsonData j;
     j.readFile(path);
@@ -205,13 +210,19 @@ void MainGame::reset(const std::string& path) {
     tileSet[6].setSolid(true);
 
     m_map = Tilemap(tileSet,*m_fen,path);
+
+    ObjectManager::setHero(&m_character);
+    ObjectManager::setFen(m_fen);
+    ObjectManager::setTileMap(&m_map);
+    ObjectManager::loadObjectsFromFile(path);
+
     m_peuzeul.init(path);
     m_itemManager.setTileMap(&m_map);
     m_itemManager.init(m_character.getHitbox());
 
 
     //std::cout << "MainGame::reset : " << &m_character <<std::endl;
-
+    m_endReset = true;
 
 }
 

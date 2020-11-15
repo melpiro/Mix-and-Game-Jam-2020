@@ -36,7 +36,7 @@ void CloneEnemy::onCollide(Character *other) {
     Character::onCollide(other);
 
     if(other->getType() == Player) {
-        other->applyDamage(1);
+        other->applyDamage(2.5f);
         other->setVel(O::math::normalise(other->getPos() - pos) * 1500.f);
 
         phase = Flee;

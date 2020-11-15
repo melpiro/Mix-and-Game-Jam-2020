@@ -30,6 +30,7 @@ public:
     static void draw();
     static void update(float deltatime);
     static void event(sf::Event &e);
+    static void reset();
 
     static void setTileMap(Tilemap* tm);
     static void setFen(sf::RenderWindow* f);
