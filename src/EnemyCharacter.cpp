@@ -78,7 +78,7 @@ void EnemyCharacter::update(float deltatime) {
             pointPathNext = (sf::Vector2f)m_graphNodePos->at(m_path.front()) * 64.f + sf::Vector2f(32.f, 32.f);
             double distToPoint = O::math::getDistance(pointPathNext, pos);
 
-            if (O::math::getDistance(*targetPoint, pos) < distToPoint)
+            if (m_path.size() <= 2 && O::math::getDistance(*targetPoint, pos) < distToPoint)
             {
                 pointPathNext = *targetPoint;
             }
